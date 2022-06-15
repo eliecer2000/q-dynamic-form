@@ -11,7 +11,6 @@
           <q-checkbox
             v-model="option.checked"
             :val="true"
-            @input="changeSelected(option.label)"
           />
         </q-item-section>
         <q-item-section>
@@ -28,7 +27,6 @@
           <q-checkbox
             v-model="newItem.checked"
             :val="true"
-            @input="changeSelected(newItem.label)"
           />
         </q-item-section>
         <q-item-section>
@@ -47,45 +45,26 @@
 <script>
 import { defineComponent } from 'vue'
 
-const defaultNewItem = () => ({
-  checked: false,
-  label: ''
-})
-
 export default defineComponent({
-  name: 'EditableDropdownOptions',
-  props: {
-    valueComponent: {
-      type: Object
-    }
-  },
-  emits: ['addNewItem'],
-  setup(props, { emit }) {
-    // PROPERTIES
-    let newItem = defaultNewItem()
+	name: 'EditableDropdownOptions',
+	props: {
+		valueComponent: {
+			type: Object,
+		},
+	},
+	emits: ['addNewItem'],
+	setup(props, { emit }) {
+		// PROPERTIES
+		const newItem = {
+			checked: false,
+			label: '',
+		};
 
-    // METHODS
-    const addNewItem = () => {
-      emit('addNewItem', newItem)
-    }
-
-    const deleteItem = (index) => {
-      props.valueComponent.options.splice(index, 1)
-    }
-
-    const changeSelected = (label) => {
-      newItem.checked = newItem.label === label
-      for (const option of props.valueComponent.options) {
-        option.checked = option.label === label
-      }
-    }
-
-    return {
-      newItem,
-      addNewItem,
-      deleteItem,
-      changeSelected
-    }
-  }
-})
+		return {
+			newItem,
+			addNewItem:()=>emit('addNewItem', newItem),
+			deleteItem:(index) => props.valueComponent.options.splice(index, 1),
+		};
+	},
+});
 </script>

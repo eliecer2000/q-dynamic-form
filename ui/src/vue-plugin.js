@@ -31,6 +31,7 @@ export {
   BooleanElement,
   SectionBreakElement,
   EmailElement,
+  install,
   version
 };
 

@@ -7,7 +7,6 @@
           <q-radio
             v-model="option.checked"
             :val="true"
-            @input="changeSelected(option.label)"
           />
         </q-item-section>
         <q-item-section>
@@ -24,7 +23,6 @@
           <q-radio
             v-model="newItem.checked"
             :val="true"
-            @input="changeSelected(newItem.label)"
           />
         </q-item-section>
         <q-item-section>
@@ -79,18 +77,10 @@ export default defineComponent({
       props.valueComponent.options.splice(index, 1)
     }
 
-    const changeSelected = (label) => {
-      newItem.checked = newItem.label === label
-      for (const option of props.valueComponent.options) {
-        option.checked = option.label === label
-      }
-    }
-
     return {
       newItem,
       addNewItem,
       deleteItem,
-      changeSelected
     }
   }
 })

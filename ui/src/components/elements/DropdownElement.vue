@@ -24,7 +24,7 @@
 
 <script>
 import { computed } from "vue";
-import { useFormElement } from "../../js/FormElement";
+import { useFormElement } from "./../js/FormElement";
 export default {
   name: "DropdownElement",
   props: {

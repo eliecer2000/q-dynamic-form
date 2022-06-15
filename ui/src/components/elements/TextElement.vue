@@ -31,7 +31,7 @@
 
 <script>
 import { defineComponent, onMounted, watch, ref } from "vue";
-import { useFormElement } from "../../js/FormElement";
+import { useFormElement } from "./../js/FormElement";
 export default defineComponent({
   name: "TextElement",
   props: {

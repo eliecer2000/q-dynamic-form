@@ -201,7 +201,7 @@ import { VueDraggableNext } from "vue-draggable-next";
 
 import EditableElement from "./editables/EditableElement.vue";
 import EditableElementOptions from "./editables/EditableElementOptions.vue";
-import * as utils from "../js/utils";
+import * as utils from "./js/utils";
 
 export default defineComponent({
   name: "QDynamicForm",

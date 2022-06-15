@@ -24,7 +24,7 @@
 
 <script>
 import { defineComponent } from "vue";
-import { useFormElement } from "../../js/FormElement";
+import { useFormElement } from "./../js/FormElement";
 export default defineComponent({
   name: "EmailElement",
   props: {

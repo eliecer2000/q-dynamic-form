@@ -4,8 +4,8 @@
   "author": "Eliezer Rangel <eliezer.rangel@escala24x7.com>",
   "description": "Quasar Dynamic Form",
   "license": "MIT",
-  "module": "dist/index.esm.js",
-  "main": "dist/index.common.js",
+  "module": "src/index.esm.js",
+  "main": "src/index.common.js",
   "scripts": {
     "dev": "cd dev && yarn dev && cd ..",
     "dev:umd": "yarn build && node build/script.open-umd.js",
@@ -54,11 +54,5 @@
     "last 4 ChromeAndroid versions",
     "last 4 FirefoxAndroid versions",
     "last 4 iOS versions"
-  ],
-  "dependencies": {
-    "vue": "^3.2.36",
-    "vue-router": "^4.0.13",
-    "vue-draggable-next": "^2.1.1",
-    "vuedraggable": "^4.1.0"
-  }
+  ]
 }

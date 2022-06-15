@@ -9,7 +9,7 @@ import {
   EmailElement
 } from "./components/Index";
 
-const version = __UI_VERSION__;
+const version = "0.0.1";
 
 function install(app) {
   app.component(QDynamicForm.name, QDynamicForm);
@@ -23,6 +23,18 @@ function install(app) {
 }
 
 export {
+  QDynamicForm,
+  QDynamicRender,
+  TextElement,
+  NumberElement,
+  DropdownElement,
+  BooleanElement,
+  SectionBreakElement,
+  EmailElement,
+  version
+};
+
+export default {
   QDynamicForm,
   QDynamicRender,
   TextElement,

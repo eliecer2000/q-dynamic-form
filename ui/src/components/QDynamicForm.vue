@@ -14,40 +14,25 @@
             <q-tooltip class="bg-white text-primary">Close</q-tooltip>
           </q-btn>
         </q-bar>
-        <q-card-section class="q-pt-none text-center">
-          <div class="text-h6 q-my-sm q-gutter-x-lg">Campos Disponibles</div>
-          <draggable
-            :list="sourceFields"
-            :clone="createField"
-            :group="{ name: 'elements', pull: 'clone', put: false }"
-          >
-            <div
-              class="source-field"
-              v-for="(sourceField, idx) in sourceFields"
-              :key="idx"
-            >
-              <q-btn
-                outline
-                stack
-                v-close-popup
-                no-caps
-                @click="onAddFieldClick(sourceField.type)"
-                v-if="sourceField.type !== ''"
-              >
-                <div class="row q-mt-sm">
-                  <div class="col-12">
-                    <div class="text-body1">{{ sourceField.label }}</div>
-                  </div>
-                </div>
-                <div class="row q-mb-sm">
-                  <div class="col-12">
-                    <q-icon :name="sourceField.icon"> </q-icon>
-                  </div>
-                </div>
-              </q-btn>
-            </div>
-          </draggable>
-        </q-card-section>
+				<q-card-section class="row q-pa-lg">
+					<div class="text-h6 col-12">Campos Disponibles</div>
+					<div
+						class="col-12 col-md-6 q-pa-sm"
+						v-for="(sourceField, idx) in sourceFields"
+						:key="idx"
+					>
+						<q-btn
+							class="full-width"
+							color="primary"
+							outline
+							no-caps
+							v-close-popup
+							:icon="sourceField.icon"
+							:label="sourceField.label"
+							@click="onAddFieldClick(sourceField.type)"
+						/>
+					</div>
+				</q-card-section>
       </q-card>
     </q-dialog>
 

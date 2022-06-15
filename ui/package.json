@@ -43,7 +43,8 @@
     "rtlcss": "^3.5.0",
     "sass": "1.52.3",
     "uglify-js": "^3.16.0",
-    "zlib": "^1.0.5"
+    "zlib": "^1.0.5",
+    "vue-draggable-next": "^2.1.1"
   },
   "browserslist": [
     "last 4 Chrome versions",

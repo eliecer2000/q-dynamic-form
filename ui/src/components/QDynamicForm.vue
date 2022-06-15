@@ -1,5 +1,5 @@
 <template>
-  <div class="no-margin q-pa-md">
+  <div class="q-pa-md">
     <q-dialog
       v-model="dialog"
       persistent
@@ -310,12 +310,13 @@ export default defineComponent({
       }
     };
 
-    const getFieldByCid = (cid) => {
-      for (const field of fields) {
+    function getFieldByCid(cid) {
+      for (let index = 0; index < fields.length; index++) {
+        const field = fields[index];
         if (field.cid === cid) return field;
       }
       return false;
-    };
+    }
 
     // COMPUTED
     const sourceOptions = computed(() => {
@@ -386,49 +387,3 @@ export default defineComponent({
   }
 });
 </script>
-
-<style scoped lang="sass">
-.source-field
-  width: 140px
-  display: inline-block
-  margin: 0px 2px 5px 2px
-  .q-btn
-    width: 100%
-
-.q-page
-  padding: 20px
-
-.q-form-builder-elements-container
-  width: 100%
-  min-height: 200px
-
-.q-form-builder-elements-container.empty
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' height='200px' width='500px'><text x='0' y='15' fill='lightgray' font-size='14' font-family='Roboto, Helvetica, sans-serif'>Drag an element here to get started.</text></svg>")
-  background-repeat: no-repeat
-  background-position: 0 40px
-
-.q-editable-element.selected
-  background-color: $blue-grey-1
-
-.editable-element-container
-  position: relative
-
-.editable-element-action-buttons
-  position: absolute
-  bottom: -11 px
-  right: 0
-  z-index: 2
-
-.editable-element-button
-  float: right
-  margin-right: 5px
-
-.delete-button
-  position: relative
-  top: 0px
-  right: 20px
-  z-index: 2
-
-.pre-format
-  overflow: auto
-</style>

@@ -97,8 +97,8 @@
 
 <script>
 import EditableCheckboxesOptions from "./EditableCheckboxesOptions.vue";
-import EditableRadioOptions from "./EditableRadioOptions";
-import EditableDropdownOptions from "./EditableDropdownOptions";
+import EditableRadioOptions from "./EditableRadioOptions.vue";
+import EditableDropdownOptions from "./EditableDropdownOptions.vue";
 import { defineComponent, computed, onMounted, ref, watch } from "vue";
 import { string } from "css-tree/lib/lexer/generic";
 
@@ -167,9 +167,9 @@ export default defineComponent({
     }
 
     const getTypeInfo = () => {
-      for (const i in props.typeInfo) {
-        if (props.typeInfo[i].type === props.value.field_type) {
-          return props.typeInfo[i];
+      for (let index = 0; index < props.typeInfo.length; index++) {
+        if (props.typeInfo[index].type === props.value.field_type) {
+          return props.typeInfo[index];
         }
       }
       return false;

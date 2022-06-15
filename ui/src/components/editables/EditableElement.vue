@@ -6,16 +6,16 @@
 </template>
 
 <script>
-import { defineComponent, computed } from 'vue'
-import TextElement from '../elements/TextElement'
-import NumberElement from '../elements/NumberElement'
-import DropdownElement from '../elements/DropdownElement'
-import BooleanElement from '../elements/BooleanElement'
-import SectionBreakElement from '../elements/SectionBreakElement'
-import EmailElement from '../elements/EmailElement'
+import { defineComponent, computed } from "vue";
+import TextElement from "../elements/TextElement.vue";
+import NumberElement from "../elements/NumberElement.vue";
+import DropdownElement from "../elements/DropdownElement.vue";
+import BooleanElement from "../elements/BooleanElement.vue";
+import SectionBreakElement from "../elements/SectionBreakElement.vue";
+import EmailElement from "../elements/EmailElement.vue";
 
 export default defineComponent({
-  name: 'EditableElement',
+  name: "EditableElement",
   components: {
     TextElement,
     NumberElement,
@@ -29,42 +29,27 @@ export default defineComponent({
       type: Object
     }
   },
-  emits: ['click'],
+  emits: ["click"],
   setup(props, { emit }) {
     // METHODS
     const onClick = () => {
-      emit('click', props.value)
-    }
+      emit("click", props.value);
+    };
 
     // COMPUTED
     const element = computed(() => {
-      const nameParts = props.value.field_type.split('_')
+      const nameParts = props.value.field_type.split("_");
       for (let i = 0; i < nameParts.length; i++) {
         nameParts[i] =
-          nameParts[i].charAt(0).toUpperCase() + nameParts[i].slice(1)
+          nameParts[i].charAt(0).toUpperCase() + nameParts[i].slice(1);
       }
-      return nameParts.join('') + 'Element'
-    })
+      return nameParts.join("") + "Element";
+    });
 
     return {
       onClick,
       element
-    }
+    };
   }
-})
+});
 </script>
-
-<style scoped>
-.q-editable-element {
-  position: relative;
-  padding: 5px;
-}
-
-.overlay {
-  position: absolute;
-  z-index: 2;
-  cursor: pointer;
-  width: 100%;
-  height: 100%;
-}
-</style>

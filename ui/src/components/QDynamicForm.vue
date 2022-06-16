@@ -250,10 +250,7 @@ export default defineComponent({
         label: utils.defaultLabel(item.type),
         field_type: item.type,
         clearable: false,
-        field_name: {
-          label: null,
-          value: null
-        },
+        field_name: '',
         readonly_name: null,
         disabled_name: null,
         required: true,

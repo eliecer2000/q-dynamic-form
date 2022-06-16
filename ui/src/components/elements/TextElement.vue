@@ -1,6 +1,7 @@
 <template>
   <div class="row q-col-gutter-sm q-form-phone q-form-builder-element">
     <div class="col-12">
+      COMPORTAMIENTO DE COMPONENTE
       <q-input
         filled
         ref="variableRef"

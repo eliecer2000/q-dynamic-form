@@ -100,8 +100,8 @@ import EditableCheckboxesOptions from "./EditableCheckboxesOptions.vue";
 import EditableRadioOptions from "./EditableRadioOptions.vue";
 import EditableDropdownOptions from "./EditableDropdownOptions.vue";
 import { defineComponent, computed, onMounted, ref, watch } from "vue";
-import { string } from "css-tree/lib/lexer/generic";
 
+/* Formulario para editar las propiedades de los campos dinamicos */
 export default defineComponent({
   name: "EditableElementOptions",
   components: {

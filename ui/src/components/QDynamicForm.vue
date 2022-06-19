@@ -1,7 +1,7 @@
 <template>
 	<div class="q-pa-md">
 		<q-dialog
-			v-model="dialog"
+			v-model="activateModaAddField"
 			persistent
 			position="bottom"
 			transition-show="slide-up"
@@ -31,7 +31,7 @@
 							v-close-popup
 							:icon="sourceField.icon"
 							:label="sourceField.label"
-							@click="addInputField(sourceField.type)"
+							@click="createInput(sourceField.type)"
 						/>
 					</div>
 				</q-card-section>
@@ -48,7 +48,9 @@
 					<q-scroll-area style="height: calc(100vh - 220px)">
 						<draggable :list="fields" group="elements">
 							Codigo pausado 1
-							<InputDynamic />
+							<div v-for="(field, index) in fields" :key="`${index}-input`">
+								<component :is="'FieldDynamic'" :setProperties="field" />
+							</div>
 							<!-- <div
                 class="row editable-element-container q-my-none"
                 v-for="(field, index) in fields"
@@ -96,8 +98,8 @@
 								fab
 								icon="add"
 								color="primary"
-								@click="addField"
-								><q-tooltip>Add field</q-tooltip></q-btn
+								@click="openModaAddField"
+								><q-tooltip>Agregar campo</q-tooltip></q-btn
 							>
 						</div>
 						<div class="col-auto">
@@ -164,44 +166,20 @@
 		</q-drawer>
 
 		<q-dialog
-			v-model="editElement"
+			v-model="activateModalWithForm"
 			persistent
 			transition-show="slide-left"
 			transition-hide="slide-right"
 			position="right"
 		>
-			<q-card class="text-dark bg-white" v-if="editElement">
-				<q-card-section class="no-margin no-padding">
-					<q-bar class="bg-grey-6">
-						<q-btn
-							dense
-							flat
-							icon="close"
-							v-close-popup
-							:disable="activatedClose"
-						>
-							<q-tooltip class="bg-white text-primary"
-								>Close</q-tooltip
-							>
-						</q-btn>
-					</q-bar>
-					<div class="text-h6 q-my-sm text-center">
-						Editar Propiedades
-					</div>
-				</q-card-section>
-				<q-card-section class="q-pt-none full-width">
-					<q-scroll-area
-						style="height: calc(100vh - 200px); width: 500px"
-					>
-						<div v-if="currentField">
-							<FormForInputs :value="currentField" />
-							<!-- <editable-element-options
-                @error="onError"
-                :value="currentField"
-                :type-info="sourceFields"
-              /> -->
-						</div>
-					</q-scroll-area>
+			<q-card>
+				<q-card-section class="q-pt-md">
+					<FormForInputs
+						v-if="currentField"
+						:fieldConfiguration="currentField"
+						@cancelCreation="cancelCreation"
+						@processCreation="processCreation"
+					/>
 				</q-card-section>
 			</q-card>
 		</q-dialog>
@@ -215,16 +193,16 @@ import { VueDraggableNext } from 'vue-draggable-next';
 
 import EditableElement from './editables/EditableElement.vue';
 import EditableElementOptions from './editables/EditableElementOptions.vue';
-import * as utils from './js/utils';
+
 
 /* NUEVO */
 import FormForInputs from './FormForInputs';
-import InputDynamic from './InputDynamic';
+import FieldDynamic from './FieldDynamic';
 
 export default defineComponent({
 	name: 'QDynamicForm',
 	components: {
-		InputDynamic,
+		FieldDynamic,
 		FormForInputs,
 		draggable: VueDraggableNext,
 		EditableElement,
@@ -247,9 +225,7 @@ export default defineComponent({
 			type: Array,
 			required: false,
 			default: () => [
-				{ type: 'text', icon: 'font_download', label: 'Text' },
-				{ type: 'number', icon: 'pin', label: 'Number' },
-				{ type: 'email', icon: 'email', label: 'Email' },
+				{ type: 'text', icon: 'font_download', label: 'Campo tipo input' },
 				{ type: 'boolean', icon: 'edit_attributes', label: 'Boolean' },
 				{
 					type: 'dropdown',
@@ -266,39 +242,59 @@ export default defineComponent({
 	},
 	emits: ['input'],
 	setup(props, { emit }) {
-		// PROPERTIES
+		/* DATA */
+		const activateModaAddField = ref(false);
+		const activatedCloseForm = ref(false);
+		console.log('primera carga',props.valueComponent)
 		const fields = ref(props.valueComponent);
+		const currentField = ref(null);
 
 		let tab = ref('add');
-		let currentField = ref({});
 
-		let dialog = ref(false);
 		let render = ref(false);
-		let editElement = ref(false);
-
-		function addField() {
-			dialog.value = true;
-		}
-
-		const activatedClose = ref(false);
-
-		function onError(error) {
-			activatedClose.value = error;
-		}
+		let activateModalWithForm = ref(false);
 
 		// METHODS
-		const selectForEdit = field => {
-			editElement.value = true;
-			currentField.value = field;
-			tab.value = 'edit';
+		/* Modal */
+		const formError = error => {
+			activatedCloseForm.value = error;
 		};
 
-		const addInputField = () => {
-			const newInput = { type: 'number', label: '',name:'' };
-      /* Se registra el objeto del nuevo input */
+		/* Modal para el tipo de campo a agregar campo nuevo */
+		function openModaAddField() {
+			activateModaAddField.value = true;
+		}
+
+		/* Se crea un objeto para el input que se va a crear*/
+		const createInput = () => {
+			const newInput = {};
+			/* Se registra el objeto del nuevo input */
 			fields.value.push(newInput);
-      /* Se envia la referencia del objeto creado para que sea editado */
-			selectForEdit(newInput);
+			/* Se envia la referencia del objeto creado para que sea editado */
+			currentField.value = newInput;
+			console.log('currentField.value',currentField.value)
+			activateModalWithForm.value=true;
+		};
+
+		/* Al procesar la creacion, reseteamos para la proxima creacion */
+		const processCreation = () => {
+			activateModalWithForm.value = false;
+			currentField.value = null;
+		}
+
+		/* Cancelar la creacion del campo */
+		const cancelCreation = () => {
+			activateModalWithForm.value = false;
+			currentField.value = null;
+
+			/* Eliminamos ultimo registro ya que canceló */
+			fields.value.pop();
+		};
+
+		const selectForEdit = field => {
+			activateModalWithForm.value = true;
+			currentField.value = field;
+			tab.value = 'edit';
 		};
 
 		const deleteField = index => {
@@ -377,25 +373,29 @@ export default defineComponent({
 		});
 
 		return {
-			fields,
 			tab,
-			currentField,
 			deleteField,
 			duplicateField,
 			onChange,
-			addInputField,
 			selectForEdit,
 			getFieldByCid,
 			sourceOptions,
 			destinationOptions,
 			// ----------------------
-			addField,
-			dialog,
 			render,
 			getElement,
-			editElement,
-			onError,
-			activatedClose,
+			activateModalWithForm,
+
+			/* Utilizados */
+			fields,
+			currentField,
+			activateModaAddField,
+			activatedCloseForm,
+			openModaAddField,
+			createInput,
+			cancelCreation,
+			processCreation,
+			formError,
 		};
 	},
 });

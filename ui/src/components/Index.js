@@ -7,6 +7,10 @@ import BooleanElement from "./elements/BooleanElement.vue";
 import SectionBreakElement from "./elements/SectionBreakElement.vue";
 import EmailElement from "./elements/EmailElement.vue";
 
+/* Nuevos campos */
+import FieldDynamic from "./FieldDynamic.vue";
+import FormForInputs from "./FormForInputs.vue";
+
 export {
   QDynamicForm,
   QDynamicRender,
@@ -15,5 +19,9 @@ export {
   DropdownElement,
   BooleanElement,
   SectionBreakElement,
-  EmailElement
+  EmailElement,
+
+  /* Nuevos campos */
+  FieldDynamic,
+  FormForInputs
 };

@@ -26,7 +26,8 @@
 				><q-avatar color="red" text-color="white">{{
 					index + 1
 				}}</q-avatar>
-				<b>label:</b> {{ item.label }}, <b>value:</b> {{ item.value }}</q-chip
+				<b>label:</b> {{ item.label }}, <b>value:</b>
+				{{ item.value }}</q-chip
 			>
 		</div>
 
@@ -55,7 +56,7 @@
 				class="full-width q-mt-md"
 				unelevated
 				outline
-				@click="cancelCreation"
+				@click="cancelProcess"
 			/>
 		</div>
 	</q-form>
@@ -118,7 +119,7 @@ export default defineComponent({
 			type: Object,
 		},
 	},
-	emits: ['cancelCreation', 'processCreation'],
+	emits: ['cancelCreation', 'cancelEdition', 'processCreation'],
 	setup(props, { emit }) {
 		/* Todos los atributos que nos interesa por el momento del componente q-select. El type: 'select' es solo un identificador, no pertener a q-select */
 		const attributes = ref({
@@ -131,17 +132,22 @@ export default defineComponent({
 			clearable: false,
 			disable: false,
 			readonly: false,
-			outlined: true
+			outlined: true,
 		});
 
 		const selectOptions = ref('');
+
+		/* Para saber si es nuevo y elegir el evento correcto al cancelar  */
+		const isNewField = ref(true);
 
 		/* Si se edita el formulario se actualizan las keys del objeto recibido */
 		watch(
 			attributes,
 			newValue => {
 				/* Actualiza las key del campo que se está modificando */
-				const keys = Object.keys(newValue);
+				const keys = Object.keys(newValue).filter(
+					item => item !== 'options'
+				);
 				keys.forEach(
 					key => (props.fieldConfiguration[key] = newValue[key])
 				);
@@ -149,9 +155,9 @@ export default defineComponent({
 			{ deep: true }
 		);
 
-		watch(selectOptions, ()=>{
-			props.fieldConfiguration['options'] = listOptionsSelect
-		})
+		watch(selectOptions, () => {
+			props.fieldConfiguration['options'] = listOptionsSelect;
+		});
 
 		/* Validar que esten los campos necesarios llenos */
 		const validation = computed(() => {
@@ -194,10 +200,8 @@ export default defineComponent({
 			if (validation) emit('processCreation');
 		};
 
-		const cancelCreation = () => {
-			console.log(attributes.value);
-			emit('cancelCreation');
-		};
+		const cancelProcess = () =>
+			isNewField.value ? emit('cancelCreation') : emit('cancelEdition');
 
 		onMounted(() => {
 			/* Se cargan los datos recibidos en el formulario */
@@ -205,6 +209,18 @@ export default defineComponent({
 				...attributes.value,
 				...props.fieldConfiguration,
 			};
+
+			/* Se pasa a string las opciones */
+			if (props.fieldConfiguration.options)
+				selectOptions.value = props.fieldConfiguration.options.reduce(
+					(text, item) => {
+						return `${text} ${item.label} | ${item.value}\r\n`;
+					},
+					''
+				);
+
+			/* Se señala si es o no nuevo */
+			if (props.fieldConfiguration.label) isNewField.value = false;
 		});
 
 		return {
@@ -215,7 +231,7 @@ export default defineComponent({
 			selectOptions,
 			listOptionsSelect,
 			onSubmit,
-			cancelCreation,
+			cancelProcess,
 		};
 	},
 });

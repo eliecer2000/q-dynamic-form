@@ -54,7 +54,7 @@
 				class="full-width q-mt-md"
 				unelevated
 				outline
-				@click="cancelCreation"
+				@click="cancelProcess"
 			/>
 		</div>
 	</q-form>
@@ -116,7 +116,7 @@ export default defineComponent({
 			type: Object,
 		},
 	},
-	emits: ['cancelCreation','processCreation'],
+	emits: ['cancelCreation', 'cancelEdition', 'processCreation'],
 	setup(props, { emit }) {
 		/* Todos los atributos que nos interesa por el momento del componente q-input */
 		const attributes = ref({
@@ -131,6 +131,9 @@ export default defineComponent({
 			readonly: false,
 			outlined: true
 		});
+
+		/* Para saber si es nuevo y elegir el evento correcto al cancelar  */
+		const isNewField = ref(true);
 
 		/* Si se edita el formulario se actualizan las keys del objeto recibido */
 		watch(
@@ -161,10 +164,8 @@ export default defineComponent({
 			if(validation) emit('processCreation')
 		};
 
-		const cancelCreation = () => {
-			console.log(attributes.value);
-			emit('cancelCreation')
-		};
+		const cancelProcess = () =>
+			isNewField.value ? emit('cancelCreation') : emit('cancelEdition');
 
 		onMounted(() => {
 			/* Se cargan los datos recibidos en el formulario */
@@ -172,6 +173,9 @@ export default defineComponent({
 				...attributes.value,
 				...props.fieldConfiguration,
 			};
+
+			/* Se señala si es o no nuevo */
+			if (props.fieldConfiguration.label) isNewField.value = false;
 		});
 
 		return {
@@ -180,7 +184,7 @@ export default defineComponent({
 			toggleOptions,
 			propsList,
 			onSubmit,
-			cancelCreation,
+			cancelProcess,
 		};
 	},
 });

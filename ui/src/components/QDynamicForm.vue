@@ -46,15 +46,38 @@
 			<q-card-section horizontal class="full-width">
 				<q-card-section class="q-my-md col-6">
 					<q-scroll-area style="height: calc(100vh - 220px)">
-						<draggable :list="fields" group="elements">
+						<draggable :list="fields" group="elements" @change="onChange">
 							<div
 								v-for="(field, index) in fields"
 								:key="`${index}-input`"
+								class="row"
 							>
-								<component
-									:is="'FieldDynamic'"
-									:setProperties="field"
-								/>
+								<div class="col-8">
+									<component
+										:is="'FieldDynamic'"
+										:setProperties="field"
+									/>
+								</div>
+								<div class="col-4">
+									<q-btn
+										flat
+										color="primary"
+										icon="edit_note"
+										@click="() => selectForEdit(field)"
+									/>
+									<q-btn
+										flat
+										color="primary"
+										icon="delete"
+										@click="() => deleteField(index)"
+									/>
+									<q-btn
+										flat
+										color="primary"
+										icon="content_copy"
+										@click="() => duplicateField(index)"
+									/>
+								</div>
 							</div>
 							<!-- <div
                 class="row editable-element-container q-my-none"
@@ -183,18 +206,21 @@
 						v-if="inputOptions.includes(currentField.type)"
 						:fieldConfiguration="currentField"
 						@cancelCreation="cancelCreation"
+						@cancelEdition="cancelEdition"
 						@processCreation="processCreation"
 					/>
 					<FormForSelect
 						v-if="currentField.type === 'select'"
 						:fieldConfiguration="currentField"
 						@cancelCreation="cancelCreation"
+						@cancelEdition="cancelEdition"
 						@processCreation="processCreation"
 					/>
 					<FormForToggle
 						v-if="currentField.type === 'toggle'"
 						:fieldConfiguration="currentField"
 						@cancelCreation="cancelCreation"
+						@cancelEdition="cancelEdition"
 						@processCreation="processCreation"
 					/>
 				</q-card-section>
@@ -286,8 +312,6 @@ export default defineComponent({
 		const fields = ref(props.valueComponent);
 		const currentField = ref(null);
 
-		let tab = ref('add');
-
 		let render = ref(false);
 		let activateModalWithForm = ref(false);
 
@@ -315,6 +339,13 @@ export default defineComponent({
 			}
 		};
 
+		/* Editar campo existente */
+		const selectForEdit = field => {
+			/* Se envia la referencia del objeto para que sea editado */
+			currentField.value = field;
+			activateModalWithForm.value = true;
+		};
+
 		/* Al procesar la creacion, reseteamos para la proxima creacion */
 		const processCreation = () => {
 			activateModalWithForm.value = false;
@@ -330,40 +361,41 @@ export default defineComponent({
 			fields.value.pop();
 		};
 
-		const selectForEdit = field => {
-			activateModalWithForm.value = true;
-			currentField.value = field;
-			tab.value = 'edit';
+		/* Cancelar la edicion del campo */
+		const cancelEdition = () => {
+			activateModalWithForm.value = false;
+			currentField.value = null;
 		};
 
+		/* Borrar campo */
 		const deleteField = index => {
-			currentField.value = [];
-			tab.value = 'add';
-			fields.value.splice(index, 1);
+			let newFields = [...fields.value];
+			fields.value = [];
+			newFields.splice(index, 1);
+			/* Para refrescar el render del formulario */
+			setTimeout(() => (fields.value = newFields), 5);
 		};
 
-		const duplicateField = idx => {
-			const newField = extend(true, {}, fields[idx]);
-			newField.cid = uid();
-			newField[props.fieldIdName] = null;
-			delete newField[props.fieldIdName];
-			fields.value.push(newField);
-			selectForEdit(newField);
+		/* Duplicar campo y editar */
+		const duplicateField = index => {
+			let newFields = JSON.parse(JSON.stringify([...fields.value, fields.value[index]]));
+			fields.value = [];
+			/* Para refrescar el render del formulario */
+			setTimeout(() => {
+				fields.value = newFields;
+				/* Se manda a editar */
+				selectForEdit(newFields[newFields.length-1]);
+			}, 5);
 		};
 
-		const onChange = evt => {
-			if (evt.added) {
-				selectForEdit(evt.added.element);
-			}
-		};
+		/* Se refresca el array de campos para que se vea los cambios */
+		const onChange = () => {
+			let newFields = [...fields.value];
+			fields.value = [];
 
-		function getFieldByCid(cid) {
-			for (let index = 0; index < fields.length; index++) {
-				const field = fields[index];
-				if (field.cid === cid) return field;
-			}
-			return false;
-		}
+			/* Para refrescar el render del formulario */
+			setTimeout(() => (fields.value = newFields), 5);
+		};
 
 		// COMPUTED
 		const sourceOptions = computed(() => {
@@ -412,12 +444,10 @@ export default defineComponent({
 		});
 
 		return {
-			tab,
 			deleteField,
 			duplicateField,
 			onChange,
 			selectForEdit,
-			getFieldByCid,
 			sourceOptions,
 			destinationOptions,
 			// ----------------------
@@ -434,6 +464,7 @@ export default defineComponent({
 			openModaAddField,
 			createInput,
 			cancelCreation,
+			cancelEdition,
 			processCreation,
 			formError,
 		};

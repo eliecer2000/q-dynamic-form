@@ -48,8 +48,14 @@
 					<q-scroll-area style="height: calc(100vh - 220px)">
 						<draggable :list="fields" group="elements">
 							Codigo pausado 1
-							<div v-for="(field, index) in fields" :key="`${index}-input`">
-								<component :is="'FieldDynamic'" :setProperties="field" />
+							<div
+								v-for="(field, index) in fields"
+								:key="`${index}-input`"
+							>
+								<component
+									:is="'FieldDynamic'"
+									:setProperties="field"
+								/>
 							</div>
 							<!-- <div
                 class="row editable-element-container q-my-none"
@@ -174,8 +180,20 @@
 		>
 			<q-card>
 				<q-card-section class="q-pt-md">
-					<FormForInputs
-						v-if="currentField"
+					<FormForInput
+						v-if="inputOptions.includes(currentField.type)"
+						:fieldConfiguration="currentField"
+						@cancelCreation="cancelCreation"
+						@processCreation="processCreation"
+					/>
+					<FormForSelect
+						v-if="currentField.type === 'select'"
+						:fieldConfiguration="currentField"
+						@cancelCreation="cancelCreation"
+						@processCreation="processCreation"
+					/>
+					<FormForToggle
+						v-if="currentField.type === 'toggle'"
 						:fieldConfiguration="currentField"
 						@cancelCreation="cancelCreation"
 						@processCreation="processCreation"
@@ -194,16 +212,33 @@ import { VueDraggableNext } from 'vue-draggable-next';
 import EditableElement from './editables/EditableElement.vue';
 import EditableElementOptions from './editables/EditableElementOptions.vue';
 
-
 /* NUEVO */
-import FormForInputs from './FormForInputs';
+import FormForInput from './FormForInput';
+import FormForSelect from './FormForSelect';
 import FieldDynamic from './FieldDynamic';
+import FormForToggle from "./FormForToggle";
+
+/* Pasar a global */
+const inputOptions = [
+	'text',
+	'password',
+	'textarea',
+	'email',
+	'file',
+	'number',
+	'url',
+	'time',
+	'date',
+];
 
 export default defineComponent({
 	name: 'QDynamicForm',
 	components: {
 		FieldDynamic,
-		FormForInputs,
+		FormForInput,
+		FormForSelect,
+		FormForToggle,
+
 		draggable: VueDraggableNext,
 		EditableElement,
 		EditableElementOptions,
@@ -225,10 +260,14 @@ export default defineComponent({
 			type: Array,
 			required: false,
 			default: () => [
-				{ type: 'text', icon: 'font_download', label: 'Campo tipo input' },
-				{ type: 'boolean', icon: 'edit_attributes', label: 'Boolean' },
 				{
-					type: 'dropdown',
+					type: 'text',
+					icon: 'font_download',
+					label: 'Campo tipo input',
+				},
+				{ type: 'toggle', icon: 'edit_attributes', label: 'Toggle' },
+				{
+					type: 'select',
 					icon: 'arrow_drop_down_circle',
 					label: 'Dropdown',
 				},
@@ -245,7 +284,6 @@ export default defineComponent({
 		/* DATA */
 		const activateModaAddField = ref(false);
 		const activatedCloseForm = ref(false);
-		console.log('primera carga',props.valueComponent)
 		const fields = ref(props.valueComponent);
 		const currentField = ref(null);
 
@@ -266,21 +304,21 @@ export default defineComponent({
 		}
 
 		/* Se crea un objeto para el input que se va a crear*/
-		const createInput = () => {
-			const newInput = {};
+		const createInput = type => {
+			const newInput = { type };
 			/* Se registra el objeto del nuevo input */
 			fields.value.push(newInput);
 			/* Se envia la referencia del objeto creado para que sea editado */
 			currentField.value = newInput;
-			console.log('currentField.value',currentField.value)
-			activateModalWithForm.value=true;
+
+			activateModalWithForm.value = true;
 		};
 
 		/* Al procesar la creacion, reseteamos para la proxima creacion */
 		const processCreation = () => {
 			activateModalWithForm.value = false;
 			currentField.value = null;
-		}
+		};
 
 		/* Cancelar la creacion del campo */
 		const cancelCreation = () => {
@@ -387,6 +425,7 @@ export default defineComponent({
 			activateModalWithForm,
 
 			/* Utilizados */
+			inputOptions,
 			fields,
 			currentField,
 			activateModaAddField,

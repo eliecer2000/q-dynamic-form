@@ -24,64 +24,21 @@
 		/>
 
 		<q-input
-			v-model="attributes.label"
-			label="Etiqueta"
-			placeholder="Nombre de la etiqueta."
-			filled
-			:rules="[val => val.length > 0 || 'Debes escribir una etiqueta.']"
-		/>
-
-		<q-input
-			v-model="attributes.name"
-			label="Nombre del campo con que contiene el valor"
-			placeholder="Ej: total_ec2."
-			filled
-			:rules="[
-				val =>
-					val.length > 0 || 'Debes escribir un nombre para el campo.',
-			]"
-		/>
-
-		<q-input
-			v-model="attributes.hint"
-			label="Descripción bajo el campo"
-			placeholder="Ej: Utilice más de 8 caracteres e incluya al menos un: numero, mayúscula y minúscula."
-			filled
-			hint=""
-		/>
-
-		<q-input
-			v-model="attributes.maxlength"
-			label="Numero máximo de carácteres que se permite escribir en el campo"
-			placeholder="Ej: 20."
-			type="number"
-			filled
-			hint=""
+			v-for="(option, index) in propsList"
+			:key="`${index}-propsList`"
+			v-model="attributes[option.propname]"
+			v-bind="option"
 		/>
 
 		<div class="row">
-			<div class="col-12 col-md-6">
+			<div
+				v-for="(option, index) in toggleOptions"
+				:key="`${index}-toggleOptions`"
+				class="col-12 col-md-6"
+			>
 				<q-toggle
-					v-model="attributes.autofocus"
-					label="Auto enfocar."
-				/>
-			</div>
-			<div class="col-12 col-md-6">
-				<q-toggle
-					v-model="attributes.clearable"
-					label="Que sea limpiable."
-				/>
-			</div>
-			<div class="col-12 col-md-6">
-				<q-toggle
-					v-model="attributes.disable"
-					label="Que se encuentre inactivo."
-				/>
-			</div>
-			<div class="col-12 col-md-6">
-				<q-toggle
-					v-model="attributes.readonly"
-					label="Que sea solo lectura."
+					v-model="attributes[option.prop]"
+					:label="option.label"
 				/>
 			</div>
 			<q-btn
@@ -105,6 +62,52 @@
 
 <script>
 import { defineComponent, onMounted, computed, ref, watch } from 'vue';
+
+/* 
+	https://quasar.dev/vue-components/select
+	Se define constante para imprimir q-input y q-toggle por lista de opciones para activar propiedades del booleanas de q-select
+*/
+const propsList = [
+	{
+		propname: 'label',
+		label: 'Etiqueta',
+		placeholder: 'Nombre de la etiqueta',
+		filled: true,
+		rules: [val => val.length > 0 || 'Debes escribir una etiqueta.'],
+	},
+	{
+		propname: 'name',
+		label: 'Nombre del campo con que contiene el valor',
+		placeholder: 'Ej: total_ec2',
+		filled: true,
+		rules: [
+			val => val.length > 0 || 'Debes escribir un nombre para el campo.',
+		],
+	},
+	{
+		propname: 'hint',
+		label: 'Descripción bajo el campo.',
+		placeholder:
+			'Ej: Utilice más de 8 caracteres e incluya al menos un: numero, mayúscula y minúscula',
+		filled: true,
+		hint: '',
+	},
+	{
+		propname: 'maxlength',
+		label: 'Numero máximo de carácteres que se permite escribir en el campo',
+		type: 'number',
+		placeholder: 'Ej: 20',
+		filled: true,
+		hint: '',
+	},
+];
+
+const toggleOptions = [
+	{ prop: 'autofocus', label: 'Auto enfocar.' },
+	{ prop: 'clearable', label: 'Que sea limpiable.' },
+	{ prop: 'disable', label: 'Que se encuentre inactivo.' },
+	{ prop: 'readonly', label: 'Que sea solo lectura.' },
+];
 
 export default defineComponent({
 	name: 'FormForInputs',
@@ -173,6 +176,8 @@ export default defineComponent({
 		return {
 			attributes,
 			validation,
+			toggleOptions,
+			propsList,
 			onSubmit,
 			cancelCreation,
 		};

@@ -3,6 +3,8 @@
 		<div class="col-12">
 			<q-input v-if="componentName==='q-input'" v-model="fieldValue" v-bind="fieldProps">
 			</q-input>
+
+			<q-select v-if="componentName==='q-select'" v-model="fieldValue" v-bind="fieldProps" />
 		</div>
 	</div>
 </template>
@@ -44,6 +46,10 @@ export default defineComponent({
 				'time',
 				'date',
 			].includes(fieldProps.type)) return 'q-input'
+
+			if(fieldProps.type ==='select') return 'q-select'
+
+			if(fieldProps.type ==='toggle') return 'q-toggle'
 		})
 
 		/* Se devuelve el valor del campo con cada cambio */

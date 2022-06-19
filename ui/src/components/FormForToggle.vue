@@ -99,8 +99,8 @@ export default defineComponent({
 			type: 'toggle',
 			label: '',
 			name: '',
-			'true-value': '',
-			'false-value': '',
+			'true-value': true,
+			'false-value': false,
 			disable: false,
 		});
 

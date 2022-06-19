@@ -47,7 +47,6 @@
 				<q-card-section class="q-my-md col-6">
 					<q-scroll-area style="height: calc(100vh - 220px)">
 						<draggable :list="fields" group="elements">
-							Codigo pausado 1
 							<div
 								v-for="(field, index) in fields"
 								:key="`${index}-input`"
@@ -216,7 +215,7 @@ import EditableElementOptions from './editables/EditableElementOptions.vue';
 import FormForInput from './FormForInput';
 import FormForSelect from './FormForSelect';
 import FieldDynamic from './FieldDynamic';
-import FormForToggle from "./FormForToggle";
+import FormForToggle from './FormForToggle';
 
 /* Pasar a global */
 const inputOptions = [
@@ -272,7 +271,7 @@ export default defineComponent({
 					label: 'Dropdown',
 				},
 				{
-					type: 'section_break',
+					type: 'separator',
 					icon: 'view_agenda',
 					label: 'Section Break',
 				},
@@ -308,10 +307,12 @@ export default defineComponent({
 			const newInput = { type };
 			/* Se registra el objeto del nuevo input */
 			fields.value.push(newInput);
-			/* Se envia la referencia del objeto creado para que sea editado */
-			currentField.value = newInput;
+			if (type !== 'separator') {
+				/* Se envia la referencia del objeto creado para que sea editado */
+				currentField.value = newInput;
 
-			activateModalWithForm.value = true;
+				activateModalWithForm.value = true;
+			}
 		};
 
 		/* Al procesar la creacion, reseteamos para la proxima creacion */

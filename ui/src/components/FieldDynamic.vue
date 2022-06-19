@@ -7,6 +7,8 @@
 			<q-select v-if="componentName==='q-select'" v-model="fieldValue" v-bind="fieldProps" />
 
 			<q-toggle v-if="componentName==='q-toggle'" v-model="fieldValue" v-bind="fieldProps" />
+
+			<q-separator v-if="componentName==='q-separator'" spaced color="accent" />
 		</div>
 	</div>
 </template>
@@ -50,6 +52,8 @@ export default defineComponent({
 			if(fieldProps.value.type ==='select') return 'q-select'
 
 			if(fieldProps.value.type ==='toggle') return 'q-toggle'
+
+			if(fieldProps.value.type ==='separator') return 'q-separator'
 		})
 
 		/* Se devuelve el valor del campo con cada cambio */

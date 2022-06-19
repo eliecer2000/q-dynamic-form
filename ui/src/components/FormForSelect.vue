@@ -131,6 +131,7 @@ export default defineComponent({
 			clearable: false,
 			disable: false,
 			readonly: false,
+			outlined: true
 		});
 
 		const selectOptions = ref('');

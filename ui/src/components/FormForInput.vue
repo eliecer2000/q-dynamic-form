@@ -129,6 +129,7 @@ export default defineComponent({
 			clearable: false,
 			disable: false,
 			readonly: false,
+			outlined: true
 		});
 
 		/* Si se edita el formulario se actualizan las keys del objeto recibido */

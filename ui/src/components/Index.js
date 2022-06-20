@@ -8,10 +8,10 @@ import SectionBreakElement from "./elements/SectionBreakElement.vue";
 import EmailElement from "./elements/EmailElement.vue";
 
 /* Nuevos campos */
-import FieldDynamic from "./FieldDynamic";
-import FormForInput from "./FormForInput";
-import FormForSelect from "./FormForSelect";
-import FormForToggle from "./FormForToggle";
+import FieldDynamic from "./FieldDynamic.vue";
+import FormForInput from "./FormForInput.vue";
+import FormForSelect from "./FormForSelect.vue";
+import FormForToggle from "./FormForToggle.vue";
 
 export {
   QDynamicForm,

@@ -238,10 +238,10 @@ import EditableElement from './editables/EditableElement.vue';
 import EditableElementOptions from './editables/EditableElementOptions.vue';
 
 /* NUEVO */
-import FormForInput from './FormForInput';
-import FormForSelect from './FormForSelect';
-import FieldDynamic from './FieldDynamic';
-import FormForToggle from './FormForToggle';
+import FormForInput from './FormForInput.vue';
+import FormForSelect from './FormForSelect.vue';
+import FieldDynamic from './FieldDynamic.vue';
+import FormForToggle from './FormForToggle.vue';
 
 /* Pasar a global */
 const inputOptions = [

@@ -99,7 +99,7 @@ export default defineComponent({
 	emits: ['data'],
 	setup(props, { emit }) {
 		/* Estilo de la columna que contiene al campo */
-		const classCol = `col-12 ${props.columnClassField}`;
+		const classCol = `col ${props.columnClassField}`;
 
 		/* Valor inicial del campo */
 		const fieldValue = ref(props.initValue);

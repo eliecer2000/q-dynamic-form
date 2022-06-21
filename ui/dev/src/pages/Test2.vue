@@ -67,7 +67,11 @@ export default defineComponent({
 			Se asignan valores a los campos del formulario creados en el builder.
 			La key debe ser el nombre defenido para el campo.
 		*/
-		const initValue = { username: 'Eduardo', active: 'false', team:['MAG','LEO'] };
+		const initValue = {
+			username: 'Eduardo',
+			active: 'false',
+			team: ['MAG', 'LEO'],
+		};
 
 		/* 
 			Cada campo se encuentra en columna col-12. Aca se puede establecer los 
@@ -130,6 +134,7 @@ export default defineComponent({
 		/* Actualiza la data cargada en el formulario con cada cambio que recibe */
 		const onData = data => {
 			formData.value = data;
+			console.log(data);
 		};
 
 		const onSubmit = () => {

@@ -53,7 +53,7 @@ export default defineComponent({
 				label: 'Equipo de beisbol',
 				name: 'team',
 				hint: '',
-				multiple: false,
+				multiple: true,
 				'use-input': false,
 				clearable: false,
 				outlined: true,
@@ -67,7 +67,7 @@ export default defineComponent({
 			Se asignan valores a los campos del formulario creados en el builder.
 			La key debe ser el nombre defenido para el campo.
 		*/
-		const initValue = { username: 'Eduardo', active: 'false' };
+		const initValue = { username: 'Eduardo', active: 'false', team:['MAG','LEO'] };
 
 		/* 
 			Cada campo se encuentra en columna col-12. Aca se puede establecer los 

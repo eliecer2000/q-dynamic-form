@@ -62,7 +62,7 @@
 </template>
 
 <script>
-import { defineComponent, computed, watch, ref } from 'vue';
+import { defineComponent, onMounted, computed, watch, ref } from 'vue';
 import {
 	inputTypes,
 	propertiesAvailableToModify as mutableProperties,
@@ -77,8 +77,7 @@ export default defineComponent({
 		},
 		/* Valor que tendrá el campo en el formulario */
 		initValue: {
-			type: String,
-			default: '',
+			type: [String, Object, Boolean],
 		},
 		/* Modificar propiedades del campo como: disable, readonly */
 		stateFields: {
@@ -102,7 +101,7 @@ export default defineComponent({
 		const classCol = `col ${props.columnClassField}`;
 
 		/* Valor inicial del campo */
-		const fieldValue = ref(props.initValue);
+		const fieldValue = ref(null);
 
 		/* En caso de definir al campo como una lista, se genera elementos en un arreglo que se devuelve como respuesta */
 		const itemlist = ref([]);
@@ -183,6 +182,10 @@ export default defineComponent({
 			if (!fieldProps.value['createlist']) {
 				emit('data', { [fieldPropsDefault['name']]: newValue });
 			}
+		});
+
+		onMounted(() => {
+			if(props.initValue) fieldValue.value = props.initValue
 		});
 
 		return {

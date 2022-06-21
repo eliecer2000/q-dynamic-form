@@ -61,8 +61,5 @@
 		"last 4 ChromeAndroid versions",
 		"last 4 FirefoxAndroid versions",
 		"last 4 iOS versions"
-	],
-	"dependencies": {
-		"@vue/compiler-sfc": "^3.2.37"
-	}
+	]
 }

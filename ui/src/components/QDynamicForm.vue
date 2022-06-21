@@ -46,7 +46,11 @@
 			<q-card-section horizontal class="full-width">
 				<q-card-section class="q-my-md col-6">
 					<q-scroll-area style="height: calc(100vh - 220px)">
-						<draggable :list="fields" group="elements" @change="onChange">
+						<draggable
+							:list="fields"
+							group="elements"
+							@change="onChange"
+						>
 							<div
 								v-for="(field, index) in fields"
 								:key="`${index}-input`"
@@ -79,31 +83,6 @@
 									/>
 								</div>
 							</div>
-							<!-- <div
-                class="row editable-element-container q-my-none"
-                v-for="(field, index) in fields"
-                :key="index"
-              >
-                <div class="col">
-                  <editable-element
-                    :value="fields[index]"
-                    @click="selectForEdit(field)"
-                    :ref="fields[index].cid"
-                  />
-                </div>
-                <div class="col-auto">
-                  <q-btn
-                    class="delete-button"
-                    style="width: 30px; height: 30px"
-                    @click="deleteField(index)"
-                    color="accent"
-                    round
-                    icon="delete"
-                    size="xs"
-                    ><q-tooltip>Delete field</q-tooltip></q-btn
-                  >
-                </div>
-              </div> -->
 						</draggable>
 					</q-scroll-area>
 				</q-card-section>
@@ -148,6 +127,24 @@
 						>
 							<pre>{{ fields }}</pre>
 						</div>
+
+						<div v-if="fields[0]">
+							<div class="q-py-md">
+								<q-btn color="primary" unelevated label="Copiar" @click="copyClipboard" />
+							</div>
+							Para manejar los estados de los campos:
+							<ul>
+								<li>
+									Desactivar campo: disable_nombredelcampo,
+									ejemplo: <b>disable_{{ fields[0].name }}</b>
+								</li>
+								<li v-if="fields[0]">
+									Campo solo lectura: readonly_nombredelcampo,
+									ejemplo:
+									<b>readonly_{{ fields[0].name }}</b>
+								</li>
+							</ul>
+						</div>
 					</q-scroll-area>
 				</q-card-section>
 			</q-card-section>
@@ -176,17 +173,6 @@
 						<div class="text-h6 q-my-sm">Ejemplo de la Vista</div>
 						<div class="q-form-container">
 							Codigo pausado 2
-							<!-- <component
-                v-for="(field, index) in fields"
-                :key="index"
-                :inner-value="field"
-                :is="getElement(field)"
-                :label="field.label"
-                :required="field.required"
-                :field_options="field.field_options"
-                :id="field.cid"
-                :cid="field.cid"
-              /> -->
 						</div>
 					</q-card-section>
 				</q-scroll-area>
@@ -230,18 +216,13 @@
 </template>
 
 <script>
-import { uid, extend } from 'quasar';
 import { ref, computed, defineComponent, onBeforeMount, watch } from 'vue';
 import { VueDraggableNext } from 'vue-draggable-next';
 
-import EditableElement from './editables/EditableElement.vue';
-import EditableElementOptions from './editables/EditableElementOptions.vue';
-
-/* NUEVO */
 import FormForInput from './FormForInput.vue';
 import FormForSelect from './FormForSelect.vue';
-import FieldDynamic from './FieldDynamic.vue';
 import FormForToggle from './FormForToggle.vue';
+import FieldDynamic from './FieldDynamic.vue';
 
 /* Pasar a global */
 const inputOptions = [
@@ -265,8 +246,6 @@ export default defineComponent({
 		FormForToggle,
 
 		draggable: VueDraggableNext,
-		EditableElement,
-		EditableElementOptions,
 	},
 	props: {
 		navPosition: {
@@ -378,13 +357,15 @@ export default defineComponent({
 
 		/* Duplicar campo y editar */
 		const duplicateField = index => {
-			let newFields = JSON.parse(JSON.stringify([...fields.value, fields.value[index]]));
+			let newFields = JSON.parse(
+				JSON.stringify([...fields.value, fields.value[index]])
+			);
 			fields.value = [];
 			/* Para refrescar el render del formulario */
 			setTimeout(() => {
 				fields.value = newFields;
 				/* Se manda a editar */
-				selectForEdit(newFields[newFields.length-1]);
+				selectForEdit(newFields[newFields.length - 1]);
 			}, 5);
 		};
 
@@ -397,26 +378,13 @@ export default defineComponent({
 			setTimeout(() => (fields.value = newFields), 5);
 		};
 
-		// COMPUTED
-		const sourceOptions = computed(() => {
-			return {
-				group: {
-					name: 'q-form-builder',
-					pull: 'clone',
-					put: false,
-				},
-			};
-		});
+		/* Copiar en el portapapeles */
+		const copyClipboard = () => {
+			/* Copy the text inside the text field */
+			navigator.clipboard.writeText(JSON.stringify(fields.value));
+		};
 
-		const destinationOptions = computed(() => {
-			return {
-				group: {
-					name: 'q-form-builder',
-					pull: false,
-					put: true,
-				},
-			};
-		});
+
 
 		watch(
 			() => fields.value,
@@ -426,16 +394,7 @@ export default defineComponent({
 			{ deep: true }
 		);
 
-		const getElement = field => {
-			const nameParts = field.field_type.split('_');
-			for (let i = 0; i < nameParts.length; i++) {
-				nameParts[i] =
-					nameParts[i].charAt(0).toUpperCase() +
-					nameParts[i].slice(1);
-			}
-			console.log(nameParts.join('') + 'Element');
-			return nameParts.join('') + 'Element';
-		};
+
 
 		onBeforeMount(() => {
 			if (!fields.value || !(fields.value instanceof Array)) {
@@ -444,22 +403,16 @@ export default defineComponent({
 		});
 
 		return {
-			deleteField,
-			duplicateField,
-			onChange,
-			selectForEdit,
-			sourceOptions,
-			destinationOptions,
-			// ----------------------
 			render,
-			getElement,
-			activateModalWithForm,
-
-			/* Utilizados */
+			selectForEdit,
+			onChange,
+			duplicateField,
+			deleteField,
 			inputOptions,
 			fields,
 			currentField,
 			activateModaAddField,
+			activateModalWithForm,
 			activatedCloseForm,
 			openModaAddField,
 			createInput,
@@ -467,6 +420,7 @@ export default defineComponent({
 			cancelEdition,
 			processCreation,
 			formError,
+			copyClipboard,
 		};
 	},
 });

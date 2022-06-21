@@ -1,6 +1,6 @@
 <template>
   <q-page>
-    <QDynamicForm :valueComponent="fields" @input="input" />
+    <QDynamicForm :valueComponent="fields" @input="input" show-button-copy />
   </q-page>
 </template>
 

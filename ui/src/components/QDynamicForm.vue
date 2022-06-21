@@ -133,7 +133,7 @@
 						</div>
 
 						<div v-if="fields[0]">
-							<div class="q-py-md">
+							<div v-if="showButtonCopy" class="q-py-md">
 								<q-btn
 									color="primary"
 									unelevated
@@ -285,6 +285,10 @@ export default defineComponent({
 		draggable: VueDraggableNext,
 	},
 	props: {
+		showButtonCopy:{
+			type: Boolean,
+			default: false,
+		},
 		navPosition: {
 			type: String,
 			default: 'left',
@@ -324,18 +328,13 @@ export default defineComponent({
 	setup(props, { emit }) {
 		/* DATA */
 		const activateModaAddField = ref(false);
-		const activatedCloseForm = ref(false);
 		const fields = ref(props.valueComponent);
 		const currentField = ref(null);
 
+		const showButtonCopy = ref(props.showButtonCopy);
+
 		let render = ref(false);
 		let activateModalWithForm = ref(false);
-
-		// METHODS
-		/* Modal */
-		const formError = error => {
-			activatedCloseForm.value = error;
-		};
 
 		/* Modal para el tipo de campo a agregar campo nuevo */
 		function openModaAddField() {
@@ -436,6 +435,7 @@ export default defineComponent({
 		});
 
 		return {
+			showButtonCopy,
 			mutableProperties,
 			render,
 			selectForEdit,
@@ -447,13 +447,11 @@ export default defineComponent({
 			currentField,
 			activateModaAddField,
 			activateModalWithForm,
-			activatedCloseForm,
 			openModaAddField,
 			createInput,
 			cancelCreation,
 			cancelEdition,
 			processCreation,
-			formError,
 			copyClipboard,
 		};
 	},

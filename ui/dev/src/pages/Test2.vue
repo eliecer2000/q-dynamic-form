@@ -24,7 +24,7 @@ import { defineComponent, ref } from 'vue';
 
 export default defineComponent({
 	setup() {
-		/* Campos creado con el builder */
+		/* Campos creado con el builder para armar el formulario */
 		const fields = ref([
 			{
 				type: 'text',
@@ -63,19 +63,44 @@ export default defineComponent({
 			},
 		]);
 
-		/* Estilos para las columnas */
-		const columnClassField = {
-			team: "col-md-6",
-			active:"col-md-6",
-			username: "col-md-6",
-		}
+		/* 
+			Se asignan valores a los campos del formulario creados en el builder.
+			La key debe ser el nombre defenido para el campo.
+		*/
+		const initValue = { username: 'Eduardo', active: 'false' };
 
-		/* Modificando el estado de los campos */
+		/* 
+			Cada campo se encuentra en columna col-12. Aca se puede establecer los 
+			anchos para los distintos breakpoint y organizar el formulario como se 
+			desee. La key debe ser el nombre defenidor para el campo.
+		*/
+		const columnClassField = {
+			team: 'col-md-6',
+			active: 'col-md-6',
+			username: 'col-md-6',
+		};
+
+		/* 
+			Modificando el estado de los campos. La key debe ser el nombre defenido 
+			para el campo, acompañado del prefijo readonly_ o disable_ o rules_
+		*/
 		const stateFields = ref({
-			readonly_username: true,
+			//readonly_username: true,
+			//disable_username: true,
+			rules_username: [
+				val => !!val || 'Este campo es requerido.',
+				val => {
+					const emailPattern =
+						/^(?=[a-zA-Z0-9@._%+-]{6,254}$)[a-zA-Z0-9._%+-]{1,64}@(?:[a-zA-Z0-9-]{1,63}\.){1,8}[a-zA-Z]{2,63}$/;
+					return emailPattern.test(val) || 'No es un email valido.';
+				},
+			],
 		});
 
-		/* Opciones del select */
+		/* 
+			Definir opciones del campo select del formulario creados en el builder.
+			La key debe ser el nombre defenidor para el campo.
+		*/
 		const optionsSelect = ref({
 			team: [
 				{
@@ -97,16 +122,15 @@ export default defineComponent({
 			],
 		});
 
-		/* Data del formulario que se modifica */
+		/* 
+			Almace de los datos que devuelve el formulario al ser enviado.
+		*/
 		const formData = ref({});
 
 		/* Actualiza la data cargada en el formulario con cada cambio que recibe */
 		const onData = data => {
 			formData.value = data;
 		};
-
-		/* Se inicializa el formulario con valores */
-		const initValue = { username: 'Eduardo', active: 'false' };
 
 		const onSubmit = () => {
 			console.log('data', formData.value);

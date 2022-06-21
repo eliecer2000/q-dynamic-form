@@ -8,17 +8,7 @@
 			v-model="attributes.type"
 			label="Tipo de campo"
 			outlined
-			:options="[
-				'text',
-				'password',
-				'textarea',
-				'email',
-				'file',
-				'number',
-				'url',
-				'time',
-				'date',
-			]"
+			:options="inputOptions"
 			behavior="menu"
 			hint=""
 		/>
@@ -62,6 +52,7 @@
 
 <script>
 import { defineComponent, onMounted, computed, ref, watch } from 'vue';
+import { inputTypes as inputOptions }  from './utils';
 
 /* 
 	https://quasar.dev/vue-components/select
@@ -93,10 +84,9 @@ const propsList = [
 		hint: '',
 	},
 	{
-		propname: 'maxlength',
-		label: 'Numero máximo de carácteres que se permite escribir en el campo',
-		type: 'number',
-		placeholder: 'Ej: 20',
+		propname: 'information',
+		label: 'Informacion de ayuda',
+		placeholder: 'Ej: La funcion de este campo es...',
 		filled: true,
 		hint: '',
 	},
@@ -183,6 +173,7 @@ export default defineComponent({
 		});
 
 		return {
+			inputOptions,
 			attributes,
 			validation,
 			toggleOptions,

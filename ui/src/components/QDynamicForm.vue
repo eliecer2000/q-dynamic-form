@@ -64,19 +64,23 @@
 								</div>
 								<div class="col-4">
 									<q-btn
+										v-if="field.type!=='separator'"
 										flat
+										round
 										color="primary"
 										icon="edit_note"
 										@click="() => selectForEdit(field)"
 									/>
 									<q-btn
 										flat
+										round
 										color="primary"
 										icon="delete"
 										@click="() => deleteField(index)"
 									/>
 									<q-btn
 										flat
+										round
 										color="primary"
 										icon="content_copy"
 										@click="() => duplicateField(index)"
@@ -130,7 +134,12 @@
 
 						<div v-if="fields[0]">
 							<div class="q-py-md">
-								<q-btn color="primary" unelevated label="Copiar" @click="copyClipboard" />
+								<q-btn
+									color="primary"
+									unelevated
+									label="Copiar"
+									@click="copyClipboard"
+								/>
 							</div>
 							Para manejar los estados de los campos:
 							<ul>
@@ -142,6 +151,30 @@
 									Campo solo lectura: readonly_nombredelcampo,
 									ejemplo:
 									<b>readonly_{{ fields[0].name }}</b>
+								</li>
+								<li>
+									Lista de las propiedades mutables: <br />
+									{{ mutableProperties.join(', ') }} <br />
+									Documentación para conocer el uso de cada
+									propiedad:
+									<a
+										href="https://quasar.dev/vue-components/input"
+										target="_blank"
+										rel="noopener noreferrer"
+										>q-input</a
+									>
+									<a
+										href="https://quasar.dev/vue-components/select"
+										target="_blank"
+										rel="noopener noreferrer"
+										>q-select</a
+									>
+									<a
+										href="https://quasar.dev/vue-components/toggle"
+										target="_blank"
+										rel="noopener noreferrer"
+										>q-toggle</a
+									>
 								</li>
 							</ul>
 						</div>
@@ -165,14 +198,24 @@
 			<q-card
 				v-if="render"
 				flat
-				class="bg-white text-primary no-margin no-padding"
+				class="no-margin no-padding"
 				style="width: 760px; height: calc(100vh - 40px)"
 			>
 				<q-scroll-area style="height: calc(100% - 30px)">
-					<q-card-section class="q-pt-sm text-center q-mb-lg">
+					<q-card-section class="q-pt-sm q-mb-lg">
 						<div class="text-h6 q-my-sm">Ejemplo de la Vista</div>
 						<div class="q-form-container">
-							Codigo pausado 2
+							<QDynamicRender :fields="fields" />
+							<!-- <q-separator />
+							<div class="q-mt-lg">
+								Nombres de los campos definidos:
+								{{
+									fields
+										.filter(field => field.name)
+										.map(field => field.name)
+										.join(',')
+								}}
+							</div> -->
 						</div>
 					</q-card-section>
 				</q-scroll-area>
@@ -216,26 +259,19 @@
 </template>
 
 <script>
-import { ref, computed, defineComponent, onBeforeMount, watch } from 'vue';
+import { ref, defineComponent, onBeforeMount, watch } from 'vue';
 import { VueDraggableNext } from 'vue-draggable-next';
 
 import FormForInput from './FormForInput.vue';
 import FormForSelect from './FormForSelect.vue';
 import FormForToggle from './FormForToggle.vue';
 import FieldDynamic from './FieldDynamic.vue';
+import QDynamicRender from './QDynamicRender.vue';
 
-/* Pasar a global */
-const inputOptions = [
-	'text',
-	'password',
-	'textarea',
-	'email',
-	'file',
-	'number',
-	'url',
-	'time',
-	'date',
-];
+import {
+	inputTypes as inputOptions,
+	propertiesAvailableToModify as mutableProperties,
+} from './utils';
 
 export default defineComponent({
 	name: 'QDynamicForm',
@@ -244,6 +280,7 @@ export default defineComponent({
 		FormForInput,
 		FormForSelect,
 		FormForToggle,
+		QDynamicRender,
 
 		draggable: VueDraggableNext,
 	},
@@ -384,8 +421,6 @@ export default defineComponent({
 			navigator.clipboard.writeText(JSON.stringify(fields.value));
 		};
 
-
-
 		watch(
 			() => fields.value,
 			newValue => {
@@ -394,8 +429,6 @@ export default defineComponent({
 			{ deep: true }
 		);
 
-
-
 		onBeforeMount(() => {
 			if (!fields.value || !(fields.value instanceof Array)) {
 				fields.value = [];
@@ -403,6 +436,7 @@ export default defineComponent({
 		});
 
 		return {
+			mutableProperties,
 			render,
 			selectForEdit,
 			onChange,

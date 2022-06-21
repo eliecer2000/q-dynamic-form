@@ -6,6 +6,20 @@
 			v-bind="fieldProps"
 			:onkeypress="addItem"
 		>
+			<template v-if="fieldProps['information']" v-slot:prepend>
+				<q-btn round dense flat icon="info">
+					<q-tooltip
+						anchor="bottom right"
+						self="top left"
+						:offset="[0, -10]"
+						class="text-body1"
+						max-width="250px"	
+					>
+						{{fieldProps['information']}}
+					</q-tooltip>
+				</q-btn>
+			</template>
+
 			<template v-if="fieldProps['createlist']" v-slot:append>
 				<q-btn round dense flat icon="add" @click="addItem" />
 			</template>
@@ -49,6 +63,11 @@
 
 <script>
 import { defineComponent, computed, watch, ref } from 'vue';
+import {
+	inputTypes,
+	propertiesAvailableToModify as mutableProperties,
+} from './utils';
+
 export default defineComponent({
 	name: 'FieldDynamic',
 	props: {
@@ -66,7 +85,7 @@ export default defineComponent({
 			type: Object,
 			default: {},
 		},
-		/* Modificar propiedades del campo como: disable, readonly */
+		/* Modificar las opciones del campoo select */
 		optionsSelect: {
 			type: Object,
 			default: {},
@@ -74,13 +93,13 @@ export default defineComponent({
 		/* Clases para organizar los campos */
 		columnClassField: {
 			type: String,
-			default: "",
-		}
+			default: '',
+		},
 	},
 	emits: ['data'],
 	setup(props, { emit }) {
 		/* Estilo de la columna que contiene al campo */
-		const classCol = `col-12 ${props.columnClassField}`
+		const classCol = `col-12 ${props.columnClassField}`;
 
 		/* Valor inicial del campo */
 		const fieldValue = ref(props.initValue);
@@ -118,21 +137,22 @@ export default defineComponent({
 		/* Armado de atributos del campo */
 		const fieldPropsDefault = props.setProperties;
 
-		/* Se altualizar los estados */
+		/* Se actualizan algunas propiedades */
 		const fieldProps = computed(() => {
 			const result = { ...fieldPropsDefault };
 
-			if (props.stateFields[`disable_${fieldPropsDefault.name}`])
-				result.disable =
-					props.stateFields[`disable_${fieldPropsDefault.name}`];
-
-			if (props.stateFields[`readonly_${fieldPropsDefault.name}`])
-				result.readonly =
-					props.stateFields[`readonly_${fieldPropsDefault.name}`];
-
-			if (props.stateFields[`rules_${fieldPropsDefault.name}`])
-				result.rules =
-					props.stateFields[`rules_${fieldPropsDefault.name}`];
+			/* Propiedades que se pueden modificar mutableProperties */
+			mutableProperties.forEach(prop => {
+				/* 
+					Se valida si las keys estan entre las disponibles para modificar.
+					Por ejemplo: error_username, siendo username el nombre definido 
+					para campo. Si se cumple la condicion se devuelve el valor de la
+					key recibida en la propiedades que le corresponde.
+				*/
+				if (props.stateFields[`${prop}_${fieldPropsDefault.name}`])
+					result[prop] =
+						props.stateFields[`${prop}_${fieldPropsDefault.name}`];
+			});
 
 			if (props.optionsSelect[fieldPropsDefault.name]) {
 				result.options = props.optionsSelect[fieldPropsDefault.name];
@@ -143,21 +163,8 @@ export default defineComponent({
 
 		/* Cual componente de quasar llamar */
 		const componentName = computed(() => {
-			/* Usar variable global luego */
-			if (
-				[
-					'text',
-					'password',
-					'textarea',
-					'email',
-					'file',
-					'number',
-					'url',
-					'time',
-					'date',
-				].includes(fieldProps.value.type)
-			)
-				return 'q-input';
+			/* Se evalua si el valor de la key type se encuentra en inputTypes */
+			if (inputTypes.includes(fieldProps.value.type)) return 'q-input';
 
 			if (fieldProps.value.type === 'select') return 'q-select';
 
@@ -166,9 +173,13 @@ export default defineComponent({
 			if (fieldProps.value.type === 'separator') return 'q-separator';
 		});
 
-		/* Se devuelve el valor del campo con cada cambio */
+		/* Devuelve el valor del campo con cada cambio */
 		watch(fieldValue, newValue => {
-			/* Si el campo no es para crear lista, se envia su contenido */
+			/* 
+				Se retorna el valor del campo con cada cambio que se hace.
+				Pero si el campo se usa para crear un arregle de valores,
+				no se emite su contenido.
+			*/
 			if (!fieldProps.value['createlist']) {
 				emit('data', { [fieldPropsDefault['name']]: newValue });
 			}

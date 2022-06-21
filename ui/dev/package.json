@@ -28,7 +28,9 @@
     "yarn": ">= 1.6.0"
   },
   "dependencies": {
-    "vue": "^3.0.0",
-    "vue-router": "^4.0.0"
+    "@vue/compiler-sfc": "^3.2.37",
+    "vue": "^3.2.37",
+    "vue-draggable-next": "^2.1.1",
+    "vue-router": "^4.0.16"
   }
 }

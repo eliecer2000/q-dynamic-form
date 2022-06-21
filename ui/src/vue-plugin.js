@@ -4,7 +4,7 @@ import {
   FieldDynamic,
 } from "./components/Index";
 
-const version = "0.0.1";
+const version = "0.0.3";
 
 function install ( app ) {
   app.component( QDynamicForm.name, QDynamicForm );
@@ -15,6 +15,25 @@ function install ( app ) {
 export {
   QDynamicForm,
   QDynamicRender,
+  TextElement,
+  NumberElement,
+  DropdownElement,
+  BooleanElement,
+  SectionBreakElement,
+  EmailElement,
+  install,
+  version
+};
+
+export default {
+  QDynamicForm,
+  QDynamicRender,
+  TextElement,
+  NumberElement,
+  DropdownElement,
+  BooleanElement,
+  SectionBreakElement,
+  EmailElement,
   install,
   version,
 };

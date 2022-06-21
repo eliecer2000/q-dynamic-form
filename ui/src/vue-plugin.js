@@ -1,6 +1,6 @@
 import { QDynamicForm, QDynamicRender, FieldDynamic } from './components/Index';
 
-const version = '0.0.3';
+const version = '0.0.4';
 
 function install(app) {
 	app.component(QDynamicForm.name, QDynamicForm);

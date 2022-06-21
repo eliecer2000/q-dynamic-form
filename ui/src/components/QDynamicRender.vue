@@ -8,18 +8,9 @@
 				:initValue="initValue[field.name]"
 				:stateFields="stateFields"
 				:optionsSelect="optionsSelect"
+				:columnClassField="columnClassField[field.name]"
 				@data="onData"
 			/>
-			<!-- <component
-				class="q-py-xs"
-				v-for="field in fields"
-				:key="field.cid"
-				:inner-value="field"
-				:init-value="initValue"
-				:state="stateFields"
-				:is="getElement(field)"
-				@data="onData"
-			/> -->
 		</div>
 	</div>
 </template>
@@ -45,21 +36,17 @@ export default defineComponent({
 		optionsSelect: {
 			type: Object,
 			default: {},
-		},
+		},		
+		columnClassField: {
+			type: Object,
+			default: {},
+		}
 	},
 	emits: ['data'],
 	setup(props, { emit }) {
 		const responseData = ref(props.initValue);
-		const getElement = field => {
-			const nameParts = field.field_type.split('_');
-			nameParts.forEach(element => {
-				element = element.charAt(0).toUpperCase() + element.slice(1);
-			});
-			const result = nameParts.join('') + 'Element';
-			console.log({ result });
-			return result;
-		};
 
+		/* Se captura los datos recibidos de cada campo que está siendo modificado */
 		function onData(data) {
 			Object.assign(responseData.value, data);
 
@@ -76,8 +63,6 @@ export default defineComponent({
 		});
 
 		return {
-			responseData,
-			getElement,
 			onData,
 		};
 	},

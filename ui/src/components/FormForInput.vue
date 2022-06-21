@@ -105,8 +105,7 @@ const propsList = [
 const toggleOptions = [
 	{ prop: 'autofocus', label: 'Auto enfocar.' },
 	{ prop: 'clearable', label: 'Que sea limpiable.' },
-	{ prop: 'disable', label: 'Que se encuentre inactivo.' },
-	{ prop: 'readonly', label: 'Que sea solo lectura.' },
+	{ prop: 'createlist', label: 'Crea un arreglo de respuesta.' },
 ];
 
 export default defineComponent({
@@ -120,6 +119,7 @@ export default defineComponent({
 	setup(props, { emit }) {
 		/* Todos los atributos que nos interesa por el momento del componente q-input */
 		const attributes = ref({
+			ref: '',
 			type: 'text', // Aceptados: text, password, textarea, email, search, tel, file, number, url, time y date
 			label: '',
 			name: '',
@@ -127,9 +127,8 @@ export default defineComponent({
 			maxlength: '',
 			autofocus: false,
 			clearable: false,
-			disable: false,
-			readonly: false,
-			outlined: true
+			outlined: true,
+			createlist: false,
 		});
 
 		/* Para saber si es nuevo y elegir el evento correcto al cancelar  */
@@ -141,9 +140,14 @@ export default defineComponent({
 			newValue => {
 				/* Actualiza las key del campo que se está modificando */
 				const keys = Object.keys(newValue);
-				keys.forEach(
-					key => (props.fieldConfiguration[key] = newValue[key])
-				);
+
+				keys.forEach(key => {
+					props.fieldConfiguration[key] = newValue[key];
+					if (key === 'name')
+						props.fieldConfiguration[
+							'ref'
+						] = `ref_${newValue[key]}`;
+				});
 			},
 			{ deep: true }
 		);
@@ -161,7 +165,7 @@ export default defineComponent({
 		});
 
 		const onSubmit = () => {
-			if(validation) emit('processCreation')
+			if (validation) emit('processCreation');
 		};
 
 		const cancelProcess = () =>

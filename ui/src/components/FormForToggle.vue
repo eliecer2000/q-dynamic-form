@@ -81,9 +81,7 @@ const propsList = [
 	},
 ];
 
-const toggleOptions = [
-	{ prop: 'disable', label: 'Que se encuentre inactivo.' },
-];
+const toggleOptions = [];
 
 export default defineComponent({
 	name: 'FormForInputs',
@@ -96,6 +94,7 @@ export default defineComponent({
 	setup(props, { emit }) {
 		/* Todos los atributos que nos interesa por el momento del componente q-input */
 		const attributes = ref({
+			ref: '',
 			type: 'toggle',
 			label: '',
 			name: '',
@@ -113,9 +112,14 @@ export default defineComponent({
 			newValue => {
 				/* Actualiza las key del campo que se está modificando */
 				const keys = Object.keys(newValue);
-				keys.forEach(
-					key => (props.fieldConfiguration[key] = newValue[key])
-				);
+
+				keys.forEach(key => {
+					props.fieldConfiguration[key] = newValue[key];
+					if (key === 'name')
+						props.fieldConfiguration[
+							'ref'
+						] = `ref_${newValue[key]}`;
+				});
 			},
 			{ deep: true }
 		);

@@ -95,21 +95,26 @@ const propsList = [
 		hint: '',
 	},
 	{
-		propname: 'max-values',
-		label: 'Numero máximo de selecciones que se permite.',
-		type: 'number',
-		placeholder: 'Ej: 20',
+		propname: 'option-value',
+		label: 'Compo se llama la key con el valor a enviar',
+		placeholder: 'Ej: value',
+		filled: true,
+		hint: '',
+	},
+	{
+		propname: 'option-label',
+		label: 'Compo se llama la key que se quiere usar como label',
+		placeholder: 'Ej: label',
 		filled: true,
 		hint: '',
 	},
 ];
 
 const toggleOptions = [
+	{ prop: 'emit-value', label: 'Emitir el value' },
 	{ prop: 'multiple', label: 'Seleccionar multiples items.' },
 	{ prop: 'use-input', label: 'Habilitar input para escribir.' },
 	{ prop: 'clearable', label: 'Que sea limpiable.' },
-	{ prop: 'disable', label: 'Que se encuentre inactivo.' },
-	{ prop: 'readonly', label: 'Que sea solo lectura.' },
 ];
 
 export default defineComponent({
@@ -123,6 +128,7 @@ export default defineComponent({
 	setup(props, { emit }) {
 		/* Todos los atributos que nos interesa por el momento del componente q-select. El type: 'select' es solo un identificador, no pertener a q-select */
 		const attributes = ref({
+			ref: '',
 			type: 'select',
 			label: '',
 			name: '',
@@ -130,8 +136,6 @@ export default defineComponent({
 			multiple: false,
 			'use-input': false,
 			clearable: false,
-			disable: false,
-			readonly: false,
 			outlined: true,
 		});
 
@@ -148,9 +152,13 @@ export default defineComponent({
 				const keys = Object.keys(newValue).filter(
 					item => item !== 'options'
 				);
-				keys.forEach(
-					key => (props.fieldConfiguration[key] = newValue[key])
-				);
+				keys.forEach(key => {
+					props.fieldConfiguration[key] = newValue[key];
+					if (key === 'name')
+						props.fieldConfiguration[
+							'ref'
+						] = `ref_${newValue[key]}`;
+				});
 			},
 			{ deep: true }
 		);

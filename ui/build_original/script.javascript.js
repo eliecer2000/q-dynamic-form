@@ -1,4 +1,3 @@
-const vuePlugin = require("rollup-plugin-vue");
 const path = require("path");
 const fs = require("fs");
 const fse = require("fs-extra");
@@ -25,7 +24,6 @@ const rollupPlugins = [
     extensions: [".js"],
     preferBuiltins: false
   }),
-  vuePlugin(),
   json(),
   buble({
     objectAssign: "Object.assign"
@@ -69,7 +67,7 @@ const builds = [
         input: pathResolve("../src/index.umd.js")
       },
       output: {
-        name: "QGrid",
+        name: "qDynamicForm",
         file: pathResolve("../dist/index.umd.js"),
         format: "umd"
       }
@@ -99,7 +97,7 @@ function pathResolve(_path) {
 // eslint-disable-next-line no-unused-vars
 function addAssets(builds, type, injectName) {
   const files = fs.readdirSync(pathResolve("../../ui/src/components/" + type)),
-    plugins = [buble(bubleConfig)],
+    plugins = [buble(/* bubleConfig */)],
     outputDir = pathResolve(`../dist/${type}`);
 
   fse.mkdirp(outputDir);
@@ -119,7 +117,7 @@ function addAssets(builds, type, injectName) {
           output: {
             file: addExtension(pathResolve(`../dist/${type}/${file}`), "umd"),
             format: "umd",
-            name: `QDynamicForm.${injectName}.${name}`
+            name: `qDynamicForm.${injectName}.${name}`
           }
         },
         build: {

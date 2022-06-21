@@ -1,19 +1,17 @@
 import QDynamicForm from "./QDynamicForm.vue";
 import QDynamicRender from "./QDynamicRender.vue";
-import TextElement from "./elements/TextElement.vue";
-import NumberElement from "./elements/NumberElement.vue";
-import DropdownElement from "./elements/DropdownElement.vue";
-import BooleanElement from "./elements/BooleanElement.vue";
-import SectionBreakElement from "./elements/SectionBreakElement.vue";
-import EmailElement from "./elements/EmailElement.vue";
+
+import FieldDynamic from "./FieldDynamic.vue";
+import FormForInput from "./FormForInput.vue";
+import FormForSelect from "./FormForSelect.vue";
+import FormForToggle from "./FormForToggle.vue";
 
 export {
   QDynamicForm,
   QDynamicRender,
-  TextElement,
-  NumberElement,
-  DropdownElement,
-  BooleanElement,
-  SectionBreakElement,
-  EmailElement
+
+  FieldDynamic,
+  FormForInput,
+  FormForSelect,
+  FormForToggle
 };

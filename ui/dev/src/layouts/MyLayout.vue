@@ -11,7 +11,7 @@
         />
 
         <q-toolbar-title>
-          quasar-ui-q-dynamic-form v{{ version }}
+          quasar-ui-q-dynamic-form
         </q-toolbar-title>
 
         <div>Quasar v{{ $q.version }}</div>
@@ -25,14 +25,14 @@
 </template>
 
 <script>
-import { version } from 'ui' // "ui" is aliased in quasar.conf.js
+
 
 export default {
   name: 'MyLayout',
 
   setup () {
     return {
-      version
+
     }
   }
 }

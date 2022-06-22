@@ -27,18 +27,6 @@ export default defineComponent({
 		/* Campos creado con el builder para armar el formulario */
 		const fields = ref([
 			{
-				type: 'text',
-				ref: 'ref_username',
-				label: 'Nombre de usuario',
-				name: 'username',
-				hint: '',
-				maxlength: '',
-				autofocus: false,
-				clearable: false,
-				outlined: true,
-				createlist: false,
-			},
-			{
 				type: 'toggle',
 				label: 'Activar',
 				name: 'active',
@@ -57,9 +45,43 @@ export default defineComponent({
 				'use-input': false,
 				clearable: false,
 				outlined: true,
-				'emit-value': true,
+				// 'emit-value': true,
 				'option-value': 'code',
 				'option-label': 'teamName',
+			},
+			{
+				type: 'text',
+				ref: 'ref_username',
+				label: 'Nombre de usuario',
+				name: 'username',
+				hint: '',
+				maxlength: '',
+				autofocus: false,
+				clearable: false,
+				outlined: true,
+				createlist: false,
+			},
+			{
+				type: 'select',
+				ref: 'ref_fffffffffff',
+				label: 'ffffff',
+				name: 'fffffffffff',
+				hint: 'ggggggggggggggggggggggggggg',
+				multiple: false,
+				'use-input': false,
+				clearable: true,
+				outlined: true,
+				options: [
+					{
+						label: 'ffffffff',
+						value: 'ddfdfsd',
+					},
+					{
+						label: 'fdfsdfsdf',
+						value: 'fgsdfgsdg',
+					},
+				],
+				'emit-value': false,
 			},
 		]);
 
@@ -70,7 +92,16 @@ export default defineComponent({
 		const initValue = {
 			username: 'Eduardo',
 			active: 'false',
-			team: ['MAG', 'LEO'],
+			team: [
+				{
+					teamName: 'Magallanes',
+					code: 'MAG',
+				},
+				{
+					teamName: 'Leones',
+					code: 'LEO',
+				},
+			],
 		};
 
 		/* 

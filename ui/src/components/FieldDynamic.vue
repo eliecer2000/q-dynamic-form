@@ -13,9 +13,9 @@
 						self="top left"
 						:offset="[0, -10]"
 						class="text-body1"
-						max-width="250px"	
+						max-width="250px"
 					>
-						{{fieldProps['information']}}
+						{{ fieldProps['information'] }}
 					</q-tooltip>
 				</q-btn>
 			</template>
@@ -173,19 +173,23 @@ export default defineComponent({
 		});
 
 		/* Devuelve el valor del campo con cada cambio */
-		watch(fieldValue, newValue => {
-			/* 
-				Se retorna el valor del campo con cada cambio que se hace.
-				Pero si el campo se usa para crear un arregle de valores,
-				no se emite su contenido.
-			*/
-			if (!fieldProps.value['createlist']) {
-				emit('data', { [fieldPropsDefault['name']]: newValue });
-			}
-		});
+		watch(
+			() => fieldValue.value,
+			newValue => {
+				/* 
+					Se retorna el valor del campo con cada cambio que se hace.
+					Pero si el campo se usa para crear un arregle de valores,
+					no se emite su contenido.
+				*/
+				if (!fieldProps.value['createlist']) {
+					emit('data', { [fieldPropsDefault['name']]: newValue });
+				}
+			},
+			{ deep: true }
+		);
 
 		onMounted(() => {
-			if(props.initValue) fieldValue.value = props.initValue
+			if (props.initValue) fieldValue.value = props.initValue;
 		});
 
 		return {

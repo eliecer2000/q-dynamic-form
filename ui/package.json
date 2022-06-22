@@ -1,6 +1,6 @@
 {
 	"name": "quasar-ui-q-dynamic-form",
-	"version": "0.0.4",
+	"version": "0.0.5",
 	"author": "Eliezer Rangel <eliezer.rangel@escala24x7.com>",
 	"description": "Quasar Dynamic Form",
 	"license": "MIT",
@@ -61,8 +61,5 @@
 		"last 4 ChromeAndroid versions",
 		"last 4 FirefoxAndroid versions",
 		"last 4 iOS versions"
-	],
-	"dependencies": {
-		"@vue/compiler-sfc": "^3.2.37"
-	}
+	]
 }

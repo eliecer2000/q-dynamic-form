@@ -36,11 +36,11 @@ export default defineComponent({
 		optionsSelect: {
 			type: Object,
 			default: {},
-		},		
+		},
 		columnClassField: {
 			type: Object,
 			default: {},
-		}
+		},
 	},
 	emits: ['data'],
 	setup(props, { emit }) {
@@ -48,13 +48,8 @@ export default defineComponent({
 
 		/* Se captura los datos recibidos de cada campo que está siendo modificado */
 		function onData(data) {
-			Object.assign(responseData.value, data);
-
-			if (
-				props.fields.length === Object.keys(responseData.value).length
-			) {
-				emit('data', responseData.value);
-			}
+			responseData.value = {...responseData.value, ...data}
+			emit('data', responseData.value);
 		}
 
 		onMounted(() => {

@@ -1,54 +1,14 @@
 <template>
   <q-page>
-    <!-- <div style="height: 100vh">
-      <q-card style="height: calc(100% + 5px) !important; width: 360px">
-        <q-card-section
-          class="no-padding no-margin q-pb-xl"
-          style="
-            height: calc(100% - 1px) !important;
-
-            width: 350px;
-          "
-        >
-          <q-scroll-area
-            visible
-            style="height: 100% !important"
-            class="q-mb-xl"
-          >
-            <q-list bordered padding>
-              <q-item-label header>Notifications</q-item-label>
-              <q-expansion-item
-                v-for="item in listInstances.filters"
-                :key="item"
-                expand-separator
-                :label="item.label"
-                :caption="'Total items ' + item.values.length"
-              >
-                <q-expansion-item
-                  v-for="i in item.values"
-                  :key="i"
-                  expand-separator
-                  :label="i.label"
-                  :caption="'Total items ' + i.items.length"
-                >
-                  <q-item tag="label" v-ripple v-for="b in i.items" :key="b">
-                    <q-item-section>
-                      <q-item-label>{{ b }}</q-item-label>
-                    </q-item-section>
-                    <q-item-section side>
-                      <q-toggle color="blue" v-model="i.model" val="battery" />
-                    </q-item-section>
-                  </q-item>
-                </q-expansion-item>
-              </q-expansion-item>
-            </q-list>
-          </q-scroll-area>
-        </q-card-section>
-      </q-card>
-    </div> -->
-
     <div style="height: 80vh" class="q-pa-lg">
-      <q-card style="height: calc(100% + 5px) !important" class="full-width">
+      <QDynamicTableRender
+        :data-columns="columns"
+        :data-rows="listInstances.items"
+        :data-filters="listInstances.filters"
+        v-model="model"
+      />
+
+      <!-- <q-card style="height: calc(100% + 5px) !important" class="full-width">
         <q-card-section horizontal style="height: calc(100% - 1px) !important">
           <q-card-section
             class="no-padding no-margin q-pb-xl"
@@ -262,17 +222,40 @@
             </div>
           </q-card-section>
         </q-card-section>
-      </q-card>
+      </q-card> -->
     </div>
   </q-page>
 </template>
 
 <script>
-import { defineComponent, ref, watch } from "vue";
+import { defineComponent, ref, watch, onMounted } from "vue";
 
 export default defineComponent({
   setup() {
-    const model = ref(null);
+    const model = ref({
+      InstanceIds: [],
+      Filters: [
+        {
+          Name: "tag:Name",
+          Values: [
+            "OrbisSandbox1OrbisSandbox1",
+            "OrbisSandbox2",
+            "dsfasdfasdf",
+            "fasdfasdfasdfasdf",
+            "dfasdfasdfasdfasdfasdf",
+          ],
+        },
+        {
+          Name: "instances-type",
+          Values: ["t2.micro", "t3.micro"],
+        },
+        {
+          Name: "images-id",
+          Values: ["ami-54545d4", "ami-f4asdf5646"],
+        },
+      ],
+    });
+
     const listInstances = ref({
       filters: [
         {
@@ -329,15 +312,28 @@ export default defineComponent({
             },
           ],
         },
+        {
+          prefix: null,
+          label: "Images ID",
+          model: null,
+          values: [
+            {
+              prefix: null,
+              label: "Images ID",
+              value: "images-id",
+              items: ["ami-54545d4", "ami-f4asdf5646", "ami-5df46a5sd4f6a"],
+            },
+          ],
+        },
       ],
       items: [
         {
           AmiLaunchIndex: 0,
-          ImageId: "ami-0be2609ba883822ec",
-          InstanceId: "i-0002ab0fe5af46ab5",
-          InstanceType: "t2.micro",
-          KeyName: "ernestocrespo2",
-          LaunchTime: 1654891708,
+          ImageId: "ami-0be2609ba883822ec" /* Este  -- Lista*/,
+          InstanceId: "i-0002ab0fe5af46ab5" /* Este */,
+          InstanceType: "t2.micro" /* Este -- Lista*/,
+          KeyName: "ernestocrespo2" /* Este */,
+          LaunchTime: 1654891708 /* Este */,
           Monitoring: {
             State: "disabled",
           },
@@ -351,13 +347,13 @@ export default defineComponent({
           ProductCodes: [],
           PublicDnsName: "",
           State: {
-            Code: 80,
+            /* Este */ Code: 80,
             Name: "stopped",
           },
           StateTransitionReason: "User initiated (2022-06-10 21:01:07 GMT)",
-          SubnetId: "subnet-f9bf66c8",
-          VpcId: "vpc-aecf69d3",
-          Architecture: "x86_64",
+          SubnetId: "subnet-f9bf66c8" /* Este -- lista*/,
+          VpcId: "vpc-aecf69d3" /* Este -- lista*/,
+          Architecture: "x86_64" /* Este -- lista*/,
           BlockDeviceMappings: [
             {
               DeviceName: "/dev/xvda",
@@ -427,11 +423,18 @@ export default defineComponent({
             Code: "Client.UserInitiatedShutdown",
             Message: "Client.UserInitiatedShutdown: User initiated shutdown",
           },
+          /* Importante: valor nuevo a partir de la etiqueta Name */
+          Name: "OrbisTest3",
+          /*  -------------------- */
+
+          /* Todas las etiquetas */
           Tags: [
+            /* Importante */
             {
               Key: "Name",
               Value: "OrbisTest3",
             },
+            /*  -------------------- */
             {
               Key: "Owner",
               Value: "EC",
@@ -1563,6 +1566,17 @@ export default defineComponent({
       { deep: true }
     );
 
+    watch(
+      () => model.value,
+      (newValue) => {
+        console.log(
+          "🚀 ~ file: Test3.vue ~ line 1550 ~ setup ~ newValue",
+          newValue
+        );
+      },
+      { deep: true }
+    );
+
     return {
       listInstances,
       model,
@@ -1576,7 +1590,6 @@ export default defineComponent({
         descending: false,
         page: 0,
         rowsPerPage: 0,
-        // rowsNumber: xx if getting data from a server
       },
     };
   },

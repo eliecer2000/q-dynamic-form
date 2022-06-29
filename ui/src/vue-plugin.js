@@ -5,7 +5,7 @@ import {
   QDynamicTableRender
 } from "./components/Index";
 
-const version = "0.0.6";
+const version = "0.0.7";
 
 function install(app) {
   app.component(QDynamicForm.name, QDynamicForm);

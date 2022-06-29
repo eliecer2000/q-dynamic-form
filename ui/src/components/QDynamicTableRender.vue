@@ -131,6 +131,7 @@
               :columns="dataColumns"
               row-key="item"
               dense
+              :loading="loading"
               flat
               @selection="updateData"
               separator="vertical"
@@ -192,6 +193,23 @@
                     </q-item>
                   </template>
                 </q-select>
+                <div>
+                  <q-chip square size="21px" class="text-right q-pa-xs">
+                    <q-toggle v-model="autoRefresh">
+                      <q-tooltip> Auto-Refresh </q-tooltip>
+                    </q-toggle>
+
+                    <q-btn
+                      color="primary"
+                      flat
+                      fab-mini
+                      :icon="autoRefresh ? 'autorenew' : 'rotate_right'"
+                      @click="onRefresh"
+                      class="q-ma-none q-pa-none"
+                    >
+                    </q-btn>
+                  </q-chip>
+                </div>
               </template>
             </q-table>
           </div>
@@ -202,11 +220,11 @@
 </template>
 
 <script>
-import { assertArrowFunctionExpression } from "@babel/types";
 import { defineComponent, ref, watch, onMounted } from "vue";
 export default defineComponent({
   name: "QDynamicTableRender",
   props: {
+    loading: { type: Boolean, default: false },
     modelValue: {
       type: Object,
       default: {}
@@ -254,8 +272,9 @@ export default defineComponent({
       default: []
     }
   },
-  emits: ["update:modelValue"],
+  emits: ["update:modelValue", "refresh"],
   setup(props, { emit }) {
+    const autoRefresh = ref(false);
     const visibleColumns = ref(
       props.dataColumns
         .filter((e) => {
@@ -302,20 +321,46 @@ export default defineComponent({
     }
 
     onMounted(() => {
-      console.log("Mounted", props.modelValue);
+      props.dataRows.map((e, i) => (e.item = i));
       props.modelValue.Filters.forEach((element) => {
-        if (element.Name.substring(0, 4) === "tag:") {
-          // data_filters.value.forEach((element_1) => {
-          //   // element_1.values.forEach((tags) => {
-          //   //   console.log(
-          //   //     "🚀 ~ file: QDynamicTableRender.vue ~ line 311 ~ data_filters.value.forEach ~ tags",
-          //   //     tags
-          //   //   );
-          //   // });
-          // });
-        }
+        data_filters.value.forEach((element_1) => {
+          if (!element_1.model) {
+            element_1.model = [];
+          }
+          element_1.values.forEach((tags) => {
+            if (tags.value === element.Name.replace("tag:", "")) {
+              tags.model = element.Values;
+              element_1.model.push(tags);
+            }
+          });
+        });
       });
     });
+
+    function onRefresh(params) {
+      emit("refresh");
+    }
+
+    watch(
+      () => data_filters.value,
+      (newValue) => {
+        let updateData = newValue.findIndex((e) => {
+          let ff =
+            e.model?.filter((element) => {
+              return element.model
+                ? element.model.length > 0
+                  ? false
+                  : true
+                : false;
+            }) || [];
+          return ff.length === 0 ? false : true;
+        });
+        if (autoRefresh.value && updateData === -1) {
+          onRefresh();
+        }
+      },
+      { deep: true }
+    );
 
     watch(
       () => selected.value,
@@ -338,6 +383,8 @@ export default defineComponent({
       deleteItem,
       updateData,
       data_filters,
+      onRefresh,
+      autoRefresh,
       initialPagination: {
         page: 0,
         rowsPerPage: 0

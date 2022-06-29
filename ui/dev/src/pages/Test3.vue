@@ -6,223 +6,9 @@
         :data-rows="listInstances.items"
         :data-filters="listInstances.filters"
         v-model="model"
+        @refresh="refresh"
+        :loading="loading"
       />
-
-      <!-- <q-card style="height: calc(100% + 5px) !important" class="full-width">
-        <q-card-section horizontal style="height: calc(100% - 1px) !important">
-          <q-card-section
-            class="no-padding no-margin q-pb-xl"
-            style="height: calc(100% - 1px) !important; min-width: 445px"
-          >
-            <q-scroll-area
-              visible
-              style="height: 100% !important"
-              class="q-mb-xl"
-            >
-              <div
-                class="q-pa-sm"
-                v-for="item in listInstances.filters"
-                :key="item"
-              >
-                <div class="row">
-                  <div class="col-12">
-                    <q-select
-                      color="primary"
-                      dropdown-icon="add"
-                      :prefix="item.label"
-                      :disable="selected.length > 0"
-                      clearable
-                      behavior="dialog"
-                      popup-content-class="q-select__dialog"
-                      outlined
-                      dense
-                      hide-selected
-                      v-model="item.model"
-                      :options="item.values"
-                      multiple
-                      class="q-mb-md"
-                      counter
-                      :maxlength="item.values.length"
-                      map-options
-                    >
-                      <template
-                        v-slot:option="{
-                          itemProps,
-                          opt,
-                          selected,
-                          toggleOption,
-                        }"
-                      >
-                        <q-item v-bind="itemProps">
-                          <q-item-section>
-                            <q-item-label v-html="opt.label" />
-                          </q-item-section>
-                          <q-item-section side>
-                            <q-toggle
-                              :model-value="selected"
-                              @update:model-value="toggleOption(opt)"
-                            />
-                          </q-item-section>
-                        </q-item>
-                      </template>
-                    </q-select>
-
-                    <div
-                      class="row q-mt-sm"
-                      v-for="(i, index) in item.model"
-                      :key="i"
-                    >
-                      <div class="col">
-                        <q-select
-                          clearable
-                          outlined
-                          color="primary"
-                          label-color="white"
-                          bg-color="grey-5"
-                          behavior="dialog"
-                          popup-content-class="my-dialog"
-                          :prefix="i.label"
-                          v-model="i.model"
-                          :options="i.items"
-                          multiple
-                          counter
-                          :rules="[(val) => !!val || 'Required']"
-                          :maxlength="i.items.length"
-                          map-options
-                        >
-                          <template v-slot:before>
-                            <q-btn
-                              fab-mini
-                              outline
-                              icon="delete_outline"
-                              color="negative"
-                              @click="deleteItem(index, item.model)"
-                            >
-                            </q-btn>
-                          </template>
-                          <template v-slot:selected-item="scope">
-                            <q-chip
-                              removable
-                              square
-                              @remove="scope.removeAtIndex(scope.index)"
-                              :tabindex="scope.tabindex"
-                              color="primary"
-                              text-color="white"
-                              style="width: 100%"
-                              class="q-ma-xs q-py-md"
-                            >
-                              <span class="text-caption">{{ scope.opt }}</span>
-                            </q-chip>
-                          </template>
-                          <template
-                            v-slot:option="{
-                              itemProps,
-                              opt,
-                              selected,
-                              toggleOption,
-                            }"
-                          >
-                            <q-item v-bind="itemProps">
-                              <q-item-section>
-                                <q-item-label v-html="opt" />
-                              </q-item-section>
-                              <q-item-section side>
-                                <q-toggle
-                                  :model-value="selected"
-                                  @update:model-value="toggleOption(opt)"
-                                />
-                              </q-item-section>
-                            </q-item>
-                          </template>
-                        </q-select>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </q-scroll-area>
-          </q-card-section>
-          <q-separator vertical />
-          <q-card-section style="width: 100%" class="q-pa-xs">
-            <div class="row full-width full-height">
-              <div class="col-12">
-                <q-table
-                  :rows="listInstances.items"
-                  :columns="columns"
-                  row-key="item"
-                  dense
-                  flat
-                  separator="vertical"
-                  hide-pagination
-                  :pagination="initialPagination"
-                  style="height: 100%"
-                  :visible-columns="visibleColumns"
-                  :selected-rows-label="getSelectedString"
-                  selection="multiple"
-                  v-model:selected="selected"
-                >
-                  <template v-slot:body-cell-State="props">
-                    <q-td :props="props">
-                      <div>
-                        <q-badge
-                          outline
-                          :label="props.value"
-                          :color="
-                            props.value === 'stopped' ? 'negative' : 'positive'
-                          "
-                        />
-                      </div>
-                    </q-td>
-                  </template>
-                  <template v-slot:top>
-                    <span class="text-weight-bold text-primary text-h6">
-                      List Resources
-                    </span>
-
-                    <q-space />
-
-                    <q-select
-                      v-model="visibleColumns"
-                      multiple
-                      outlined
-                      dense
-                      options-dense
-                      :display-value="$q.lang.table.columns"
-                      emit-value
-                      map-options
-                      :options="columns"
-                      option-value="name"
-                      options-cover
-                      style="min-width: 250px"
-                    >
-                      <template
-                        v-slot:option="{
-                          itemProps,
-                          opt,
-                          selected,
-                          toggleOption,
-                        }"
-                      >
-                        <q-item v-bind="itemProps" v-if="opt.mutable">
-                          <q-item-section>
-                            <q-item-label v-html="opt.label" />
-                          </q-item-section>
-                          <q-item-section side>
-                            <q-toggle
-                              :model-value="selected"
-                              @update:model-value="toggleOption(opt)"
-                            />
-                          </q-item-section>
-                        </q-item>
-                      </template>
-                    </q-select>
-                  </template>
-                </q-table>
-              </div>
-            </div>
-          </q-card-section>
-        </q-card-section>
-      </q-card> -->
     </div>
   </q-page>
 </template>
@@ -237,21 +23,11 @@ export default defineComponent({
       Filters: [
         {
           Name: "tag:Name",
-          Values: [
-            "OrbisSandbox1OrbisSandbox1",
-            "OrbisSandbox2",
-            "dsfasdfasdf",
-            "fasdfasdfasdfasdf",
-            "dfasdfasdfasdfasdfasdf",
-          ],
-        },
-        {
-          Name: "instances-type",
-          Values: ["t2.micro", "t3.micro"],
+          Values: ["OrbisSandbox1OrbisSandbox1", "OrbisSandbox2"],
         },
         {
           Name: "images-id",
-          Values: ["ami-54545d4", "ami-f4asdf5646"],
+          Values: ["ami-54545d4"],
         },
       ],
     });
@@ -1474,8 +1250,6 @@ export default defineComponent({
       ],
     });
 
-    listInstances.value.items.map((e, i) => (e.item = i));
-
     const columns = ref([
       {
         name: "InstanceId",
@@ -1527,44 +1301,7 @@ export default defineComponent({
       },
     ]);
 
-    const visibleColumns = ref(
-      columns.value
-        .filter((e) => {
-          return e.mutable;
-        })
-        .map((e) => {
-          return e.name;
-        })
-    );
-
-    function deleteItem(index, item) {
-      item.splice(index, 1);
-    }
-
-    const selected = ref([]);
-
-    function getSelectedString() {
-      return selected.value.length === 0
-        ? ""
-        : `${selected.value.length} record${
-            selected.value.length > 1 ? "s" : ""
-          } selected of ${listInstances.value.items.length}`;
-    }
-
-    watch(
-      () => selected.value,
-      (newValue) => {
-        if (newValue.length > 0) {
-          listInstances.value.filters.map((e) => {
-            e.model = null;
-            e.values.map((a) => {
-              a.model = null;
-            });
-          });
-        }
-      },
-      { deep: true }
-    );
+    const loading = ref(false);
 
     watch(
       () => model.value,
@@ -1577,20 +1314,22 @@ export default defineComponent({
       { deep: true }
     );
 
+    function refresh() {
+      loading.value = true;
+      setTimeout(() => {
+        console.log("Refresca ", listInstances.value.items.length);
+        listInstances.value.items.splice(0, 1);
+        console.log("Final ", listInstances.value.items.length);
+        loading.value = false;
+      }, 1000);
+    }
+
     return {
       listInstances,
       model,
-      deleteItem,
-      visibleColumns,
       columns,
-      selected,
-      getSelectedString,
-      initialPagination: {
-        sortBy: "desc",
-        descending: false,
-        page: 0,
-        rowsPerPage: 0,
-      },
+      refresh,
+      loading,
     };
   },
 });

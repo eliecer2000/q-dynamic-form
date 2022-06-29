@@ -21,14 +21,14 @@ export default defineComponent({
     const model = ref({
       InstanceIds: [],
       Filters: [
-        {
-          Name: "tag:Name",
-          Values: ["OrbisSandbox1OrbisSandbox1", "OrbisSandbox2"],
-        },
-        {
-          Name: "images-id",
-          Values: ["ami-54545d4"],
-        },
+        // {
+        //   Name: "tag:Name",
+        //   Values: ["OrbisSandbox1dbox1", "OrbisSandbox2"],
+        // },
+        // {
+        //   Name: "images-id",
+        //   Values: ["ami-54545d4"],
+        // },
       ],
     });
 
@@ -39,40 +39,40 @@ export default defineComponent({
           label: "Tags",
           model: null,
           values: [
-            {
-              prefix: "tag:",
-              label: "Name",
-              value: "Name",
-              model: null,
-              items: [
-                "OrbisSandbox1OrbisSandbox1",
-                "OrbisSandbox2",
-                "dsfasdfasdf",
-                "fasdfasdfasdfasdf",
-                "dfasdfasdfasdfasdfasdf",
-              ],
-            },
-            {
-              prefix: "tag:",
-              label: "Owner",
-              value: "Owner",
-              model: null,
-              items: ["EC", "dd", "ddd"],
-            },
-            {
-              prefix: "tag:",
-              label: "Orbis",
-              value: "Orbis",
-              model: null,
-              items: ["true"],
-            },
-            {
-              prefix: "tag:",
-              label: "Orbis2",
-              value: "Orbis2",
-              model: null,
-              items: ["true"],
-            },
+            // {
+            //   prefix: "tag:",
+            //   label: "Name",
+            //   value: "Name",
+            //   model: null,
+            //   items: [
+            //     "OrbisSandbox1OrbisSandbox1",
+            //     "OrbisSandbox2",
+            //     "dsfasdfasdf",
+            //     "fasdfasdfasdfasdf",
+            //     "dfasdfasdfasdfasdfasdf",
+            //   ],
+            // },
+            // {
+            //   prefix: "tag:",
+            //   label: "Owner",
+            //   value: "Owner",
+            //   model: null,
+            //   items: ["EC", "dd", "ddd"],
+            // },
+            // {
+            //   prefix: "tag:",
+            //   label: "Orbis",
+            //   value: "Orbis",
+            //   model: null,
+            //   items: ["true"],
+            // },
+            // {
+            //   prefix: "tag:",
+            //   label: "Orbis2",
+            //   value: "Orbis2",
+            //   model: null,
+            //   items: ["true"],
+            // },
           ],
         },
         {

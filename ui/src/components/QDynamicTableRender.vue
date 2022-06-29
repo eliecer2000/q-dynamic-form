@@ -6,7 +6,7 @@
         style="height: calc(100% - 1px) !important; min-width: 445px"
       >
         <q-scroll-area visible style="height: 100% !important" class="q-mb-xl">
-          <div class="q-pa-sm" v-for="item in data_filters" :key="item">
+          <div class="q-pa-sm" v-for="item in data_filters" :key="item.label">
             <div class="row">
               <div class="col-12">
                 <q-select
@@ -14,8 +14,8 @@
                   dropdown-icon="add"
                   :prefix="item.label"
                   :disable="selected.length > 0"
+                  :behavior="item.values.length > 0 ? 'dialog' : 'menu'"
                   clearable
-                  behavior="dialog"
                   popup-content-class="q-select__dialog"
                   outlined
                   dense
@@ -29,6 +29,41 @@
                   :maxlength="item.values.length"
                   map-options
                 >
+                  <template v-slot:no-option>
+                    <div class="q-pt-md bg-grey-3">
+                      <q-item>
+                        <q-item-section class="text-italic text-grey">
+                          <q-input
+                            outlined
+                            ref="newLabel"
+                            v-model="newLabelModel"
+                            label="New Tag Name"
+                            :rules="[
+                              (val) => !!val || 'Required',
+                              (val) =>
+                                /^\S+$/.test(val) ||
+                                'A string consisting only of non-whitespaces'
+                            ]"
+                          />
+                        </q-item-section>
+                        <q-item-section
+                          class="justify-start"
+                          avatar
+                          style="justify-content: flex-start !important"
+                        >
+                          <q-btn
+                            icon="bookmark_add"
+                            fab
+                            no-caps
+                            color="primary"
+                            v-close-popup
+                            @click="addTag(item)"
+                          >
+                          </q-btn>
+                        </q-item-section>
+                      </q-item>
+                    </div>
+                  </template>
                   <template
                     v-slot:option="{ itemProps, opt, selected, toggleOption }"
                   >
@@ -58,7 +93,7 @@
                       color="primary"
                       label-color="white"
                       bg-color="grey-5"
-                      behavior="dialog"
+                      :behavior="i.items.length > 0 ? 'dialog' : 'menu'"
                       popup-content-class="my-dialog"
                       :prefix="i.label"
                       v-model="i.model"
@@ -70,6 +105,41 @@
                       :maxlength="i.items.length"
                       map-options
                     >
+                      <template v-slot:no-option>
+                        <div class="q-pt-md bg-grey-3">
+                          <q-item>
+                            <q-item-section class="text-italic text-grey">
+                              <q-input
+                                outlined
+                                ref="newLabel"
+                                v-model="newValueModel"
+                                label="New Tag Value"
+                                :rules="[
+                                  (val) => !!val || 'Required',
+                                  (val) =>
+                                    /^\S+$/.test(val) ||
+                                    'A string consisting only of non-whitespaces'
+                                ]"
+                              />
+                            </q-item-section>
+                            <q-item-section
+                              class="justify-start"
+                              avatar
+                              style="justify-content: flex-start !important"
+                            >
+                              <q-btn
+                                icon="sell"
+                                fab
+                                no-caps
+                                color="primary"
+                                v-close-popup
+                                @click="addTagValue(i)"
+                              >
+                              </q-btn>
+                            </q-item-section>
+                          </q-item>
+                        </div>
+                      </template>
                       <template v-slot:before>
                         <q-btn
                           fab-mini
@@ -274,7 +344,7 @@ export default defineComponent({
   },
   emits: ["update:modelValue", "refresh"],
   setup(props, { emit }) {
-    const autoRefresh = ref(false);
+    const autoRefresh = ref(true);
     const visibleColumns = ref(
       props.dataColumns
         .filter((e) => {
@@ -284,6 +354,9 @@ export default defineComponent({
           return e.name;
         })
     );
+
+    const newLabelModel = ref(null);
+    const newValueModel = ref(null);
     const selected = ref([]);
     const data_filters = ref(props.dataFilters);
     function deleteItem(index, item) {
@@ -341,21 +414,43 @@ export default defineComponent({
       emit("refresh");
     }
 
+    function addTag(item) {
+      let tag = {
+        prefix: "tag:",
+        label: newLabelModel.value,
+        value: newLabelModel.value,
+        model: null,
+        items: []
+      };
+
+      item.values.push(tag);
+      item.model = typeof item.models === "array" ? item.model : [];
+      item.model.push(tag);
+
+      newLabelModel.value = null;
+    }
+
+    function addTagValue(item) {
+      item.items.push(newValueModel.value);
+      item.model = typeof item.models === "array" ? item.model : [];
+      item.model.push(newValueModel.value);
+      newLabelModel.value = null;
+      updateData();
+    }
+
     watch(
       () => data_filters.value,
       (newValue) => {
-        let updateData = newValue.findIndex((e) => {
-          let ff =
-            e.model?.filter((element) => {
-              return element.model
-                ? element.model.length > 0
-                  ? false
-                  : true
-                : false;
-            }) || [];
-          return ff.length === 0 ? false : true;
+        let updateData = newValue.filter((e) => {
+          if (e.model?.length > 0) {
+            let ff = e.model.filter((element) => {
+              return element.model?.length > 0 ? false : true;
+            });
+            return ff.length === 0 ? false : true;
+          }
+          return false;
         });
-        if (autoRefresh.value && updateData === -1) {
+        if (autoRefresh.value && updateData.length === 0) {
           onRefresh();
         }
       },
@@ -385,6 +480,10 @@ export default defineComponent({
       data_filters,
       onRefresh,
       autoRefresh,
+      newLabelModel,
+      addTag,
+      addTagValue,
+      newValueModel,
       initialPagination: {
         page: 0,
         rowsPerPage: 0

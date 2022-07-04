@@ -122,14 +122,14 @@ export default defineComponent({
     const stateFields = ref({
       //readonly_username: true,
       //disable_username: true,
-      rules_username: [
-        (val) => !!val || "Este campo es requerido.",
+      rules_username: `[
+        (val) => !!val || "Este campo es requerido!!.",
         (val) => {
           const emailPattern =
             /^(?=[a-zA-Z0-9@._%+-]{6,254}$)[a-zA-Z0-9._%+-]{1,64}@(?:[a-zA-Z0-9-]{1,63}\.){1,8}[a-zA-Z]{2,63}$/;
           return emailPattern.test(val) || "No es un email valido.";
         },
-      ],
+      ]`,
     });
 
     /*

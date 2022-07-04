@@ -151,6 +151,8 @@ export default defineComponent({
 				if (props.stateFields[`${prop}_${fieldPropsDefault.name}`])
 					result[prop] =
 						props.stateFields[`${prop}_${fieldPropsDefault.name}`];
+				
+				if(prop ==='rules') result[prop] = eval(result[prop]);
 			});
 
 			if (props.optionsSelect[fieldPropsDefault.name]) {

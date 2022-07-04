@@ -216,13 +216,7 @@
               <template v-slot:body-cell-State="props">
                 <q-td :props="props">
                   <div>
-                    <q-badge
-                      outline
-                      :label="props.value"
-                      :color="
-                        props.value === 'stopped' ? 'negative' : 'positive'
-                      "
-                    />
+                    <q-badge outline :label="props.value" color="primary" />
                   </div>
                 </q-td>
               </template>

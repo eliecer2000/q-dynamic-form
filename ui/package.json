@@ -1,6 +1,6 @@
 {
   "name": "quasar-ui-q-dynamic-form",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "author": "Eliezer Rangel <eliezer.rangel@escala24x7.com>",
   "description": "Quasar Dynamic Form",
   "license": "MIT",
@@ -48,8 +48,7 @@
     "vue": "^3.0.0",
     "vue-draggable-next": "^2.1.1",
     "vue-router": "^4.0.0",
-    "zlib": "^1.0.5",
-    "@quasar/quasar-app-extension-dotenv": "^1.1.0"
+    "zlib": "^1.0.5"
   },
   "browserslist": [
     "last 4 Chrome versions",

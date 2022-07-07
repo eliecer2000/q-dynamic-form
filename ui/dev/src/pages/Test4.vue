@@ -1,7 +1,7 @@
 <template>
   <q-page>
     <div style="height: 80vh" class="q-pa-lg">
-      <QDynamicTable v-model="test" :data-rows="rows" />
+      <QDynamicTable v-model="test" :data-rows="rows" :row-index="InstanceId" />
     </div>
   </q-page>
 </template>

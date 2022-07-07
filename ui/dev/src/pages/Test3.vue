@@ -8,6 +8,7 @@
         v-model="model"
         @refresh="refresh"
         :loading="loading"
+        row-index="InstanceId"
       />
     </div>
   </q-page>

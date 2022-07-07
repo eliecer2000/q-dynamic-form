@@ -199,7 +199,7 @@
             <q-table
               :rows="dataRows"
               :columns="dataColumns"
-              row-key="item"
+              :row-key="rowIndex"
               dense
               :loading="loading"
               flat
@@ -288,6 +288,7 @@ import { defineComponent, ref, watch, onMounted } from "vue";
 export default defineComponent({
   name: "QDynamicTableRender",
   props: {
+    rowIndex: { type: String, default: "name" },
     loading: { type: Boolean, default: false },
     modelValue: {
       type: Object,

@@ -15,7 +15,6 @@
                   :prefix="item.label"
                   :disable="selected.length > 0 || disableAll"
                   :behavior="item.values.length > 0 ? 'dialog' : 'menu'"
-                  clearable
                   popup-content-class="q-select__dialog"
                   outlined
                   dense
@@ -88,7 +87,6 @@
                 >
                   <div class="col">
                     <q-select
-                      clearable
                       outlined
                       color="primary"
                       label-color="white"
@@ -99,6 +97,7 @@
                       v-model="i.model"
                       :options="i.items"
                       @update:model-value="updateData"
+                      :disable="selected.length > 0 || disableAll"
                       multiple
                       counter
                       :rules="[(val) => !!val || 'Required']"
@@ -146,6 +145,7 @@
                           outline
                           icon="delete_outline"
                           color="negative"
+                          :disable="disableAll"
                           @click="deleteItem(index, item.model)"
                         >
                         </q-btn>
@@ -210,7 +210,7 @@
               style="height: 100%"
               :visible-columns="visibleColumns"
               :selected-rows-label="getSelectedString"
-              :selection="disableAll ? 'none' : 'multiple'"
+              :selection="disableAll || getstateRow() ? 'none' : 'multiple'"
               v-model:selected="selected"
             >
               <template v-slot:body-cell-State="props">
@@ -359,18 +359,20 @@ export default defineComponent({
     const selected = ref([]);
     const data_filters = ref(props.dataFilters);
     function deleteItem(index, item) {
+      item[index].model = null;
       item.splice(index, 1);
+      updateData();
     }
-    let data_local = [];
+    let data_local = ref([]);
 
     function updateData() {
-      data_local = [];
       setTimeout(() => {
+        data_local.value = [];
         data_filters.value.forEach((element) => {
           element.values.forEach((element_1) => {
             if (element_1.model) {
               if (element_1.model.length > 0) {
-                data_local.push({
+                data_local.value.push({
                   Name: (element_1.prefix || "") + element_1.value,
                   Values: element_1.model
                 });
@@ -382,7 +384,7 @@ export default defineComponent({
           InstanceIds: selected.value.map((e) => {
             return e[props.rowIndex];
           }),
-          Filters: data_local
+          Filters: data_local.value
         });
       }, 50);
     }
@@ -421,6 +423,16 @@ export default defineComponent({
       updateData();
     }
 
+    function getstateRow() {
+      if (data_local.value.length > 0) {
+        return true;
+      } else {
+        setTimeout(() => {
+          return false;
+        }, 1000);
+      }
+    }
+
     watch(
       () => data_filters.value,
       (newValue) => {
@@ -453,7 +465,7 @@ export default defineComponent({
             });
           });
         } else {
-          if (data_local.length === 0) {
+          if (data_local.value.length === 0) {
             setTimeout(() => {
               onRefresh();
             }, 300);
@@ -498,6 +510,8 @@ export default defineComponent({
       addTag,
       addTagValue,
       newValueModel,
+      getstateRow,
+      data_local,
       initialPagination: {
         page: 0,
         rowsPerPage: 0

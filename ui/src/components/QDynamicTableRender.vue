@@ -13,7 +13,7 @@
                   color="primary"
                   dropdown-icon="add"
                   :prefix="item.label"
-                  :disable="selected.length > 0"
+                  :disable="selected.length > 0 || disableAll"
                   :behavior="item.values.length > 0 ? 'dialog' : 'menu'"
                   clearable
                   popup-content-class="q-select__dialog"
@@ -210,7 +210,7 @@
               style="height: 100%"
               :visible-columns="visibleColumns"
               :selected-rows-label="getSelectedString"
-              selection="multiple"
+              :selection="disableAll ? 'none' : 'multiple'"
               v-model:selected="selected"
             >
               <template v-slot:body-cell-State="props">
@@ -335,6 +335,10 @@ export default defineComponent({
     dataFilters: {
       type: Array,
       default: []
+    },
+    disableAll: {
+      type: Boolean,
+      default: false
     }
   },
   emits: ["update:modelValue", "refresh"],
@@ -357,8 +361,10 @@ export default defineComponent({
     function deleteItem(index, item) {
       item.splice(index, 1);
     }
-    async function updateData() {
-      const data_local = [];
+    let data_local = [];
+
+    function updateData() {
+      data_local = [];
       setTimeout(() => {
         data_filters.value.forEach((element) => {
           element.values.forEach((element_1) => {
@@ -374,7 +380,7 @@ export default defineComponent({
         });
         emit("update:modelValue", {
           InstanceIds: selected.value.map((e) => {
-            return e.InstanceId;
+            return e[props.rowIndex];
           }),
           Filters: data_local
         });
@@ -387,28 +393,10 @@ export default defineComponent({
             selected.value.length > 1 ? "s" : ""
           } selected of ${props.dataRows.length}`;
     }
-
-    onMounted(() => {
-      props.dataRows.map((e, i) => (e.item = i));
-      props.modelValue.Filters.forEach((element) => {
-        data_filters.value.forEach((element_1) => {
-          if (!element_1.model) {
-            element_1.model = [];
-          }
-          element_1.values.forEach((tags) => {
-            if (tags.value === element.Name.replace("tag:", "")) {
-              tags.model = element.Values;
-              element_1.model.push(tags);
-            }
-          });
-        });
-      });
-    });
-
     function onRefresh(params) {
+      updateData();
       emit("refresh");
     }
-
     function addTag(item) {
       let tag = {
         prefix: "tag:",
@@ -446,7 +434,9 @@ export default defineComponent({
           return false;
         });
         if (autoRefresh.value && updateData.length === 0) {
-          onRefresh();
+          setTimeout(() => {
+            onRefresh();
+          }, 300);
         }
       },
       { deep: true }
@@ -462,10 +452,39 @@ export default defineComponent({
               a.model = null;
             });
           });
+        } else {
+          if (data_local.length === 0) {
+            setTimeout(() => {
+              onRefresh();
+            }, 300);
+          }
         }
       },
       { deep: true }
     );
+    onMounted(() => {
+      props.dataRows.map((e, i) => (e.item = i));
+      props.modelValue.Filters.forEach((element) => {
+        data_filters.value.forEach((element_1) => {
+          if (!element_1.model) {
+            element_1.model = [];
+          }
+          element_1.values.forEach((tags) => {
+            if (tags.value === element.Name.replace("tag:", "")) {
+              tags.model = element.Values;
+              element_1.model.push(tags);
+            }
+          });
+        });
+      });
+      props.modelValue.InstanceIds.forEach((element) => {
+        props.dataRows.map((e) => {
+          if (e[props.rowIndex] === element) {
+            selected.value.push(e);
+          }
+        });
+      });
+    });
     return {
       visibleColumns,
       getSelectedString,
@@ -479,6 +498,7 @@ export default defineComponent({
       addTag,
       addTagValue,
       newValueModel,
+      disableAll,
       initialPagination: {
         page: 0,
         rowsPerPage: 0

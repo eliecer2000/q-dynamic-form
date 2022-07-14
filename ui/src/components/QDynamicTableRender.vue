@@ -498,7 +498,6 @@ export default defineComponent({
       addTag,
       addTagValue,
       newValueModel,
-      disableAll,
       initialPagination: {
         page: 0,
         rowsPerPage: 0

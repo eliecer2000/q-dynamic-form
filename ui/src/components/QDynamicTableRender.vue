@@ -292,7 +292,10 @@ export default defineComponent({
     loading: { type: Boolean, default: false },
     modelValue: {
       type: Object,
-      default: {}
+      default: {
+        Filters: [],
+        InstanceIds: []
+      }
     },
     dataColumns: {
       type: Array,
@@ -345,13 +348,15 @@ export default defineComponent({
   setup(props, { emit }) {
     const autoRefresh = ref(true);
     const visibleColumns = ref(
-      props.dataColumns
-        .filter((e) => {
-          return e.mutable;
-        })
-        .map((e) => {
-          return e.name;
-        })
+      []
+      /* En caso de volver a este codigo*/
+      // props.dataColumns
+      //   .filter((e) => {
+      //     return e.mutable;
+      //   })
+      //   .map((e) => {
+      //     return e.name;
+      //   })
     );
 
     const newLabelModel = ref(null);
@@ -366,8 +371,8 @@ export default defineComponent({
     let data_local = ref([]);
 
     function updateData() {
+      data_local.value = [];
       setTimeout(() => {
-        data_local.value = [];
         data_filters.value.forEach((element) => {
           element.values.forEach((element_1) => {
             if (element_1.model) {
@@ -386,7 +391,7 @@ export default defineComponent({
           }),
           Filters: data_local.value
         });
-      }, 50);
+      }, 500);
     }
     function getSelectedString() {
       return selected.value.length === 0
@@ -435,7 +440,7 @@ export default defineComponent({
 
     watch(
       () => data_filters.value,
-      (newValue) => {
+      async (newValue) => {
         let updateData = newValue.filter((e) => {
           if (e.model?.length > 0) {
             let ff = e.model.filter((element) => {
@@ -445,10 +450,14 @@ export default defineComponent({
           }
           return false;
         });
-        if (autoRefresh.value && updateData.length === 0) {
+        if (
+          autoRefresh.value &&
+          updateData.length === 0 &&
+          selected.value.length === 0
+        ) {
           setTimeout(() => {
             onRefresh();
-          }, 300);
+          }, 800);
         }
       },
       { deep: true }
@@ -456,7 +465,7 @@ export default defineComponent({
 
     watch(
       () => selected.value,
-      (newValue) => {
+      async (newValue) => {
         if (newValue.length > 0) {
           props.dataFilters.map((e) => {
             e.model = null;
@@ -468,13 +477,13 @@ export default defineComponent({
           if (data_local.value.length === 0) {
             setTimeout(() => {
               onRefresh();
-            }, 300);
+            }, 800);
           }
         }
       },
       { deep: true }
     );
-    onMounted(() => {
+    onMounted(async () => {
       props.dataRows.map((e, i) => (e.item = i));
       props.modelValue.Filters.forEach((element) => {
         data_filters.value.forEach((element_1) => {

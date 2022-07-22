@@ -210,7 +210,11 @@
               style="height: 100%"
               :visible-columns="visibleColumns"
               :selected-rows-label="getSelectedString"
-              :selection="disableAll || getstateRow() ? 'none' : 'multiple'"
+              :selection="
+                disableSelection || disableAll || getstateRow()
+                  ? 'none'
+                  : 'multiple'
+              "
               v-model:selected="selected"
             >
               <template v-slot:body-cell-State="props">
@@ -340,6 +344,10 @@ export default defineComponent({
       default: []
     },
     disableAll: {
+      type: Boolean,
+      default: false
+    },
+    disableSelection: {
       type: Boolean,
       default: false
     }

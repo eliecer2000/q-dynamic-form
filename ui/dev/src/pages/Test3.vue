@@ -5,6 +5,7 @@
         :data-columns="columns"
         :data-rows="listInstances.items"
         :data-filters="listInstances.filters"
+        :disable-selection="true"
         v-model="model"
         @refresh="refresh"
         :loading="loading"

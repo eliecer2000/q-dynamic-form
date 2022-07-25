@@ -5,11 +5,11 @@
         :data-columns="columns"
         :data-rows="listInstances.items"
         :data-filters="listInstances.filters"
-        :disable-selection="true"
+        :disable-selection="false"
         v-model="model"
         @refresh="refresh"
         :loading="loading"
-        row-index="InstanceId"
+        row-index="ResourceId"
       />
     </div>
   </q-page>
@@ -21,7 +21,7 @@ import { defineComponent, ref, watch, onMounted } from "vue";
 export default defineComponent({
   setup() {
     const model = ref({
-      InstanceIds: [],
+      InstanceIds: ["i-0002ab0fe5af46ab5", "i-0d3582ecee49a930b"],
       Filters: [
         // {
         //   Name: "tag:Name",
@@ -106,6 +106,7 @@ export default defineComponent({
       ],
       items: [
         {
+          ResourceId: "i-0002ab0fe5af46ab5" /* Este */,
           AmiLaunchIndex: 0,
           ImageId: "ami-0be2609ba883822ec" /* Este  -- Lista*/,
           InstanceId: "i-0002ab0fe5af46ab5" /* Este */,
@@ -281,6 +282,7 @@ export default defineComponent({
           },
         },
         {
+          ResourceId: "i-0d3582ecee49a930b",
           AmiLaunchIndex: 0,
           ImageId: "ami-0be2609ba883822ec",
           InstanceId: "i-0d3582ecee49a930b",

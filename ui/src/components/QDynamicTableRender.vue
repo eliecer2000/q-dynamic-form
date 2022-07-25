@@ -196,6 +196,9 @@
       <q-card-section style="width: 100%" class="q-pa-xs">
         <div class="row full-width full-height">
           <div class="col-12">
+            <div style="display: none">
+              {{ selected }}
+            </div>
             <q-table
               :rows="dataRows"
               :columns="dataColumns"
@@ -206,6 +209,7 @@
               @selection="updateData"
               separator="vertical"
               hide-pagination
+              v-model:selected="selected"
               :pagination="initialPagination"
               style="height: 100%"
               :visible-columns="visibleColumns"
@@ -215,7 +219,6 @@
                   ? 'none'
                   : 'multiple'
               "
-              v-model:selected="selected"
             >
               <template v-slot:body-cell-State="props">
                 <q-td :props="props">
@@ -292,7 +295,7 @@ import { defineComponent, ref, watch, onMounted } from "vue";
 export default defineComponent({
   name: "QDynamicTableRender",
   props: {
-    rowIndex: { type: String, default: "name" },
+    rowIndex: { type: String, default: "ResourceId" },
     loading: { type: Boolean, default: false },
     modelValue: {
       type: Object,

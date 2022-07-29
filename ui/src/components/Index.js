@@ -1,6 +1,7 @@
 import QDynamicForm from "./QDynamicForm.vue";
 import QDynamicRender from "./QDynamicRender.vue";
 import QDynamicTableRender from "./QDynamicTableRender.vue";
+import QDynamicTableRenderSimple from "./QDynamicTableRenderSimple.vue";
 import QDynamicTable from "./QDynamicTable.vue";
 
 import FieldDynamic from "./FieldDynamic.vue";
@@ -12,6 +13,7 @@ export {
   QDynamicForm,
   QDynamicRender,
   QDynamicTableRender,
+  QDynamicTableRenderSimple,
   QDynamicTable,
   FieldDynamic,
   FormForInput,

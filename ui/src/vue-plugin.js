@@ -3,6 +3,7 @@ import {
   QDynamicRender,
   FieldDynamic,
   QDynamicTableRender,
+  QDynamicTableRenderSimple,
   QDynamicTable
 } from "./components/Index";
 
@@ -13,6 +14,7 @@ function install(app) {
   app.component(QDynamicRender.name, QDynamicRender);
   app.component(FieldDynamic.name, FieldDynamic);
   app.component(QDynamicTableRender.name, QDynamicTableRender);
+  app.component(QDynamicTableRenderSimple.name, QDynamicTableRenderSimple);
   app.component(QDynamicTable.name, QDynamicTable);
 }
 
@@ -21,6 +23,7 @@ export {
   QDynamicRender,
   FieldDynamic,
   QDynamicTableRender,
+  QDynamicTableRenderSimple,
   QDynamicTable,
   install,
   version
@@ -31,6 +34,7 @@ export default {
   QDynamicRender,
   FieldDynamic,
   QDynamicTableRender,
+  QDynamicTableRenderSimple,
   QDynamicTable,
   install,
   version

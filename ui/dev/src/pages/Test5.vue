@@ -25,14 +25,12 @@ export default defineComponent({
       items: [
         {
           AmiLaunchIndex: 0,
-          ImageId: "ami-0be2609ba883822ec" /* Este  -- Lista*/,
-          InstanceId: "i-0002ab0fe5af46ab5" /* Este */,
-          InstanceType: "t2.micro" /* Este -- Lista*/,
-          KeyName: "ernestocrespo2" /* Este */,
-          LaunchTime: 1654891708 /* Este */,
-          Monitoring: {
-            State: "disabled",
-          },
+          ImageId: "ami-0be2609ba883822ec",
+          InstanceId: "i-0002ab0fe5af46ab5",
+          InstanceType: "t2.micro",
+          KeyName: "ernestocrespo2",
+          LaunchTime: 1657112466,
+          Monitoring: { State: "disabled" },
           Placement: {
             AvailabilityZone: "us-east-1e",
             GroupName: "",
@@ -42,14 +40,11 @@ export default defineComponent({
           PrivateIpAddress: "172.31.61.55",
           ProductCodes: [],
           PublicDnsName: "",
-          State: {
-            /* Este */ Code: 80,
-            Name: "stopped",
-          },
-          StateTransitionReason: "User initiated (2022-06-10 21:01:07 GMT)",
-          SubnetId: "subnet-f9bf66c8" /* Este -- lista*/,
-          VpcId: "vpc-aecf69d3" /* Este -- lista*/,
-          Architecture: "x86_64" /* Este -- lista*/,
+          State: { Code: 80, Name: "stopped" },
+          StateTransitionReason: "User initiated (2022-07-11 13:34:07 GMT)",
+          SubnetId: "subnet-f9bf66c8",
+          VpcId: "vpc-aecf69d3",
+          Architecture: "x86_64",
           BlockDeviceMappings: [
             {
               DeviceName: "/dev/xvda",
@@ -109,94 +104,43 @@ export default defineComponent({
           RootDeviceName: "/dev/xvda",
           RootDeviceType: "ebs",
           SecurityGroups: [
-            {
-              GroupName: "launch-wizard-1",
-              GroupId: "sg-046872156683f4a93",
-            },
+            { GroupName: "launch-wizard-1", GroupId: "sg-046872156683f4a93" },
           ],
           SourceDestCheck: true,
           StateReason: {
             Code: "Client.UserInitiatedShutdown",
             Message: "Client.UserInitiatedShutdown: User initiated shutdown",
           },
-          /* Importante: valor nuevo a partir de la etiqueta Name */
-          Name: "OrbisTest3",
-          /*  -------------------- */
-
-          /* Todas las etiquetas */
           Tags: [
-            /* Importante */
-            {
-              Key: "Name",
-              Value: "OrbisTest3",
-            },
-            /*  -------------------- */
-            {
-              Key: "Owner",
-              Value: "EC",
-            },
-            {
-              Key: "TestStop",
-              Value: "2",
-            },
-            {
-              Key: "OrbisStart",
-              Value: "MON-SAT_0700",
-            },
-            {
-              Key: "OrbisBackup",
-              Value: "Daily_MON-SAT_0400_Ret7",
-            },
+            { Key: "Name", Value: "OrbisTest3" },
+            { Key: "Owner", Value: "EC" },
+            { Key: "TestStop", Value: "2" },
+            { Key: "OrbisStart", Value: "MON-SAT_0700" },
+            { Key: "OrbisBackup", Value: "Daily_MON-SAT_0400_Ret7" },
             {
               Key: "awsAutoScalingGroupName",
               Value: "WebSiteAutoScalingTEST-ForDEMO",
             },
-            {
-              Key: "OrbisSchedule",
-              Value: "True",
-            },
-            {
-              Key: "OrbisStop",
-              Value: "MON-SAT_1800",
-            },
-            {
-              Key: "Environment",
-              Value: "DEV",
-            },
-            {
-              Key: "TestStop2",
-              Value: "2",
-            },
+            { Key: "OrbisSchedule", Value: "True" },
+            { Key: "OrbisStop", Value: "MON-SAT_1800" },
+            { Key: "Environment", Value: "DEV" },
+            { Key: "TestStop2", Value: "2" },
           ],
           VirtualizationType: "hvm",
-          CpuOptions: {
-            CoreCount: 1,
-            ThreadsPerCore: 1,
-          },
+          CpuOptions: { CoreCount: 1, ThreadsPerCore: 1 },
           CapacityReservationSpecification: {
             CapacityReservationPreference: "open",
           },
-          HibernationOptions: {
-            Configured: false,
-          },
+          HibernationOptions: { Configured: false },
           MetadataOptions: {
             State: "applied",
             HttpTokens: "optional",
             HttpPutResponseHopLimit: 1,
             HttpEndpoint: "enabled",
-            HttpProtocolIpv6: "disabled",
           },
-          EnclaveOptions: {
-            Enabled: false,
-          },
+          EnclaveOptions: { Enabled: false },
           BootMode: "legacy-bios",
-          PlatformDetails: "Linux/UNIX",
-          UsageOperation: "RunInstances",
-          UsageOperationUpdateTime: 1611674536,
-          PrivateDnsNameOptions: {},
-          MaintenanceOptions: {
-            AutoRecovery: "default",
-          },
+          Name: ["OrbisTest3"],
         },
         {
           AmiLaunchIndex: 0,
@@ -205,9 +149,7 @@ export default defineComponent({
           InstanceType: "t2.micro",
           KeyName: "ernestocrespo2",
           LaunchTime: 1652823393,
-          Monitoring: {
-            State: "disabled",
-          },
+          Monitoring: { State: "disabled" },
           Placement: {
             AvailabilityZone: "us-east-1e",
             GroupName: "",
@@ -217,10 +159,7 @@ export default defineComponent({
           PrivateIpAddress: "172.31.62.169",
           ProductCodes: [],
           PublicDnsName: "",
-          State: {
-            Code: 80,
-            Name: "stopped",
-          },
+          State: { Code: 80, Name: "stopped" },
           StateTransitionReason: "User initiated (2022-05-17 21:40:11 GMT)",
           SubnetId: "subnet-f9bf66c8",
           VpcId: "vpc-aecf69d3",
@@ -280,10 +219,7 @@ export default defineComponent({
           RootDeviceName: "/dev/xvda",
           RootDeviceType: "ebs",
           SecurityGroups: [
-            {
-              GroupName: "launch-wizard-2",
-              GroupId: "sg-0f82a6d0dbd82f6c7",
-            },
+            { GroupName: "launch-wizard-2", GroupId: "sg-0f82a6d0dbd82f6c7" },
           ],
           SourceDestCheck: true,
           StateReason: {
@@ -291,76 +227,35 @@ export default defineComponent({
             Message: "Client.UserInitiatedShutdown: User initiated shutdown",
           },
           Tags: [
-            {
-              Key: "OrbisStop",
-              Value: "Daily_MON-SAT_1800*",
-            },
-            {
-              Key: "TestStop2",
-              Value: "1",
-            },
-            {
-              Key: "Name",
-              Value: "OrbisTest4",
-            },
-            {
-              Key: "OrbisStart",
-              Value: "Blank+++",
-            },
-            {
-              Key: "OrbisSchedule",
-              Value: "True",
-            },
+            { Key: "OrbisStop", Value: "Daily_MON-SAT_1800*" },
+            { Key: "TestStop2", Value: "1" },
+            { Key: "Name", Value: "OrbisTest4" },
+            { Key: "OrbisStart", Value: "Blank+++" },
+            { Key: "OrbisSchedule", Value: "True" },
             {
               Key: "awsAutoScalingGroupName",
               Value: "WebSiteAutoScalingTEST-ForDEMO",
             },
-            {
-              Key: "OrbisBackup",
-              Value: "Daily_MON-SAT_0400_Ret7",
-            },
-            {
-              Key: "Environment",
-              Value: "DEV",
-            },
-            {
-              Key: "TestStop",
-              Value: "2",
-            },
-            {
-              Key: "Owner",
-              Value: "EC",
-            },
+            { Key: "OrbisBackup", Value: "Daily_MON-SAT_0400_Ret7" },
+            { Key: "Environment", Value: "DEV" },
+            { Key: "TestStop", Value: "2" },
+            { Key: "Owner", Value: "EC" },
           ],
           VirtualizationType: "hvm",
-          CpuOptions: {
-            CoreCount: 1,
-            ThreadsPerCore: 1,
-          },
+          CpuOptions: { CoreCount: 1, ThreadsPerCore: 1 },
           CapacityReservationSpecification: {
             CapacityReservationPreference: "open",
           },
-          HibernationOptions: {
-            Configured: false,
-          },
+          HibernationOptions: { Configured: false },
           MetadataOptions: {
             State: "applied",
             HttpTokens: "optional",
             HttpPutResponseHopLimit: 1,
             HttpEndpoint: "enabled",
-            HttpProtocolIpv6: "disabled",
           },
-          EnclaveOptions: {
-            Enabled: false,
-          },
+          EnclaveOptions: { Enabled: false },
           BootMode: "legacy-bios",
-          PlatformDetails: "Linux/UNIX",
-          UsageOperation: "RunInstances",
-          UsageOperationUpdateTime: 1611674634,
-          PrivateDnsNameOptions: {},
-          MaintenanceOptions: {
-            AutoRecovery: "default",
-          },
+          Name: ["OrbisTest4"],
         },
         {
           AmiLaunchIndex: 0,
@@ -369,9 +264,7 @@ export default defineComponent({
           InstanceType: "t2.micro",
           KeyName: "ernestocrespo2",
           LaunchTime: 1654891708,
-          Monitoring: {
-            State: "disabled",
-          },
+          Monitoring: { State: "disabled" },
           Placement: {
             AvailabilityZone: "us-east-1c",
             GroupName: "",
@@ -381,10 +274,7 @@ export default defineComponent({
           PrivateIpAddress: "172.31.93.37",
           ProductCodes: [],
           PublicDnsName: "",
-          State: {
-            Code: 80,
-            Name: "stopped",
-          },
+          State: { Code: 80, Name: "stopped" },
           StateTransitionReason: "User initiated (2022-06-10 21:52:19 GMT)",
           SubnetId: "subnet-9afc6cbb",
           VpcId: "vpc-aecf69d3",
@@ -448,10 +338,7 @@ export default defineComponent({
           RootDeviceName: "/dev/xvda",
           RootDeviceType: "ebs",
           SecurityGroups: [
-            {
-              GroupName: "launch-wizard-3",
-              GroupId: "sg-09dd1eaf2323fb8ff",
-            },
+            { GroupName: "launch-wizard-3", GroupId: "sg-09dd1eaf2323fb8ff" },
           ],
           SourceDestCheck: true,
           StateReason: {
@@ -459,79 +346,32 @@ export default defineComponent({
             Message: "Client.UserInitiatedShutdown: User initiated shutdown",
           },
           Tags: [
-            {
-              Key: "Project",
-              Value: "Orbis",
-            },
-            {
-              Key: "Environment",
-              Value: "QA",
-            },
-            {
-              Key: "et3",
-              Value: "3",
-            },
-            {
-              Key: "OrbisStop",
-              Value: "Daily_MON-FRI_1800",
-            },
-            {
-              Key: "et1",
-              Value: "1",
-            },
-            {
-              Key: "Owner",
-              Value: "EC",
-            },
-            {
-              Key: "OrbisStart",
-              Value: "Daily_MON-FRI_0700",
-            },
-            {
-              Key: "et2",
-              Value: "2",
-            },
-            {
-              Key: "Name",
-              Value: "Test",
-            },
-            {
-              Key: "OrbisBackup",
-              Value: "Daily_MON-SUN_0300-Ret15",
-            },
-            {
-              Key: "OrbisSchedule",
-              Value: "True",
-            },
+            { Key: "Project", Value: "Orbis" },
+            { Key: "Environment", Value: "QA" },
+            { Key: "et3", Value: "3" },
+            { Key: "OrbisStop", Value: "Daily_MON-FRI_1800" },
+            { Key: "et1", Value: "1" },
+            { Key: "Owner", Value: "EC" },
+            { Key: "OrbisStart", Value: "Daily_MON-FRI_0700" },
+            { Key: "et2", Value: "2" },
+            { Key: "Name", Value: "Test" },
+            { Key: "OrbisBackup", Value: "Daily_MON-SUN_0300-Ret15" },
+            { Key: "OrbisSchedule", Value: "True" },
           ],
           VirtualizationType: "hvm",
-          CpuOptions: {
-            CoreCount: 1,
-            ThreadsPerCore: 1,
-          },
+          CpuOptions: { CoreCount: 1, ThreadsPerCore: 1 },
           CapacityReservationSpecification: {
             CapacityReservationPreference: "open",
           },
-          HibernationOptions: {
-            Configured: false,
-          },
+          HibernationOptions: { Configured: false },
           MetadataOptions: {
             State: "applied",
             HttpTokens: "optional",
             HttpPutResponseHopLimit: 1,
             HttpEndpoint: "enabled",
-            HttpProtocolIpv6: "disabled",
           },
-          EnclaveOptions: {
-            Enabled: false,
-          },
-          PlatformDetails: "Linux/UNIX",
-          UsageOperation: "RunInstances",
-          UsageOperationUpdateTime: 1612880679,
-          PrivateDnsNameOptions: {},
-          MaintenanceOptions: {
-            AutoRecovery: "default",
-          },
+          EnclaveOptions: { Enabled: false },
+          Name: ["Test"],
         },
         {
           AmiLaunchIndex: 0,
@@ -540,9 +380,7 @@ export default defineComponent({
           InstanceType: "t2.micro",
           KeyName: "ernestocrespo2",
           LaunchTime: 1654892570,
-          Monitoring: {
-            State: "disabled",
-          },
+          Monitoring: { State: "disabled" },
           Placement: {
             AvailabilityZone: "us-east-1c",
             GroupName: "",
@@ -552,10 +390,7 @@ export default defineComponent({
           PrivateIpAddress: "172.31.85.173",
           ProductCodes: [],
           PublicDnsName: "",
-          State: {
-            Code: 80,
-            Name: "stopped",
-          },
+          State: { Code: 80, Name: "stopped" },
           StateTransitionReason: "User initiated (2022-06-10 21:52:19 GMT)",
           SubnetId: "subnet-9afc6cbb",
           VpcId: "vpc-aecf69d3",
@@ -619,10 +454,7 @@ export default defineComponent({
           RootDeviceName: "/dev/xvda",
           RootDeviceType: "ebs",
           SecurityGroups: [
-            {
-              GroupName: "launch-wizard-4",
-              GroupId: "sg-0b9dd5fcaad80f43e",
-            },
+            { GroupName: "launch-wizard-4", GroupId: "sg-0b9dd5fcaad80f43e" },
           ],
           SourceDestCheck: true,
           StateReason: {
@@ -630,81 +462,38 @@ export default defineComponent({
             Message: "Client.UserInitiatedShutdown: User initiated shutdown",
           },
           Tags: [
-            {
-              Key: "Environment",
-              Value: "PROD",
-            },
-            {
-              Key: "OrbisFantasia",
-              Value: "LaVidaEsBella",
-            },
-            {
-              Key: "Project",
-              Value: "Orbis",
-            },
-            {
-              Key: "OrbisStart",
-              Value: "Blank+++",
-            },
-            {
-              Key: "OrbisStop",
-              Value: "Daily_MON-FRI_1800",
-            },
-            {
-              Key: "Owner",
-              Value: "EC",
-            },
-            {
-              Key: "OrbisBackup",
-              Value: "Daily_MON-SUN_0300-Ret15",
-            },
-            {
-              Key: "OrbisSchedule",
-              Value: "True",
-            },
-            {
-              Key: "Name",
-              Value: "OrbisTest8",
-            },
+            { Key: "Environment", Value: "PROD" },
+            { Key: "OrbisFantasia", Value: "LaVidaEsBella" },
+            { Key: "Project", Value: "Orbis" },
+            { Key: "OrbisStart", Value: "Blank+++" },
+            { Key: "OrbisStop", Value: "Daily_MON-FRI_1800" },
+            { Key: "Owner", Value: "EC" },
+            { Key: "OrbisBackup", Value: "Daily_MON-SUN_0300-Ret15" },
+            { Key: "OrbisSchedule", Value: "True" },
+            { Key: "Name", Value: "OrbisTest8" },
           ],
           VirtualizationType: "hvm",
-          CpuOptions: {
-            CoreCount: 1,
-            ThreadsPerCore: 1,
-          },
+          CpuOptions: { CoreCount: 1, ThreadsPerCore: 1 },
           CapacityReservationSpecification: {
             CapacityReservationPreference: "open",
           },
-          HibernationOptions: {
-            Configured: false,
-          },
+          HibernationOptions: { Configured: false },
           MetadataOptions: {
             State: "applied",
             HttpTokens: "optional",
             HttpPutResponseHopLimit: 1,
             HttpEndpoint: "enabled",
-            HttpProtocolIpv6: "disabled",
           },
-          EnclaveOptions: {
-            Enabled: false,
-          },
-          PlatformDetails: "Linux/UNIX",
-          UsageOperation: "RunInstances",
-          UsageOperationUpdateTime: 1612881059,
-          PrivateDnsNameOptions: {},
-          MaintenanceOptions: {
-            AutoRecovery: "default",
-          },
+          EnclaveOptions: { Enabled: false },
+          Name: ["OrbisTest8"],
         },
         {
           AmiLaunchIndex: 0,
           ImageId: "ami-01cc34ab2709337aa",
           InstanceId: "i-002e43a3aa16adc77",
           InstanceType: "t2.micro",
-          LaunchTime: 1656072069,
-          Monitoring: {
-            State: "disabled",
-          },
+          LaunchTime: 1656352088,
+          Monitoring: { State: "disabled" },
           Placement: {
             AvailabilityZone: "us-east-1d",
             GroupName: "",
@@ -714,11 +503,8 @@ export default defineComponent({
           PrivateIpAddress: "172.31.22.44",
           ProductCodes: [],
           PublicDnsName: "",
-          State: {
-            Code: 80,
-            Name: "stopped",
-          },
-          StateTransitionReason: "User initiated (2022-06-24 20:17:05 GMT)",
+          State: { Code: 80, Name: "stopped" },
+          StateTransitionReason: "User initiated (2022-07-11 13:34:07 GMT)",
           SubnetId: "subnet-c9abf184",
           VpcId: "vpc-aecf69d3",
           Architecture: "x86_64",
@@ -781,10 +567,7 @@ export default defineComponent({
           RootDeviceName: "/dev/xvda",
           RootDeviceType: "ebs",
           SecurityGroups: [
-            {
-              GroupName: "launch-wizard-6",
-              GroupId: "sg-0b4647cf04cd86365",
-            },
+            { GroupName: "launch-wizard-6", GroupId: "sg-0b4647cf04cd86365" },
           ],
           SourceDestCheck: true,
           StateReason: {
@@ -792,86 +575,38 @@ export default defineComponent({
             Message: "Client.UserInitiatedShutdown: User initiated shutdown",
           },
           Tags: [
-            {
-              Key: "OrbisStart",
-              Value: "Daily_MON-SAT_0700",
-            },
-            {
-              Key: "OrbisStop2",
-              Value: "Daily_MON-FRI_1800_SAT_1500",
-            },
-            {
-              Key: "OrbisStop",
-              Value: "Daily_MON-SAT_1800",
-            },
-            {
-              Key: "Environment",
-              Value: "QA",
-            },
-            {
-              Key: "OrbisDEMO",
-              Value: "True",
-            },
-            {
-              Key: "Name",
-              Value: "Orbis-UsoEnPresentaciones",
-            },
-            {
-              Key: "OrbisBackup-Weekly",
-              Value: "Weekly_SAT_0300_Ret15",
-            },
-            {
-              Key: "OrbisSchedule",
-              Value: "True",
-            },
-            {
-              Key: "OrbisBackup",
-              Value: "Daily_MON-SAT_0400_Ret7",
-            },
+            { Key: "OrbisStart", Value: "Daily_MON-SAT_0700" },
+            { Key: "OrbisStop2", Value: "Daily_MON-FRI_1800_SAT_1500" },
+            { Key: "OrbisStop", Value: "Daily_MON-SAT_1800" },
+            { Key: "Environment", Value: "QA" },
+            { Key: "OrbisDEMO", Value: "True" },
+            { Key: "Name", Value: "Orbis-UsoEnPresentaciones" },
+            { Key: "OrbisBackup-Weekly", Value: "Weekly_SAT_0300_Ret15" },
+            { Key: "OrbisSchedule", Value: "True" },
+            { Key: "OrbisBackup", Value: "Daily_MON-SAT_0400_Ret7" },
           ],
           VirtualizationType: "hvm",
-          CpuOptions: {
-            CoreCount: 1,
-            ThreadsPerCore: 1,
-          },
+          CpuOptions: { CoreCount: 1, ThreadsPerCore: 1 },
           CapacityReservationSpecification: {
             CapacityReservationPreference: "open",
           },
-          HibernationOptions: {
-            Configured: false,
-          },
+          HibernationOptions: { Configured: false },
           MetadataOptions: {
             State: "applied",
             HttpTokens: "optional",
             HttpPutResponseHopLimit: 1,
             HttpEndpoint: "enabled",
-            HttpProtocolIpv6: "disabled",
-            InstanceMetadataTags: "disabled",
           },
-          EnclaveOptions: {
-            Enabled: false,
-          },
-          PlatformDetails: "Linux/UNIX",
-          UsageOperation: "RunInstances",
-          UsageOperationUpdateTime: 1636638710,
-          PrivateDnsNameOptions: {
-            HostnameType: "ip-name",
-            EnableResourceNameDnsARecord: false,
-            EnableResourceNameDnsAAAARecord: false,
-          },
-          MaintenanceOptions: {
-            AutoRecovery: "default",
-          },
+          EnclaveOptions: { Enabled: false },
+          Name: ["Orbis-UsoEnPresentaciones"],
         },
         {
           AmiLaunchIndex: 0,
           ImageId: "ami-01cc34ab2709337aa",
           InstanceId: "i-0cc36134c56360e07",
           InstanceType: "t2.micro",
-          LaunchTime: 1656072067,
-          Monitoring: {
-            State: "disabled",
-          },
+          LaunchTime: 1657015267,
+          Monitoring: { State: "disabled" },
           Placement: {
             AvailabilityZone: "us-east-1d",
             GroupName: "",
@@ -881,11 +616,8 @@ export default defineComponent({
           PrivateIpAddress: "172.31.22.172",
           ProductCodes: [],
           PublicDnsName: "",
-          State: {
-            Code: 80,
-            Name: "stopped",
-          },
-          StateTransitionReason: "User initiated (2022-06-24 20:17:05 GMT)",
+          State: { Code: 80, Name: "stopped" },
+          StateTransitionReason: "User initiated (2022-07-11 13:34:07 GMT)",
           SubnetId: "subnet-c9abf184",
           VpcId: "vpc-aecf69d3",
           Architecture: "x86_64",
@@ -944,10 +676,7 @@ export default defineComponent({
           RootDeviceName: "/dev/xvda",
           RootDeviceType: "ebs",
           SecurityGroups: [
-            {
-              GroupName: "launch-wizard-5",
-              GroupId: "sg-0bc04f192d77ae8be",
-            },
+            { GroupName: "launch-wizard-5", GroupId: "sg-0bc04f192d77ae8be" },
           ],
           SourceDestCheck: true,
           StateReason: {
@@ -955,80 +684,32 @@ export default defineComponent({
             Message: "Client.UserInitiatedShutdown: User initiated shutdown",
           },
           Tags: [
-            {
-              Key: "OrbisExcluded",
-              Value: "For DEMO Purposes",
-            },
-            {
-              Key: "OrbisStop",
-              Value: "Daily_MON-SAT_1800",
-            },
-            {
-              Key: "OrbisStop2",
-              Value: "Daily_MON-FRI_1800_SAT_1500",
-            },
-            {
-              Key: "OrbisBackup",
-              Value: "Daily_MON-SAT_0400_Ret7",
-            },
-            {
-              Key: "OrbisSchedule",
-              Value: "True",
-            },
-            {
-              Key: "OrbisDEMO",
-              Value: "True",
-            },
-            {
-              Key: "Environment",
-              Value: "QA",
-            },
-            {
-              Key: "Name",
-              Value: "OrbisTest1",
-            },
-            {
-              Key: "CloudEndure_Name",
-              Value: "Excluir",
-            },
-            {
-              Key: "OrbisStart",
-              Value: "Daily_MON-SAT_0700",
-            },
+            { Key: "OrbisExcluded", Value: "For DEMO Purposes" },
+            { Key: "OrbisStop", Value: "Daily_MON-SAT_1800" },
+            { Key: "OrbisStop2", Value: "Daily_MON-FRI_1800_SAT_1500" },
+            { Key: "OrbisBackup", Value: "Daily_MON-SAT_0400_Ret7" },
+            { Key: "OrbisReboot", Value: "OrbisTest1" },
+            { Key: "OrbisSchedule", Value: "True" },
+            { Key: "OrbisDEMO", Value: "True" },
+            { Key: "Environment", Value: "QA" },
+            { Key: "Name", Value: "OrbisTest1" },
+            { Key: "CloudEndure_Name", Value: "Excluir" },
+            { Key: "OrbisStart", Value: "Daily_MON-SAT_0700" },
           ],
           VirtualizationType: "hvm",
-          CpuOptions: {
-            CoreCount: 1,
-            ThreadsPerCore: 1,
-          },
+          CpuOptions: { CoreCount: 1, ThreadsPerCore: 1 },
           CapacityReservationSpecification: {
             CapacityReservationPreference: "open",
           },
-          HibernationOptions: {
-            Configured: false,
-          },
+          HibernationOptions: { Configured: false },
           MetadataOptions: {
             State: "applied",
             HttpTokens: "optional",
             HttpPutResponseHopLimit: 1,
             HttpEndpoint: "enabled",
-            HttpProtocolIpv6: "disabled",
-            InstanceMetadataTags: "disabled",
           },
-          EnclaveOptions: {
-            Enabled: false,
-          },
-          PlatformDetails: "Linux/UNIX",
-          UsageOperation: "RunInstances",
-          UsageOperationUpdateTime: 1636638685,
-          PrivateDnsNameOptions: {
-            HostnameType: "ip-name",
-            EnableResourceNameDnsARecord: false,
-            EnableResourceNameDnsAAAARecord: false,
-          },
-          MaintenanceOptions: {
-            AutoRecovery: "default",
-          },
+          EnclaveOptions: { Enabled: false },
+          Name: ["OrbisTest1"],
         },
         {
           AmiLaunchIndex: 0,
@@ -1036,9 +717,7 @@ export default defineComponent({
           InstanceId: "i-0cf946c2eebc77930",
           InstanceType: "t2.nano",
           LaunchTime: 1654894293,
-          Monitoring: {
-            State: "disabled",
-          },
+          Monitoring: { State: "disabled" },
           Placement: {
             AvailabilityZone: "us-east-1a",
             GroupName: "",
@@ -1048,10 +727,7 @@ export default defineComponent({
           PrivateIpAddress: "172.16.1.166",
           ProductCodes: [],
           PublicDnsName: "",
-          State: {
-            Code: 80,
-            Name: "stopped",
-          },
+          State: { Code: 80, Name: "stopped" },
           StateTransitionReason: "User initiated (2022-06-10 21:52:19 GMT)",
           SubnetId: "subnet-0460f59e587aeecc0",
           VpcId: "vpc-010d9ef6af77e3ca7",
@@ -1098,10 +774,7 @@ export default defineComponent({
               OwnerId: "996443402123",
               PrivateIpAddress: "172.16.1.166",
               PrivateIpAddresses: [
-                {
-                  Primary: true,
-                  PrivateIpAddress: "172.16.1.166",
-                },
+                { Primary: true, PrivateIpAddress: "172.16.1.166" },
               ],
               SourceDestCheck: false,
               Status: "in-use",
@@ -1113,10 +786,7 @@ export default defineComponent({
           RootDeviceName: "/dev/xvda",
           RootDeviceType: "ebs",
           SecurityGroups: [
-            {
-              GroupName: "nat-instance-sg",
-              GroupId: "sg-0e6cbf0704953b857",
-            },
+            { GroupName: "nat-instance-sg", GroupId: "sg-0e6cbf0704953b857" },
           ],
           SourceDestCheck: false,
           StateReason: {
@@ -1124,104 +794,115 @@ export default defineComponent({
             Message: "Client.UserInitiatedShutdown: User initiated shutdown",
           },
           Tags: [
-            {
-              Key: "Environment",
-              Value: "PROD",
-            },
-            {
-              Key: "Name",
-              Value: "NAT-Instance",
-            },
+            { Key: "Environment", Value: "PROD" },
+            { Key: "Name", Value: "NAT-Instance" },
           ],
           VirtualizationType: "hvm",
-          CpuOptions: {
-            CoreCount: 1,
-            ThreadsPerCore: 1,
-          },
+          CpuOptions: { CoreCount: 1, ThreadsPerCore: 1 },
           CapacityReservationSpecification: {
             CapacityReservationPreference: "open",
           },
-          HibernationOptions: {
-            Configured: false,
-          },
+          HibernationOptions: { Configured: false },
           MetadataOptions: {
             State: "applied",
             HttpTokens: "optional",
             HttpPutResponseHopLimit: 1,
             HttpEndpoint: "enabled",
-            HttpProtocolIpv6: "disabled",
-            InstanceMetadataTags: "disabled",
           },
-          EnclaveOptions: {
-            Enabled: false,
-          },
-          PlatformDetails: "Linux/UNIX",
-          UsageOperation: "RunInstances",
-          UsageOperationUpdateTime: 1652970564,
-          PrivateDnsNameOptions: {
-            HostnameType: "ip-name",
-            EnableResourceNameDnsARecord: true,
-            EnableResourceNameDnsAAAARecord: false,
-          },
-          MaintenanceOptions: {
-            AutoRecovery: "default",
-          },
+          EnclaveOptions: { Enabled: false },
+          Name: ["NAT-Instance"],
         },
       ],
     });
 
     const columns = ref([
       {
+        name: "Name",
+        required: true,
+        label: "Name",
+        align: "left",
+        expression: "(row) => row.Name",
+        sortable: true,
+        typeField: null,
+        mutable: false,
+        no_editable: true,
+      },
+      {
         name: "InstanceId",
         required: true,
         label: "InstanceID",
         align: "left",
-        field: (row) => row.InstanceId,
-        format: (val) => `${val}`,
+        expression: "(row) => row.InstanceId",
         sortable: true,
+        typeField: null,
         mutable: false,
+        no_editable: true,
       },
       {
         name: "State",
         align: "center",
         label: "State",
-        field: (row) => row.State.Name,
+        expression: '(row) => row["State"]["Name"]',
         required: true,
         sortable: true,
         mutable: false,
-      },
-      {
-        name: "InstanceType",
-        label: "InstanceType",
-        field: "InstanceType",
-        sortable: true,
-        mutable: true,
-      },
-      {
-        name: "Architecture",
-        label: "Architecture",
-        field: "Architecture",
-        mutable: true,
+        no_editable: true,
       },
       {
         name: "ImageId",
+        align: "center",
         label: "ImageId",
-        field: "ImageId",
+        expression: '(row) => row["ImageId"]',
+        required: false,
         sortable: true,
         mutable: true,
-        sort: (a, b) => parseInt(a, 10) - parseInt(b, 10),
+        no_editable: false,
+      },
+      {
+        name: "SubnetId",
+        align: "center",
+        label: "Subnet Id",
+        expression: '(row) => row["SubnetId"]',
+        required: false,
+        sortable: true,
+        mutable: true,
+        no_editable: false,
       },
       {
         name: "VpcId",
+        align: "center",
         label: "VpcId",
-        field: "VpcId",
+        expression: '(row) => row["VpcId"]',
+        required: false,
         sortable: true,
-        sort: (a, b) => parseInt(a, 10) - parseInt(b, 10),
         mutable: true,
+        no_editable: false,
+      },
+      {
+        name: "InstanceType",
+        align: "center",
+        label: "Instance Type",
+        expression: '(row) => row["InstanceType"]',
+        required: false,
+        sortable: true,
+        mutable: true,
+        no_editable: false,
+      },
+      {
+        name: "Architecture",
+        align: "center",
+        label: "Architecture",
+        expression: '(row) => row["Architecture"]',
+        required: false,
+        sortable: true,
+        mutable: true,
+        no_editable: false,
       },
     ]);
 
     const loading = ref(false);
+
+    columns.value.map((e) => (e.field = eval(e.expression)));
 
     watch(
       () => model.value,

@@ -1,6 +1,6 @@
 {
   "name": "quasar-app-extension-q-dynamic-form",
-  "version": "0.0.17",
+  "version": "0.0.18",
   "description": " Quasar Dynamic Form",
   "author": "Eliezer Rangel <eliezer.rangel@escala24x7.com>",
   "license": "MIT",
@@ -12,7 +12,7 @@
   "bugs": "https://github.com/eliecer2000/q-dynamic-form/issues",
   "homepage": "https://github.com/eliecer2000/q-dynamic-form",
   "dependencies": {
-    "quasar-ui-q-dynamic-form": "^0.0.17"
+    "quasar-ui-q-dynamic-form": "^0.0.18"
   },
   "engines": {
     "node": ">= 8.9.0",

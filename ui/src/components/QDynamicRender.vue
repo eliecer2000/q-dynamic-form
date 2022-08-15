@@ -9,6 +9,7 @@
         :stateFields="stateFields"
         :optionsSelect="optionsSelect"
         :columnClassField="columnClassField[field.name]"
+        :disable-all="disableAll"
         @data="onData"
       />
     </div>
@@ -44,6 +45,10 @@ export default defineComponent({
     modelValue: {
       type: Object,
       default: {}
+    },
+    disableAll: {
+      type: Boolean,
+      default: false
     }
   },
 

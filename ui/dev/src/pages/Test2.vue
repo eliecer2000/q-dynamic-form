@@ -7,6 +7,7 @@
         :stateFields="stateFields"
         :optionsSelect="optionsSelect"
         :columnClassField="columnClassField"
+        :disable-all="true"
         v-model="formData"
       ></QDynamicRender>
 

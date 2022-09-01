@@ -7,7 +7,7 @@
         :stateFields="stateFields"
         :optionsSelect="optionsSelect"
         :columnClassField="columnClassField"
-        :disable-all="true"
+        :disable-all="false"
         v-model="formData"
       ></QDynamicRender>
 
@@ -27,6 +27,18 @@ export default defineComponent({
   setup() {
     /* Campos creado con el builder para armar el formulario */
     const fields = ref([
+      {
+        clearable: true,
+        ref: "ref_email_destination_cco",
+        outlined: true,
+        maxlength: "",
+        hint: "",
+        name: "email_destination_cco",
+        label: "Email Destination - CCO",
+        autofocus: false,
+        type: "text",
+        createlist: true,
+      },
       {
         type: "toggle",
         label: "Activar",
@@ -91,6 +103,7 @@ export default defineComponent({
 			La key debe ser el nombre defenido para el campo.
 		*/
     const initValue = {
+      email_destination_cco: ["eliecer2000@gmail.com"],
       username: "Eduardo",
       active: "false",
       team: [
@@ -128,7 +141,17 @@ export default defineComponent({
         (val) => {
           const emailPattern =
             /^(?=[a-zA-Z0-9@._%+-]{6,254}$)[a-zA-Z0-9._%+-]{1,64}@(?:[a-zA-Z0-9-]{1,63}\.){1,8}[a-zA-Z]{2,63}$/;
+
           return emailPattern.test(val) || "No es un email valido.";
+        },
+      ],
+      rules_email_destination_cco: [
+        (val) => {
+          const emailPattern =
+            /^(?=[a-zA-Z0-9@._%+-]{6,254}$)[a-zA-Z0-9._%+-]{1,64}@(?:[a-zA-Z0-9-]{1,63}\.){1,8}[a-zA-Z]{2,63}$/;
+          return !!val
+            ? emailPattern.test(val) || "No es un email valido."
+            : true || "No es un email valido.";
         },
       ],
     });

@@ -191,7 +191,13 @@ export default defineComponent({
     );
 
     onMounted(() => {
-      if (props.initValue) fieldValue.value = props.initValue;
+      if (props.initValue) {
+        if (props.setProperties["createlist"]) {
+          itemlist.value = props.initValue;
+        } else {
+          fieldValue.value = props.initValue;
+        }
+      }
     });
 
     return {

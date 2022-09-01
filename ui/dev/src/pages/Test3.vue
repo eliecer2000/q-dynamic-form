@@ -21,16 +21,12 @@ import { defineComponent, ref, watch, onMounted } from "vue";
 export default defineComponent({
   setup() {
     const model = ref({
-      InstanceIds: ["i-0002ab0fe5af46ab5", "i-0d3582ecee49a930b"],
+      InstanceIds: [],
       Filters: [
-        // {
-        //   Name: "tag:Name",
-        //   Values: ["OrbisSandbox1dbox1", "OrbisSandbox2"],
-        // },
-        // {
-        //   Name: "images-id",
-        //   Values: ["ami-54545d4"],
-        // },
+        {
+          Name: "tag:Name",
+          Values: ["OrbisTest4", "OrbisTest8"],
+        },
       ],
     });
 
@@ -41,179 +37,239 @@ export default defineComponent({
           label: "Tags",
           model: null,
           values: [
-            // {
-            //   prefix: "tag:",
-            //   label: "Name",
-            //   value: "Name",
-            //   model: null,
-            //   items: [
-            //     "OrbisSandbox1OrbisSandbox1",
-            //     "OrbisSandbox2",
-            //     "dsfasdfasdf",
-            //     "fasdfasdfasdfasdf",
-            //     "dfasdfasdfasdfasdfasdf",
-            //   ],
-            // },
-            // {
-            //   prefix: "tag:",
-            //   label: "Owner",
-            //   value: "Owner",
-            //   model: null,
-            //   items: ["EC", "dd", "ddd"],
-            // },
-            // {
-            //   prefix: "tag:",
-            //   label: "Orbis",
-            //   value: "Orbis",
-            //   model: null,
-            //   items: ["true"],
-            // },
-            // {
-            //   prefix: "tag:",
-            //   label: "Orbis2",
-            //   value: "Orbis2",
-            //   model: null,
-            //   items: ["true"],
-            // },
-          ],
-        },
-        {
-          prefix: null,
-          label: "Instances Type",
-          model: null,
-          values: [
             {
-              prefix: null,
-              label: "Instances Type",
-              value: "instances-type",
-              items: ["t2.micro", "t3.micro"],
+              prefix: "tag:",
+              label: "CloudEndure_Name",
+              model: null,
+              value: "CloudEndure_Name",
+              items: ["Excluir"],
+            },
+            {
+              prefix: "tag:",
+              label: "Environment",
+              model: null,
+              value: "Environment",
+              items: ["PROD", "QA", "DEV"],
+            },
+            {
+              prefix: "tag:",
+              label: "Name",
+              model: null,
+              value: "Name",
+              items: [
+                "NAT-Instance",
+                "OrbisTest8",
+                "Orbis-UsoEnPresentaciones",
+                "Test",
+                "OrbisTest4",
+                "OrbisTest1",
+              ],
+            },
+            {
+              prefix: "tag:",
+              label: "OrbisBackup",
+              model: null,
+              value: "OrbisBackup",
+              items: ["Daily_MON-SAT_0400_Ret7", "Daily_MON-SUN_0300-Ret15"],
+            },
+            {
+              prefix: "tag:",
+              label: "OrbisBackup-Weekly",
+              model: null,
+              value: "OrbisBackup-Weekly",
+              items: ["Weekly_SAT_0300_Ret15"],
+            },
+            {
+              prefix: "tag:",
+              label: "OrbisDEMO",
+              model: null,
+              value: "OrbisDEMO",
+              items: ["True"],
+            },
+            {
+              prefix: "tag:",
+              label: "OrbisExcluded",
+              model: null,
+              value: "OrbisExcluded",
+              items: ["For DEMO Purposes"],
+            },
+            {
+              prefix: "tag:",
+              label: "OrbisFantasia",
+              model: null,
+              value: "OrbisFantasia",
+              items: ["LaVidaEsBella"],
+            },
+            {
+              prefix: "tag:",
+              label: "OrbisReboot",
+              model: null,
+              value: "OrbisReboot",
+              items: ["OrbisTest1"],
+            },
+            {
+              prefix: "tag:",
+              label: "OrbisSchedule",
+              model: null,
+              value: "OrbisSchedule",
+              items: ["True"],
+            },
+            {
+              prefix: "tag:",
+              label: "OrbisStart",
+              model: null,
+              value: "OrbisStart",
+              items: [
+                "Blank+++",
+                "Daily_MON-FRI_0700",
+                "MON-SAT_0700",
+                "Daily_MON-SAT_0700",
+              ],
+            },
+            {
+              prefix: "tag:",
+              label: "OrbisStop",
+              model: null,
+              value: "OrbisStop",
+              items: [
+                "MON-SAT_1800",
+                "Daily_MON-SAT_1800*",
+                "Daily_MON-FRI_1800",
+                "Daily_MON-SAT_1800",
+              ],
+            },
+            {
+              prefix: "tag:",
+              label: "OrbisStop2",
+              model: null,
+              value: "OrbisStop2",
+              items: ["Daily_MON-FRI_1800_SAT_1500"],
+            },
+            {
+              prefix: "tag:",
+              label: "Owner",
+              model: null,
+              value: "Owner",
+              items: ["EC"],
+            },
+            {
+              prefix: "tag:",
+              label: "Project",
+              model: null,
+              value: "Project",
+              items: ["Orbis"],
+            },
+            {
+              prefix: "tag:",
+              label: "TestStop",
+              model: null,
+              value: "TestStop",
+              items: ["2"],
+            },
+            {
+              prefix: "tag:",
+              label: "TestStop2",
+              model: null,
+              value: "TestStop2",
+              items: ["2", "1"],
+            },
+            {
+              prefix: "tag:",
+              label: "awsAutoScalingGroupName",
+              model: null,
+              value: "awsAutoScalingGroupName",
+              items: ["WebSiteAutoScalingTEST-ForDEMO"],
+            },
+            {
+              prefix: "tag:",
+              label: "et1",
+              model: null,
+              value: "et1",
+              items: ["1"],
+            },
+            {
+              prefix: "tag:",
+              label: "et2",
+              model: null,
+              value: "et2",
+              items: ["2"],
+            },
+            {
+              prefix: "tag:",
+              label: "et3",
+              model: null,
+              value: "et3",
+              items: ["3"],
             },
           ],
         },
         {
           prefix: null,
-          label: "Images ID",
+          label: "Other Filters",
           model: null,
           values: [
             {
               prefix: null,
-              label: "Images ID",
-              value: "images-id",
-              items: ["ami-54545d4", "ami-f4asdf5646", "ami-5df46a5sd4f6a"],
+              model: null,
+              items: ["t2.micro", "t2.nano"],
+              label: "Instance type",
+              value: "instance-type",
+            },
+            {
+              prefix: null,
+              model: null,
+              items: [
+                "ami-047a51fa27710816e",
+                "ami-0be2609ba883822ec",
+                "ami-0022f774911c1d690",
+                "ami-01cc34ab2709337aa",
+              ],
+              label: "Image Id",
+              value: "image-id",
+            },
+            {
+              prefix: null,
+              model: null,
+              items: [
+                "subnet-f9bf66c8",
+                "subnet-c9abf184",
+                "subnet-9afc6cbb",
+                "subnet-0460f59e587aeecc0",
+              ],
+              label: "Subnet Id",
+              value: "subnet-id",
+            },
+            {
+              prefix: null,
+              model: null,
+              items: ["vpc-010d9ef6af77e3ca7", "vpc-aecf69d3"],
+              label: "Vpc Id",
+              value: "vpc-id",
+            },
+            {
+              prefix: null,
+              label: "Architecture",
+              value: "architecture",
+              items: ["i386", "x86_64", "arm64"],
+              model: null,
             },
           ],
         },
       ],
       items: [
         {
-          ResourceId: "i-0002ab0fe5af46ab5" /* Este */,
-          AmiLaunchIndex: 0,
-          ImageId: "ami-0be2609ba883822ec" /* Este  -- Lista*/,
-          InstanceId: "i-0002ab0fe5af46ab5" /* Este */,
-          InstanceType: "t2.micro" /* Este -- Lista*/,
-          KeyName: "ernestocrespo2" /* Este */,
-          LaunchTime: 1654891708 /* Este */,
-          Monitoring: {
-            State: "disabled",
-          },
-          Placement: {
-            AvailabilityZone: "us-east-1e",
-            GroupName: "",
-            Tenancy: "default",
-          },
-          PrivateDnsName: "ip-172-31-61-55.ec2.internal",
-          PrivateIpAddress: "172.31.61.55",
-          ProductCodes: [],
-          PublicDnsName: "",
+          ResourceId: "i-0002ab0fe5af46ab5",
+          ImageId: "ami-0be2609ba883822ec",
+          InstanceId: "i-0002ab0fe5af46ab5",
+          InstanceType: "t2.micro",
           State: {
-            /* Este */ Code: 80,
-            Name: "stopped",
+            Code: 16,
+            Name: "running",
           },
-          StateTransitionReason: "User initiated (2022-06-10 21:01:07 GMT)",
-          SubnetId: "subnet-f9bf66c8" /* Este -- lista*/,
-          VpcId: "vpc-aecf69d3" /* Este -- lista*/,
-          Architecture: "x86_64" /* Este -- lista*/,
-          BlockDeviceMappings: [
-            {
-              DeviceName: "/dev/xvda",
-              Ebs: {
-                AttachTime: 1611674537,
-                DeleteOnTermination: true,
-                Status: "attached",
-                VolumeId: "vol-04e7eb85c14cdd738",
-              },
-            },
-          ],
-          ClientToken: "",
-          EbsOptimized: false,
-          EnaSupport: true,
-          Hypervisor: "xen",
-          IamInstanceProfile: {
-            Arn: "arn:aws:iam::996443402123:instance-profile/EC2-SSMagent",
-            Id: "AIPA6QAFHV6FRIGSUY5YW",
-          },
-          NetworkInterfaces: [
-            {
-              Attachment: {
-                AttachTime: 1611674536,
-                AttachmentId: "eni-attach-04eb83a715dab03cd",
-                DeleteOnTermination: true,
-                DeviceIndex: 0,
-                Status: "attached",
-                NetworkCardIndex: 0,
-              },
-              Description: "",
-              Groups: [
-                {
-                  GroupName: "launch-wizard-1",
-                  GroupId: "sg-046872156683f4a93",
-                },
-              ],
-              Ipv6Addresses: [],
-              MacAddress: "06:71:aa:f6:ab:3b",
-              NetworkInterfaceId: "eni-087cb6b19067158d6",
-              OwnerId: "996443402123",
-              PrivateDnsName: "ip-172-31-61-55.ec2.internal",
-              PrivateIpAddress: "172.31.61.55",
-              PrivateIpAddresses: [
-                {
-                  Primary: true,
-                  PrivateDnsName: "ip-172-31-61-55.ec2.internal",
-                  PrivateIpAddress: "172.31.61.55",
-                },
-              ],
-              SourceDestCheck: true,
-              Status: "in-use",
-              SubnetId: "subnet-f9bf66c8",
-              VpcId: "vpc-aecf69d3",
-              InterfaceType: "interface",
-            },
-          ],
-          RootDeviceName: "/dev/xvda",
-          RootDeviceType: "ebs",
-          SecurityGroups: [
-            {
-              GroupName: "launch-wizard-1",
-              GroupId: "sg-046872156683f4a93",
-            },
-          ],
-          SourceDestCheck: true,
-          StateReason: {
-            Code: "Client.UserInitiatedShutdown",
-            Message: "Client.UserInitiatedShutdown: User initiated shutdown",
-          },
-          /* Importante: valor nuevo a partir de la etiqueta Name */
-          Name: "OrbisTest3",
-          /*  -------------------- */
-
-          /* Todas las etiquetas */
+          SubnetId: "subnet-f9bf66c8",
+          VpcId: "vpc-aecf69d3",
+          Architecture: "x86_64",
           Tags: [
-            /* Importante */
-            {
-              Key: "Name",
-              Value: "OrbisTest3",
-            },
-            /*  -------------------- */
             {
               Key: "Owner",
               Value: "EC",
@@ -243,6 +299,10 @@ export default defineComponent({
               Value: "MON-SAT_1800",
             },
             {
+              Key: "Name",
+              Value: "",
+            },
+            {
               Key: "Environment",
               Value: "DEV",
             },
@@ -251,129 +311,21 @@ export default defineComponent({
               Value: "2",
             },
           ],
-          VirtualizationType: "hvm",
-          CpuOptions: {
-            CoreCount: 1,
-            ThreadsPerCore: 1,
-          },
-          CapacityReservationSpecification: {
-            CapacityReservationPreference: "open",
-          },
-          HibernationOptions: {
-            Configured: false,
-          },
-          MetadataOptions: {
-            State: "applied",
-            HttpTokens: "optional",
-            HttpPutResponseHopLimit: 1,
-            HttpEndpoint: "enabled",
-            HttpProtocolIpv6: "disabled",
-          },
-          EnclaveOptions: {
-            Enabled: false,
-          },
-          BootMode: "legacy-bios",
-          PlatformDetails: "Linux/UNIX",
-          UsageOperation: "RunInstances",
-          UsageOperationUpdateTime: 1611674536,
-          PrivateDnsNameOptions: {},
-          MaintenanceOptions: {
-            AutoRecovery: "default",
-          },
+          Name: "",
+          check: false,
         },
         {
           ResourceId: "i-0d3582ecee49a930b",
-          AmiLaunchIndex: 0,
           ImageId: "ami-0be2609ba883822ec",
           InstanceId: "i-0d3582ecee49a930b",
           InstanceType: "t2.micro",
-          KeyName: "ernestocrespo2",
-          LaunchTime: 1652823393,
-          Monitoring: {
-            State: "disabled",
-          },
-          Placement: {
-            AvailabilityZone: "us-east-1e",
-            GroupName: "",
-            Tenancy: "default",
-          },
-          PrivateDnsName: "ip-172-31-62-169.ec2.internal",
-          PrivateIpAddress: "172.31.62.169",
-          ProductCodes: [],
-          PublicDnsName: "",
           State: {
             Code: 80,
             Name: "stopped",
           },
-          StateTransitionReason: "User initiated (2022-05-17 21:40:11 GMT)",
           SubnetId: "subnet-f9bf66c8",
           VpcId: "vpc-aecf69d3",
           Architecture: "x86_64",
-          BlockDeviceMappings: [
-            {
-              DeviceName: "/dev/xvda",
-              Ebs: {
-                AttachTime: 1611674635,
-                DeleteOnTermination: true,
-                Status: "attached",
-                VolumeId: "vol-0f7e775aca93fa787",
-              },
-            },
-          ],
-          ClientToken: "",
-          EbsOptimized: false,
-          EnaSupport: true,
-          Hypervisor: "xen",
-          NetworkInterfaces: [
-            {
-              Attachment: {
-                AttachTime: 1611674634,
-                AttachmentId: "eni-attach-0d73be0cc66d4b098",
-                DeleteOnTermination: true,
-                DeviceIndex: 0,
-                Status: "attached",
-                NetworkCardIndex: 0,
-              },
-              Description: "",
-              Groups: [
-                {
-                  GroupName: "launch-wizard-2",
-                  GroupId: "sg-0f82a6d0dbd82f6c7",
-                },
-              ],
-              Ipv6Addresses: [],
-              MacAddress: "06:3f:a4:d0:93:fd",
-              NetworkInterfaceId: "eni-03b1f65722576e085",
-              OwnerId: "996443402123",
-              PrivateDnsName: "ip-172-31-62-169.ec2.internal",
-              PrivateIpAddress: "172.31.62.169",
-              PrivateIpAddresses: [
-                {
-                  Primary: true,
-                  PrivateDnsName: "ip-172-31-62-169.ec2.internal",
-                  PrivateIpAddress: "172.31.62.169",
-                },
-              ],
-              SourceDestCheck: true,
-              Status: "in-use",
-              SubnetId: "subnet-f9bf66c8",
-              VpcId: "vpc-aecf69d3",
-              InterfaceType: "interface",
-            },
-          ],
-          RootDeviceName: "/dev/xvda",
-          RootDeviceType: "ebs",
-          SecurityGroups: [
-            {
-              GroupName: "launch-wizard-2",
-              GroupId: "sg-0f82a6d0dbd82f6c7",
-            },
-          ],
-          SourceDestCheck: true,
-          StateReason: {
-            Code: "Client.UserInitiatedShutdown",
-            Message: "Client.UserInitiatedShutdown: User initiated shutdown",
-          },
           Tags: [
             {
               Key: "OrbisStop",
@@ -416,132 +368,21 @@ export default defineComponent({
               Value: "EC",
             },
           ],
-          VirtualizationType: "hvm",
-          CpuOptions: {
-            CoreCount: 1,
-            ThreadsPerCore: 1,
-          },
-          CapacityReservationSpecification: {
-            CapacityReservationPreference: "open",
-          },
-          HibernationOptions: {
-            Configured: false,
-          },
-          MetadataOptions: {
-            State: "applied",
-            HttpTokens: "optional",
-            HttpPutResponseHopLimit: 1,
-            HttpEndpoint: "enabled",
-            HttpProtocolIpv6: "disabled",
-          },
-          EnclaveOptions: {
-            Enabled: false,
-          },
-          BootMode: "legacy-bios",
-          PlatformDetails: "Linux/UNIX",
-          UsageOperation: "RunInstances",
-          UsageOperationUpdateTime: 1611674634,
-          PrivateDnsNameOptions: {},
-          MaintenanceOptions: {
-            AutoRecovery: "default",
-          },
+          Name: "OrbisTest4",
+          check: false,
         },
         {
-          AmiLaunchIndex: 0,
+          ResourceId: "i-07d0f5532ba58fd35",
           ImageId: "ami-047a51fa27710816e",
           InstanceId: "i-07d0f5532ba58fd35",
           InstanceType: "t2.micro",
-          KeyName: "ernestocrespo2",
-          LaunchTime: 1654891708,
-          Monitoring: {
-            State: "disabled",
-          },
-          Placement: {
-            AvailabilityZone: "us-east-1c",
-            GroupName: "",
-            Tenancy: "default",
-          },
-          PrivateDnsName: "ip-172-31-93-37.ec2.internal",
-          PrivateIpAddress: "172.31.93.37",
-          ProductCodes: [],
-          PublicDnsName: "",
           State: {
             Code: 80,
             Name: "stopped",
           },
-          StateTransitionReason: "User initiated (2022-06-10 21:52:19 GMT)",
           SubnetId: "subnet-9afc6cbb",
           VpcId: "vpc-aecf69d3",
           Architecture: "x86_64",
-          BlockDeviceMappings: [
-            {
-              DeviceName: "/dev/xvda",
-              Ebs: {
-                AttachTime: 1612880680,
-                DeleteOnTermination: true,
-                Status: "attached",
-                VolumeId: "vol-051ae818aa22af2dc",
-              },
-            },
-          ],
-          ClientToken: "",
-          EbsOptimized: false,
-          EnaSupport: true,
-          Hypervisor: "xen",
-          IamInstanceProfile: {
-            Arn: "arn:aws:iam::996443402123:instance-profile/EC2-SSMagent",
-            Id: "AIPA6QAFHV6FRIGSUY5YW",
-          },
-          NetworkInterfaces: [
-            {
-              Attachment: {
-                AttachTime: 1612880679,
-                AttachmentId: "eni-attach-0f065a2bf1202935d",
-                DeleteOnTermination: true,
-                DeviceIndex: 0,
-                Status: "attached",
-                NetworkCardIndex: 0,
-              },
-              Description: "",
-              Groups: [
-                {
-                  GroupName: "launch-wizard-3",
-                  GroupId: "sg-09dd1eaf2323fb8ff",
-                },
-              ],
-              Ipv6Addresses: [],
-              MacAddress: "12:d5:c9:b6:6b:b5",
-              NetworkInterfaceId: "eni-031830a99950b5748",
-              OwnerId: "996443402123",
-              PrivateDnsName: "ip-172-31-93-37.ec2.internal",
-              PrivateIpAddress: "172.31.93.37",
-              PrivateIpAddresses: [
-                {
-                  Primary: true,
-                  PrivateDnsName: "ip-172-31-93-37.ec2.internal",
-                  PrivateIpAddress: "172.31.93.37",
-                },
-              ],
-              SourceDestCheck: true,
-              Status: "in-use",
-              SubnetId: "subnet-9afc6cbb",
-              VpcId: "vpc-aecf69d3",
-              InterfaceType: "interface",
-            },
-          ],
-          RootDeviceName: "/dev/xvda",
-          RootDeviceType: "ebs",
-          SecurityGroups: [
-            {
-              GroupName: "launch-wizard-3",
-              GroupId: "sg-09dd1eaf2323fb8ff",
-            },
-          ],
-          SourceDestCheck: true,
-          StateReason: {
-            Code: "Client.UserInitiatedShutdown",
-            Message: "Client.UserInitiatedShutdown: User initiated shutdown",
-          },
           Tags: [
             {
               Key: "Project",
@@ -588,131 +429,21 @@ export default defineComponent({
               Value: "True",
             },
           ],
-          VirtualizationType: "hvm",
-          CpuOptions: {
-            CoreCount: 1,
-            ThreadsPerCore: 1,
-          },
-          CapacityReservationSpecification: {
-            CapacityReservationPreference: "open",
-          },
-          HibernationOptions: {
-            Configured: false,
-          },
-          MetadataOptions: {
-            State: "applied",
-            HttpTokens: "optional",
-            HttpPutResponseHopLimit: 1,
-            HttpEndpoint: "enabled",
-            HttpProtocolIpv6: "disabled",
-          },
-          EnclaveOptions: {
-            Enabled: false,
-          },
-          PlatformDetails: "Linux/UNIX",
-          UsageOperation: "RunInstances",
-          UsageOperationUpdateTime: 1612880679,
-          PrivateDnsNameOptions: {},
-          MaintenanceOptions: {
-            AutoRecovery: "default",
-          },
+          Name: "Test",
+          check: true,
         },
         {
-          AmiLaunchIndex: 0,
+          ResourceId: "i-058a70fc62057f7d6",
           ImageId: "ami-047a51fa27710816e",
           InstanceId: "i-058a70fc62057f7d6",
           InstanceType: "t2.micro",
-          KeyName: "ernestocrespo2",
-          LaunchTime: 1654892570,
-          Monitoring: {
-            State: "disabled",
-          },
-          Placement: {
-            AvailabilityZone: "us-east-1c",
-            GroupName: "",
-            Tenancy: "default",
-          },
-          PrivateDnsName: "ip-172-31-85-173.ec2.internal",
-          PrivateIpAddress: "172.31.85.173",
-          ProductCodes: [],
-          PublicDnsName: "",
           State: {
             Code: 80,
             Name: "stopped",
           },
-          StateTransitionReason: "User initiated (2022-06-10 21:52:19 GMT)",
           SubnetId: "subnet-9afc6cbb",
           VpcId: "vpc-aecf69d3",
           Architecture: "x86_64",
-          BlockDeviceMappings: [
-            {
-              DeviceName: "/dev/xvda",
-              Ebs: {
-                AttachTime: 1612881070,
-                DeleteOnTermination: true,
-                Status: "attached",
-                VolumeId: "vol-0b57a56f24b361300",
-              },
-            },
-          ],
-          ClientToken: "",
-          EbsOptimized: false,
-          EnaSupport: true,
-          Hypervisor: "xen",
-          IamInstanceProfile: {
-            Arn: "arn:aws:iam::996443402123:instance-profile/EC2-SSMagent",
-            Id: "AIPA6QAFHV6FRIGSUY5YW",
-          },
-          NetworkInterfaces: [
-            {
-              Attachment: {
-                AttachTime: 1612881059,
-                AttachmentId: "eni-attach-0c37bf45390df97ea",
-                DeleteOnTermination: true,
-                DeviceIndex: 0,
-                Status: "attached",
-                NetworkCardIndex: 0,
-              },
-              Description: "",
-              Groups: [
-                {
-                  GroupName: "launch-wizard-4",
-                  GroupId: "sg-0b9dd5fcaad80f43e",
-                },
-              ],
-              Ipv6Addresses: [],
-              MacAddress: "12:46:aa:57:3e:45",
-              NetworkInterfaceId: "eni-0f554c21ed6eabe91",
-              OwnerId: "996443402123",
-              PrivateDnsName: "ip-172-31-85-173.ec2.internal",
-              PrivateIpAddress: "172.31.85.173",
-              PrivateIpAddresses: [
-                {
-                  Primary: true,
-                  PrivateDnsName: "ip-172-31-85-173.ec2.internal",
-                  PrivateIpAddress: "172.31.85.173",
-                },
-              ],
-              SourceDestCheck: true,
-              Status: "in-use",
-              SubnetId: "subnet-9afc6cbb",
-              VpcId: "vpc-aecf69d3",
-              InterfaceType: "interface",
-            },
-          ],
-          RootDeviceName: "/dev/xvda",
-          RootDeviceType: "ebs",
-          SecurityGroups: [
-            {
-              GroupName: "launch-wizard-4",
-              GroupId: "sg-0b9dd5fcaad80f43e",
-            },
-          ],
-          SourceDestCheck: true,
-          StateReason: {
-            Code: "Client.UserInitiatedShutdown",
-            Message: "Client.UserInitiatedShutdown: User initiated shutdown",
-          },
           Tags: [
             {
               Key: "Environment",
@@ -751,130 +482,21 @@ export default defineComponent({
               Value: "OrbisTest8",
             },
           ],
-          VirtualizationType: "hvm",
-          CpuOptions: {
-            CoreCount: 1,
-            ThreadsPerCore: 1,
-          },
-          CapacityReservationSpecification: {
-            CapacityReservationPreference: "open",
-          },
-          HibernationOptions: {
-            Configured: false,
-          },
-          MetadataOptions: {
-            State: "applied",
-            HttpTokens: "optional",
-            HttpPutResponseHopLimit: 1,
-            HttpEndpoint: "enabled",
-            HttpProtocolIpv6: "disabled",
-          },
-          EnclaveOptions: {
-            Enabled: false,
-          },
-          PlatformDetails: "Linux/UNIX",
-          UsageOperation: "RunInstances",
-          UsageOperationUpdateTime: 1612881059,
-          PrivateDnsNameOptions: {},
-          MaintenanceOptions: {
-            AutoRecovery: "default",
-          },
+          Name: "OrbisTest8",
+          check: true,
         },
         {
-          AmiLaunchIndex: 0,
+          ResourceId: "i-002e43a3aa16adc77",
           ImageId: "ami-01cc34ab2709337aa",
           InstanceId: "i-002e43a3aa16adc77",
           InstanceType: "t2.micro",
-          LaunchTime: 1656072069,
-          Monitoring: {
-            State: "disabled",
-          },
-          Placement: {
-            AvailabilityZone: "us-east-1d",
-            GroupName: "",
-            Tenancy: "default",
-          },
-          PrivateDnsName: "ip-172-31-22-44.ec2.internal",
-          PrivateIpAddress: "172.31.22.44",
-          ProductCodes: [],
-          PublicDnsName: "",
           State: {
             Code: 80,
             Name: "stopped",
           },
-          StateTransitionReason: "User initiated (2022-06-24 20:17:05 GMT)",
           SubnetId: "subnet-c9abf184",
           VpcId: "vpc-aecf69d3",
           Architecture: "x86_64",
-          BlockDeviceMappings: [
-            {
-              DeviceName: "/dev/xvda",
-              Ebs: {
-                AttachTime: 1636638711,
-                DeleteOnTermination: true,
-                Status: "attached",
-                VolumeId: "vol-02e317f31af98076c",
-              },
-            },
-          ],
-          ClientToken: "",
-          EbsOptimized: false,
-          EnaSupport: true,
-          Hypervisor: "xen",
-          IamInstanceProfile: {
-            Arn: "arn:aws:iam::996443402123:instance-profile/EC2-SSMagent",
-            Id: "AIPA6QAFHV6FRIGSUY5YW",
-          },
-          NetworkInterfaces: [
-            {
-              Attachment: {
-                AttachTime: 1636638710,
-                AttachmentId: "eni-attach-040ec9913190510d9",
-                DeleteOnTermination: true,
-                DeviceIndex: 0,
-                Status: "attached",
-                NetworkCardIndex: 0,
-              },
-              Description: "",
-              Groups: [
-                {
-                  GroupName: "launch-wizard-6",
-                  GroupId: "sg-0b4647cf04cd86365",
-                },
-              ],
-              Ipv6Addresses: [],
-              MacAddress: "0a:a1:83:e4:40:97",
-              NetworkInterfaceId: "eni-059be8c11b872f7ac",
-              OwnerId: "996443402123",
-              PrivateDnsName: "ip-172-31-22-44.ec2.internal",
-              PrivateIpAddress: "172.31.22.44",
-              PrivateIpAddresses: [
-                {
-                  Primary: true,
-                  PrivateDnsName: "ip-172-31-22-44.ec2.internal",
-                  PrivateIpAddress: "172.31.22.44",
-                },
-              ],
-              SourceDestCheck: true,
-              Status: "in-use",
-              SubnetId: "subnet-c9abf184",
-              VpcId: "vpc-aecf69d3",
-              InterfaceType: "interface",
-            },
-          ],
-          RootDeviceName: "/dev/xvda",
-          RootDeviceType: "ebs",
-          SecurityGroups: [
-            {
-              GroupName: "launch-wizard-6",
-              GroupId: "sg-0b4647cf04cd86365",
-            },
-          ],
-          SourceDestCheck: true,
-          StateReason: {
-            Code: "Client.UserInitiatedShutdown",
-            Message: "Client.UserInitiatedShutdown: User initiated shutdown",
-          },
           Tags: [
             {
               Key: "OrbisStart",
@@ -913,131 +535,21 @@ export default defineComponent({
               Value: "Daily_MON-SAT_0400_Ret7",
             },
           ],
-          VirtualizationType: "hvm",
-          CpuOptions: {
-            CoreCount: 1,
-            ThreadsPerCore: 1,
-          },
-          CapacityReservationSpecification: {
-            CapacityReservationPreference: "open",
-          },
-          HibernationOptions: {
-            Configured: false,
-          },
-          MetadataOptions: {
-            State: "applied",
-            HttpTokens: "optional",
-            HttpPutResponseHopLimit: 1,
-            HttpEndpoint: "enabled",
-            HttpProtocolIpv6: "disabled",
-            InstanceMetadataTags: "disabled",
-          },
-          EnclaveOptions: {
-            Enabled: false,
-          },
-          PlatformDetails: "Linux/UNIX",
-          UsageOperation: "RunInstances",
-          UsageOperationUpdateTime: 1636638710,
-          PrivateDnsNameOptions: {
-            HostnameType: "ip-name",
-            EnableResourceNameDnsARecord: false,
-            EnableResourceNameDnsAAAARecord: false,
-          },
-          MaintenanceOptions: {
-            AutoRecovery: "default",
-          },
+          Name: "Orbis-UsoEnPresentaciones",
+          check: false,
         },
         {
-          AmiLaunchIndex: 0,
+          ResourceId: "i-0cc36134c56360e07",
           ImageId: "ami-01cc34ab2709337aa",
           InstanceId: "i-0cc36134c56360e07",
           InstanceType: "t2.micro",
-          LaunchTime: 1656072067,
-          Monitoring: {
-            State: "disabled",
-          },
-          Placement: {
-            AvailabilityZone: "us-east-1d",
-            GroupName: "",
-            Tenancy: "default",
-          },
-          PrivateDnsName: "ip-172-31-22-172.ec2.internal",
-          PrivateIpAddress: "172.31.22.172",
-          ProductCodes: [],
-          PublicDnsName: "",
           State: {
             Code: 80,
             Name: "stopped",
           },
-          StateTransitionReason: "User initiated (2022-06-24 20:17:05 GMT)",
           SubnetId: "subnet-c9abf184",
           VpcId: "vpc-aecf69d3",
           Architecture: "x86_64",
-          BlockDeviceMappings: [
-            {
-              DeviceName: "/dev/xvda",
-              Ebs: {
-                AttachTime: 1636638686,
-                DeleteOnTermination: true,
-                Status: "attached",
-                VolumeId: "vol-094b824d9c1121ec7",
-              },
-            },
-          ],
-          ClientToken: "",
-          EbsOptimized: false,
-          EnaSupport: true,
-          Hypervisor: "xen",
-          NetworkInterfaces: [
-            {
-              Attachment: {
-                AttachTime: 1636638685,
-                AttachmentId: "eni-attach-08974caf5141f9bc9",
-                DeleteOnTermination: true,
-                DeviceIndex: 0,
-                Status: "attached",
-                NetworkCardIndex: 0,
-              },
-              Description: "",
-              Groups: [
-                {
-                  GroupName: "launch-wizard-5",
-                  GroupId: "sg-0bc04f192d77ae8be",
-                },
-              ],
-              Ipv6Addresses: [],
-              MacAddress: "0a:93:1d:70:34:15",
-              NetworkInterfaceId: "eni-006a03979b614c4d2",
-              OwnerId: "996443402123",
-              PrivateDnsName: "ip-172-31-22-172.ec2.internal",
-              PrivateIpAddress: "172.31.22.172",
-              PrivateIpAddresses: [
-                {
-                  Primary: true,
-                  PrivateDnsName: "ip-172-31-22-172.ec2.internal",
-                  PrivateIpAddress: "172.31.22.172",
-                },
-              ],
-              SourceDestCheck: true,
-              Status: "in-use",
-              SubnetId: "subnet-c9abf184",
-              VpcId: "vpc-aecf69d3",
-              InterfaceType: "interface",
-            },
-          ],
-          RootDeviceName: "/dev/xvda",
-          RootDeviceType: "ebs",
-          SecurityGroups: [
-            {
-              GroupName: "launch-wizard-5",
-              GroupId: "sg-0bc04f192d77ae8be",
-            },
-          ],
-          SourceDestCheck: true,
-          StateReason: {
-            Code: "Client.UserInitiatedShutdown",
-            Message: "Client.UserInitiatedShutdown: User initiated shutdown",
-          },
           Tags: [
             {
               Key: "OrbisExcluded",
@@ -1054,6 +566,10 @@ export default defineComponent({
             {
               Key: "OrbisBackup",
               Value: "Daily_MON-SAT_0400_Ret7",
+            },
+            {
+              Key: "OrbisReboot",
+              Value: "OrbisTest1",
             },
             {
               Key: "OrbisSchedule",
@@ -1080,133 +596,21 @@ export default defineComponent({
               Value: "Daily_MON-SAT_0700",
             },
           ],
-          VirtualizationType: "hvm",
-          CpuOptions: {
-            CoreCount: 1,
-            ThreadsPerCore: 1,
-          },
-          CapacityReservationSpecification: {
-            CapacityReservationPreference: "open",
-          },
-          HibernationOptions: {
-            Configured: false,
-          },
-          MetadataOptions: {
-            State: "applied",
-            HttpTokens: "optional",
-            HttpPutResponseHopLimit: 1,
-            HttpEndpoint: "enabled",
-            HttpProtocolIpv6: "disabled",
-            InstanceMetadataTags: "disabled",
-          },
-          EnclaveOptions: {
-            Enabled: false,
-          },
-          PlatformDetails: "Linux/UNIX",
-          UsageOperation: "RunInstances",
-          UsageOperationUpdateTime: 1636638685,
-          PrivateDnsNameOptions: {
-            HostnameType: "ip-name",
-            EnableResourceNameDnsARecord: false,
-            EnableResourceNameDnsAAAARecord: false,
-          },
-          MaintenanceOptions: {
-            AutoRecovery: "default",
-          },
+          Name: "OrbisTest1",
+          check: false,
         },
         {
-          AmiLaunchIndex: 0,
+          ResourceId: "i-0cf946c2eebc77930",
           ImageId: "ami-0022f774911c1d690",
           InstanceId: "i-0cf946c2eebc77930",
           InstanceType: "t2.nano",
-          LaunchTime: 1654894293,
-          Monitoring: {
-            State: "disabled",
-          },
-          Placement: {
-            AvailabilityZone: "us-east-1a",
-            GroupName: "",
-            Tenancy: "default",
-          },
-          PrivateDnsName: "ip-172-16-1-166.ec2.internal",
-          PrivateIpAddress: "172.16.1.166",
-          ProductCodes: [],
-          PublicDnsName: "",
           State: {
-            Code: 80,
-            Name: "stopped",
+            Code: 16,
+            Name: "running",
           },
-          StateTransitionReason: "User initiated (2022-06-10 21:52:19 GMT)",
           SubnetId: "subnet-0460f59e587aeecc0",
           VpcId: "vpc-010d9ef6af77e3ca7",
           Architecture: "x86_64",
-          BlockDeviceMappings: [
-            {
-              DeviceName: "/dev/xvda",
-              Ebs: {
-                AttachTime: 1652970565,
-                DeleteOnTermination: true,
-                Status: "attached",
-                VolumeId: "vol-055da8d70476b3093",
-              },
-            },
-          ],
-          ClientToken: "",
-          EbsOptimized: false,
-          EnaSupport: true,
-          Hypervisor: "xen",
-          IamInstanceProfile: {
-            Arn: "arn:aws:iam::996443402123:instance-profile/EC2-SSMagent",
-            Id: "AIPA6QAFHV6FRIGSUY5YW",
-          },
-          NetworkInterfaces: [
-            {
-              Attachment: {
-                AttachTime: 1652970564,
-                AttachmentId: "eni-attach-015837e5259c1ae96",
-                DeleteOnTermination: true,
-                DeviceIndex: 0,
-                Status: "attached",
-                NetworkCardIndex: 0,
-              },
-              Description: "",
-              Groups: [
-                {
-                  GroupName: "nat-instance-sg",
-                  GroupId: "sg-0e6cbf0704953b857",
-                },
-              ],
-              Ipv6Addresses: [],
-              MacAddress: "0e:bb:28:fa:7e:17",
-              NetworkInterfaceId: "eni-0182825b1ad6c6f7a",
-              OwnerId: "996443402123",
-              PrivateIpAddress: "172.16.1.166",
-              PrivateIpAddresses: [
-                {
-                  Primary: true,
-                  PrivateIpAddress: "172.16.1.166",
-                },
-              ],
-              SourceDestCheck: false,
-              Status: "in-use",
-              SubnetId: "subnet-0460f59e587aeecc0",
-              VpcId: "vpc-010d9ef6af77e3ca7",
-              InterfaceType: "interface",
-            },
-          ],
-          RootDeviceName: "/dev/xvda",
-          RootDeviceType: "ebs",
-          SecurityGroups: [
-            {
-              GroupName: "nat-instance-sg",
-              GroupId: "sg-0e6cbf0704953b857",
-            },
-          ],
-          SourceDestCheck: false,
-          StateReason: {
-            Code: "Client.UserInitiatedShutdown",
-            Message: "Client.UserInitiatedShutdown: User initiated shutdown",
-          },
           Tags: [
             {
               Key: "Environment",
@@ -1217,39 +621,8 @@ export default defineComponent({
               Value: "NAT-Instance",
             },
           ],
-          VirtualizationType: "hvm",
-          CpuOptions: {
-            CoreCount: 1,
-            ThreadsPerCore: 1,
-          },
-          CapacityReservationSpecification: {
-            CapacityReservationPreference: "open",
-          },
-          HibernationOptions: {
-            Configured: false,
-          },
-          MetadataOptions: {
-            State: "applied",
-            HttpTokens: "optional",
-            HttpPutResponseHopLimit: 1,
-            HttpEndpoint: "enabled",
-            HttpProtocolIpv6: "disabled",
-            InstanceMetadataTags: "disabled",
-          },
-          EnclaveOptions: {
-            Enabled: false,
-          },
-          PlatformDetails: "Linux/UNIX",
-          UsageOperation: "RunInstances",
-          UsageOperationUpdateTime: 1652970564,
-          PrivateDnsNameOptions: {
-            HostnameType: "ip-name",
-            EnableResourceNameDnsARecord: true,
-            EnableResourceNameDnsAAAARecord: false,
-          },
-          MaintenanceOptions: {
-            AutoRecovery: "default",
-          },
+          Name: "NAT-Instance",
+          check: false,
         },
       ],
     });
@@ -1264,6 +637,10 @@ export default defineComponent({
         format: (val) => `${val}`,
         sortable: true,
         mutable: false,
+        style: (row) =>
+          row.check
+            ? "font-weight: bolder;background-color: #d7d4d4"
+            : "font-weight: normal",
       },
       {
         name: "State",
@@ -1273,6 +650,10 @@ export default defineComponent({
         required: true,
         sortable: true,
         mutable: false,
+        style: (row) =>
+          row.check
+            ? "font-weight: bolder;background-color: #d7d4d4"
+            : "font-weight: normal",
       },
       {
         name: "InstanceType",
@@ -1280,12 +661,20 @@ export default defineComponent({
         field: "InstanceType",
         sortable: true,
         mutable: true,
+        style: (row) =>
+          row.check
+            ? "font-weight: bolder;background-color: #d7d4d4"
+            : "font-weight: normal",
       },
       {
         name: "Architecture",
         label: "Architecture",
         field: "Architecture",
         mutable: true,
+        style: (row) =>
+          row.check
+            ? "font-weight: bolder;background-color: #d7d4d4"
+            : "font-weight: normal",
       },
       {
         name: "ImageId",
@@ -1294,6 +683,10 @@ export default defineComponent({
         sortable: true,
         mutable: true,
         sort: (a, b) => parseInt(a, 10) - parseInt(b, 10),
+        style: (row) =>
+          row.check
+            ? "font-weight: bolder;background-color: #d7d4d4"
+            : "font-weight: normal",
       },
       {
         name: "VpcId",
@@ -1302,6 +695,10 @@ export default defineComponent({
         sortable: true,
         sort: (a, b) => parseInt(a, 10) - parseInt(b, 10),
         mutable: true,
+        style: (row) =>
+          row.check
+            ? "font-weight: bolder;background-color: #d7d4d4"
+            : "font-weight: normal",
       },
     ]);
 
@@ -1319,13 +716,13 @@ export default defineComponent({
     );
 
     function refresh() {
-      loading.value = true;
-      setTimeout(() => {
-        console.log("Refresca ", listInstances.value.items.length);
-        listInstances.value.items.splice(0, 1);
-        console.log("Final ", listInstances.value.items.length);
-        loading.value = false;
-      }, 1000);
+      // loading.value = true;
+      // setTimeout(() => {
+      //   console.log("Refresca ", listInstances.value.items.length);
+      //   listInstances.value.items.splice(0, 1);
+      //   console.log("Final ", listInstances.value.items.length);
+      //   loading.value = false;
+      // }, 1000);
     }
 
     return {

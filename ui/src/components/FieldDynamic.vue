@@ -140,7 +140,6 @@ export default defineComponent({
     const fieldProps = computed(() => {
       const result = { ...fieldPropsDefault };
 
-      console.log("TCL: fieldProps -> result", result);
       /* Propiedades que se pueden modificar mutableProperties */
       mutableProperties.forEach((prop) => {
         /*
@@ -175,6 +174,19 @@ export default defineComponent({
     });
 
     /* Devuelve el valor del campo con cada cambio */
+    watch(
+      () => itemlist.value,
+      (newValue) => {
+        /*
+					Se retorna el valor del campo con cada cambio que se hace.
+					Pero si el campo se usa para crear un arregle de valores,
+					no se emite su contenido.
+				*/
+        emit("data", { [fieldPropsDefault["name"]]: itemlist.value });
+      },
+      { deep: true }
+    );
+
     watch(
       () => fieldValue.value,
       (newValue) => {

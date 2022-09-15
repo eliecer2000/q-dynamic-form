@@ -1,5 +1,5 @@
 <template>
-  <q-card style="height: 510px !important" class="full-width" flat>
+  <q-card style="height: 470px" class="full-width" flat>
     <q-card-section horizontal style="height: calc(100% - 1px) !important">
       <q-card-section
         class="no-padding no-margin q-pb-xl"

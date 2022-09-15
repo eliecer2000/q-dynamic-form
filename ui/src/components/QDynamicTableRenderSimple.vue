@@ -100,7 +100,7 @@
                   </q-tr>
                   <q-tr v-show="props.expand" :props="props">
                     <q-td colspan="100%">
-                      <q-scroll-area style="height: 350px">
+                      <q-scroll-area visible style="height: 350px">
                         <FieldsExpands :item-row="props.row"></FieldsExpands>
                       </q-scroll-area>
                     </q-td>

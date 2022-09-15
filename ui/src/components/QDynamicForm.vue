@@ -46,7 +46,7 @@
         style="height: calc(100% - 35px) !important; position: absolute"
       >
         <q-card-section class="col-6">
-          <q-scroll-area style="height: 100% !important">
+          <q-scroll-area visible style="height: 100% !important">
             <draggable :list="fields" group="elements" @change="onChange">
               <div
                 v-for="(field, index) in fields"
@@ -123,6 +123,7 @@
             </div>
           </div>
           <q-scroll-area
+            visible
             style="height: 100% !important"
             class="text-caption bg-dark pre-format text-white q-pl-md"
           >
@@ -146,7 +147,7 @@
         class="no-margin no-padding"
         style="width: 760px; height: calc(100vh - 40px)"
       >
-        <q-scroll-area style="height: calc(100% - 30px)">
+        <q-scroll-area visible style="height: calc(100% - 30px)">
           <q-card-section class="q-pt-sm q-mb-lg">
             <div class="text-h6 q-my-sm">Ejemplo de la Vista</div>
             <div class="q-form-container">

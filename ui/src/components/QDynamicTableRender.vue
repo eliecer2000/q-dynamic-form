@@ -1,5 +1,5 @@
 <template>
-  <q-card style="height: calc(100% + 5px) !important" class="full-width">
+  <q-card style="height: 510px !important" class="full-width" flat>
     <q-card-section horizontal style="height: calc(100% - 1px) !important">
       <q-card-section
         class="no-padding no-margin q-pb-xl"
@@ -194,7 +194,7 @@
       </q-card-section>
       <q-separator vertical />
       <q-card-section style="width: 100%" class="q-pa-xs">
-        <div class="row full-width full-height">
+        <div class="row full-width">
           <div class="col-12">
             <div style="display: none">
               {{ selected }}
@@ -208,10 +208,9 @@
               flat
               @selection="updateData"
               separator="vertical"
-              hide-pagination
               v-model:selected="selected"
               :pagination="initialPagination"
-              style="height: 100%"
+              style="height: 100%; max-height: 500px"
               :visible-columns="visibleColumns"
               :selected-rows-label="getSelectedString"
               :selection="

@@ -349,6 +349,10 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
+    dataSelectionAll: {
+      type: Boolean,
+      default: false
+    },
     disableSelection: {
       type: Boolean,
       default: false
@@ -357,17 +361,7 @@ export default defineComponent({
   emits: ["update:modelValue", "refresh"],
   setup(props, { emit }) {
     const autoRefresh = ref(true);
-    const visibleColumns = ref(
-      []
-      /* En caso de volver a este codigo*/
-      // props.dataColumns
-      //   .filter((e) => {
-      //     return e.mutable;
-      //   })
-      //   .map((e) => {
-      //     return e.name;
-      //   })
-    );
+    const visibleColumns = ref([]);
 
     const newLabelModel = ref(null);
     const newValueModel = ref(null);
@@ -397,7 +391,11 @@ export default defineComponent({
         });
         emit("update:modelValue", {
           InstanceIds: selected.value.map((e) => {
-            return e[props.rowIndex];
+            if (props.dataSelectionAll) {
+              return e;
+            } else {
+              return e[props.rowIndex];
+            }
           }),
           Filters: data_local.value
         });
@@ -509,9 +507,15 @@ export default defineComponent({
         });
       });
       props.modelValue.InstanceIds.forEach((element) => {
-        props.dataRows.map((e) => {
-          if (e[props.rowIndex] === element) {
-            selected.value.push(e);
+        dataRowsScope.value.map((e) => {
+          if (props.dataSelectionAll) {
+            if (e[props.rowIndex] === element[props.rowIndex]) {
+              selected.value.push(e);
+            }
+          } else {
+            if (e[props.rowIndex] === element) {
+              selected.value.push(e);
+            }
           }
         });
       });

@@ -6,6 +6,7 @@
         :data-rows="listInstances.items"
         :data-filters="listInstances.filters"
         :disable-selection="false"
+        :data-selection-all="true"
         v-model="model"
         @refresh="refresh"
         :loading="loading"
@@ -5931,7 +5932,7 @@ export default defineComponent({
           },
           ResourceId: "i-0554b2737a4305c79",
           Name: "UAO-Portal90Min-Prod-OpsWorks - wordpress013",
-          check: false,
+          check: true,
         },
         {
           AmiLaunchIndex: 0,
@@ -6080,7 +6081,7 @@ export default defineComponent({
           },
           ResourceId: "i-0dbdde1c892ba9e59",
           Name: "UAO-Portal90Min-Prod-OpsWorks - wordpress-14",
-          check: false,
+          check: true,
         },
         {
           AmiLaunchIndex: 0,
@@ -6209,6 +6210,19 @@ export default defineComponent({
     });
 
     const columns = ref([
+      {
+        name: "check",
+        required: true,
+        label: "Check",
+        align: "left",
+        field: (row) => row.check,
+        sortable: true,
+        mutable: false,
+        style: (row) =>
+          row.check
+            ? "font-weight: bolder;background-color: #d7d4d4"
+            : "font-weight: normal",
+      },
       {
         name: "InstanceId",
         required: true,

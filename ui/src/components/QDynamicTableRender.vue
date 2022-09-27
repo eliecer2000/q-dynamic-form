@@ -507,7 +507,7 @@ export default defineComponent({
         });
       });
       props.modelValue.InstanceIds.forEach((element) => {
-        dataRowsScope.value.map((e) => {
+        props.dataRows.map((e) => {
           if (props.dataSelectionAll) {
             if (e[props.rowIndex] === element[props.rowIndex]) {
               selected.value.push(e);
